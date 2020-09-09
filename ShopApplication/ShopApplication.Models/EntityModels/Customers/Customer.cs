@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ShopApplication.Models.EntityModels.Sales;
+using ShopApplication.Models.ModelContracts;
 
 namespace ShopApplication.Models.EntityModels.Customers
 {
-    public class Customer
+    public class Customer: IEntity, IDelete
     {
         public int Id { get; set; }
         public string FirstName  { get; set; }
@@ -13,5 +15,7 @@ namespace ShopApplication.Models.EntityModels.Customers
         public string Email { get; set; }
         public string Address { get; set; }
         public string CustomerCode { get; set; }
+        public ICollection<Sale> Sales { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

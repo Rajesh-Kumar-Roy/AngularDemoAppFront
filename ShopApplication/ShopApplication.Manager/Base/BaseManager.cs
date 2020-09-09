@@ -1,13 +1,12 @@
-﻿using System;
+﻿using ShopApplication.Manager.IMContract;
+using ShopApplication.Repositories.IRContracts;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using ShopApplication.Manager.IMContract;
-using ShopApplication.Repositories.IRContracts;
 
 namespace ShopApplication.Manager.Base
 {
-    public class BaseManager<T>:IBaseManager<T> where T:class
+    public class BaseManager<T> : IBaseManager<T> where T : class
     {
         private readonly IBaseRepository<T> _iBaseRepository;
         public BaseManager(IBaseRepository<T> iBaseRepository)
@@ -24,12 +23,12 @@ namespace ShopApplication.Manager.Base
             return _iBaseRepository.Update(entity);
         }
 
-        public bool Remove(T entity)
+        public bool Remove(T entity, bool isRemove)
         {
-            return _iBaseRepository.Remove(entity);
+            return _iBaseRepository.Remove(entity, isRemove);
         }
 
-        public T GetById(int? id)
+        public T GetById(int id)
         {
             return _iBaseRepository.GetById(id);
         }
@@ -39,9 +38,20 @@ namespace ShopApplication.Manager.Base
             return _iBaseRepository.GetAll();
         }
 
-        public ICollection<T> Get(T instance, Expression<Func<T, object>> expression)
-        {;
-            return _iBaseRepository.Get(instance, expression);
+        public ICollection<T> Get(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        {
+            return _iBaseRepository.Get(predicate, isTracking);
         }
+
+        public ICollection<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            return _iBaseRepository.Get(predicate, includes);
+        }
+
+        public ICollection<T> Get(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        {
+            return _iBaseRepository.Get(predicate, isTracking, includes);
+        }
+
     }
 }

@@ -60,7 +60,7 @@ namespace ShopApplication.Controllers.API
             return BadRequest(new {error = "Model Sate is Not Valid! "});
         }
         [HttpGet("{id}")]
-        public IActionResult Get(int? id)
+        public IActionResult Get(int id)
         {
             var product = _productManager.GetById(id);
             if (product == null)
@@ -127,7 +127,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "product not Found!" });
             }
 
-            bool isDelete = _productManager.Remove(retriveProduct);
+            bool isDelete = _productManager.Remove(retriveProduct, false);
             if (isDelete)
             {
                 return Ok(retriveProduct);

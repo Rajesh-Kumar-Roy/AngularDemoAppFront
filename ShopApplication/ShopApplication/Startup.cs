@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShopApplication.DbContext.DbContext;
+using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Manager.Managers;
 using ShopApplication.Repositories.IRContracts;

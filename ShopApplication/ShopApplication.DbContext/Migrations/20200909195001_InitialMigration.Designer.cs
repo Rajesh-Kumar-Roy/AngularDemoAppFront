@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShopApplication.DbContext.DbContext;
+using ShopApplication.Context.ProjectDbContext;
 
-namespace ShopApplication.DbContext.Migrations
+namespace ShopApplication.Context.Migrations
 {
     [DbContext(typeof(ShopApplicationDbContext))]
-    [Migration("20200904110403_add_sale_and_salesDetails_table_with_relationShip")]
-    partial class add_sale_and_salesDetails_table_with_relationShip
+    [Migration("20200909195001_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,43 @@ namespace ShopApplication.DbContext.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ShopApplication.Models.ProductModel.Product", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.Customers.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.ProductModel.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,6 +66,9 @@ namespace ShopApplication.DbContext.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -45,10 +84,10 @@ namespace ShopApplication.DbContext.Migrations
 
                     b.HasIndex("ProductTypeId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("ShopApplication.Models.ProductModel.ProductType", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.ProductModel.ProductType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,29 +101,27 @@ namespace ShopApplication.DbContext.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("ProductType");
                 });
 
-            modelBuilder.Entity("ShopApplication.Models.Sales.Sale", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.Sales.Sale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -92,16 +129,21 @@ namespace ShopApplication.DbContext.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MobileNo")
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SaleNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sales");
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Sale");
                 });
 
-            modelBuilder.Entity("ShopApplication.Models.Sales.SalesDetails", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.Sales.SaleDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,6 +152,9 @@ namespace ShopApplication.DbContext.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -132,27 +177,36 @@ namespace ShopApplication.DbContext.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("SalesDetails");
+                    b.ToTable("SaleDetail");
                 });
 
-            modelBuilder.Entity("ShopApplication.Models.ProductModel.Product", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.ProductModel.Product", b =>
                 {
-                    b.HasOne("ShopApplication.Models.ProductModel.ProductType", "ProductType")
+                    b.HasOne("ShopApplication.Models.EntityModels.ProductModel.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ShopApplication.Models.Sales.SalesDetails", b =>
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.Sales.Sale", b =>
                 {
-                    b.HasOne("ShopApplication.Models.ProductModel.Product", "Product")
+                    b.HasOne("ShopApplication.Models.EntityModels.Customers.Customer", "Customer")
+                        .WithMany("Sales")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.Sales.SaleDetail", b =>
+                {
+                    b.HasOne("ShopApplication.Models.EntityModels.ProductModel.Product", "Product")
                         .WithMany("SalesDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShopApplication.Models.Sales.Sale", "Sale")
+                    b.HasOne("ShopApplication.Models.EntityModels.Sales.Sale", "Sale")
                         .WithMany("SalesDetails")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)

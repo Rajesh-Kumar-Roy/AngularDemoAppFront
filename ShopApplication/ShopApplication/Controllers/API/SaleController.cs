@@ -50,7 +50,7 @@ namespace ShopApplication.Controllers.API
             return BadRequest(new { error = "Model Sate is Not Valid! " });
         }
         [HttpGet("{id}")]
-        public IActionResult Get(int? id)
+        public IActionResult Get(int id)
         {
             var sale = _SaleManager.GetById(id);
             if (sale == null)
@@ -69,10 +69,12 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "product not Found!" });
             }
 
-            retriveSales.CustomerName = sale.CustomerName;
-            retriveSales.Address = sale.Address;
+          
+           
             retriveSales.Description = sale.Description;
-            retriveSales.MobileNo = sale.MobileNo;
+            retriveSales.SaleNo = sale.SaleNo;
+            retriveSales.CustomerId = sale.CustomerId;
+            
             retriveSales.Date = sale.Date;
             bool isUpdate = _SaleManager.Update(retriveSales);
             if (isUpdate)
@@ -92,7 +94,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = " not Found!" });
             }
 
-            bool isDelete = _SaleManager.Remove(retriveSales);
+            bool isDelete = _SaleManager.Remove(retriveSales, false);
             if (isDelete)
             {
                 return Ok(retriveSales  );

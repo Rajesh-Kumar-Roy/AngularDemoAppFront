@@ -50,7 +50,7 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int? id)
+        public IActionResult Get(int id)
         {
             var productType = _productTypeManager.GetById(id);
             if (productType == null)

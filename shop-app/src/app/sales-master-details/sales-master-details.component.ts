@@ -22,22 +22,31 @@ export class SalesMasterDetailsComponent implements OnInit {
    sale: Sales[];
    salesDetails: SalesDetails[];
    salesForm: FormGroup;
+   hideCustomerCode: boolean =true;
    submitted=false;
+   regShowHide: boolean =false;
    productAdded: boolean =false;
    products: Product[];
    unitPriceByProductId: number;
    productByType: Product[];
    productType: ProductType[];
    totalPrice: number;
+   unqDate: string;
   constructor(private fb: FormBuilder,private productService: ProductServiceService,private productTypeService: ProductTypeService,private salesDetailsService: SalesDetailsService) {
     this.$Model = new Sales(); this.$DetailModel = new SalesDetails();
+    this.unqDate ="S-" + Date.now().toString();
+ 
    }
-
+    
+     
   ngOnInit(): void {
      this.salesForm = this.fb.group({
       customerName:[this.$Model.customerName, Validators.required],
-       phoneNo: [this.$Model.phoneNo, Validators.required],
-       address: [this.$Model.address, Validators.required],
+       firstName:[this.$Model.firstName,Validators.required,Validators.maxLength(20)],
+       lastName:[this.$Model.lastName,Validators.required],
+       email: [this.$Model.email],
+       saleNo:[this.$Model.saleNo],
+       address:[this.$Model.address,Validators.required],
        date: [this.$Model.date, Validators.required],
        description: [this.$Model.description, Validators.maxLength(250)],
        details:this.fb.array([
@@ -72,6 +81,19 @@ export class SalesMasterDetailsComponent implements OnInit {
       totalPrice:[this.$DetailModel.totalPrice,Validators.required],
       description:[this.$DetailModel.description, Validators.maxLength(100)]
     })
+  }
+
+  //registration Button CLick
+  registrationButtonClick(){
+    this.regShowHide = true;
+    this.hideCustomerCode = false;
+    console.log("Click")
+  }
+  //registration cancel Button 
+  regCancelButton(){
+    this.regShowHide=false;
+    this.hideCustomerCode  = true;
+
   }
   removeDetailsButton(detailsIndex: number):void{
     const detailsFormArray= (<FormArray>this.salesForm.get('details'));
@@ -112,5 +134,7 @@ export class SalesMasterDetailsComponent implements OnInit {
       return value1.id;
   })
   }
+  ;
+  
 
 }

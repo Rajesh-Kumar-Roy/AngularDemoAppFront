@@ -10,11 +10,12 @@ namespace ShopApplication.Manager.Managers
 {
     public class ProductTypeManager:BaseManager<ProductType>,IProductTypeManager
     {
-        private IProductTypeRepository _productTypeRepository;
-        private IMapper _iMapper;
+        private readonly IProductTypeRepository Repository;
+        private readonly IMapper _iMapper;
         public ProductTypeManager(IProductTypeRepository productTypeRepository, IMapper iMapper) : base(productTypeRepository)
         {
-            _productTypeRepository = productTypeRepository;
+            Repository = productTypeRepository;
+            _iMapper = iMapper;
         }
 
         public  ProductTypeDto ConvertModelToDto(ProductType model)
