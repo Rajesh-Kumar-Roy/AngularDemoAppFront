@@ -1,0 +1,37 @@
+
+
+<br>
+<div class="container">
+<div class="row justify-content-center">
+    
+    <div class="col-md-10">
+    <div class="card ">
+        <div class="card-header bg-secondary text-white">
+            Product Details
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                        
+                        <th>Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let products of productType">
+                        <td>{{products.name}}</td>
+                        <td>{{products.code}}</td>
+                        <td>{{products.description}}</td>
+                        <td><span><i class="fas fa-pencil-alt"></i></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
