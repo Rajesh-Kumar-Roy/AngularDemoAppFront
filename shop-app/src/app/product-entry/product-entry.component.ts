@@ -34,8 +34,6 @@ export class ProductEntryComponent implements OnInit {
     this.productTypeService.getAll().subscribe((res: ProductType[])=>{
       if(res.length>0){
         this.productType= res;
-     
-
       }
     })
     

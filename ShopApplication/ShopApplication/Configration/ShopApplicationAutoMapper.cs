@@ -12,7 +12,7 @@ namespace ShopApplication.Configration
         {
             CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<ProductTypeDto, ProductType>().ReverseMap();
-            CreateMap<SaleDto, Sale>().ReverseMap();
+            CreateMap<SaleDt, Sale>().ReverseMap();
             CreateMap<SaleDetailDto, SaleDetail>().ReverseMap();
         }
     }

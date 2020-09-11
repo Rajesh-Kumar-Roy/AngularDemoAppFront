@@ -1,0 +1,88 @@
+<form [formGroup]="customerForm" (ngSubmit) = "onSave()">
+    <div class="card border-danger">
+          <div class="card-body">
+            <div class="form-gorup">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="firstName" class="form-label">First Name</label>
+
+                        <input type="text" class="form-control" name="firstName" id="firstName"
+                            formControlName="firstName"
+                            [ngClass]="{ 'is-invalid': submitted && c.firstName.errors }"
+                             placeholder="Enter Customer Code" />
+                        <div *ngIf="submitted &&c.firstName?.errors" class="invalid-feedback">
+                            <div *ngIf=" c.firstName.errors?.required">First Name is Required!!
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <label for="lastName" class="form-label">Last Name</label>
+
+                        <input type="text" class="form-control" name="lastName" id="lastName"
+                            formControlName="lastName"
+                            [ngClass]="{ 'is-invalid': submitted && c.lastName.errors }"
+                             placeholder="Enter Last Name" />
+                        <div *ngIf="submitted && c.lastName?.errors" class="invalid-feedback">
+                            <div *ngIf=" c.lastName.errors?.required">Last Name is Required!!
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                   
+                </div>
+                 
+            </div>
+            <div class="form-gorup">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="Code" class="form-label">Phone No <i class="fa fa-volume-control-phone" aria-hidden="true"></i></label>
+
+                        <input type="text" class="form-control" name="mobileNo" id="mobileNo"
+                            formControlName="mobileNo"
+                            [ngClass]="{ 'is-invalid': submitted && c.mobileNo?.errors }"
+                             placeholder="Enter Customer Code" />
+                        <div *ngIf="submitted &&  c.mobileNo?.errors" class="invalid-feedback">
+                            <div *ngIf="  c.mobileNo.errors?.required">Phone No is Required!!
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <label for="Code" class="form-label">Email</label>
+
+                        <input type="text" class="form-control" name="email" id="customerName"
+                            formControlName="email"
+                            
+                             placeholder="Enter Email" />
+                        
+                        
+                       
+                    </div>
+                   
+                </div>
+                 
+            </div>
+            <div class="form-gorup">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="description" class="form-label">Address</label>
+                        <textarea type="text" class="form-control" name="description" rows="1" id="address"
+                            formControlName="address" placeholder="Enter Address"></textarea>
+                    </div>
+                    <div class="col">
+                    
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex flex-row-reverse">
+                <button type="submit" class="btn btn-danger" style="margin-right: 25px;">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

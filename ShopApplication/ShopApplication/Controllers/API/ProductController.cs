@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.ProductDtos;
 using ShopApplication.Models.EntityModels.ProductModel;
-using ShopApplication.Utilities;
+using ShopApplication.UtilityManager;
 
 namespace ShopApplication.Controllers.API
 {
@@ -20,10 +20,10 @@ namespace ShopApplication.Controllers.API
     {
         private IProductManager _productManager;
         private IMapper _mapper;
-        private IUtilitiManager _utilitiManager;
+        private IDropdownManager _utilitiManager;
       
 
-        public ProductController(IProductManager productManager,IMapper mapper,IUtilitiManager utilitiManager)
+        public ProductController(IProductManager productManager,IMapper mapper,IDropdownManager utilitiManager)
         {
             _productManager = productManager;
             _utilitiManager= utilitiManager;

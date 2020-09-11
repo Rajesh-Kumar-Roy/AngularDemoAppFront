@@ -1,4 +1,7 @@
-﻿using ShopApplication.Context.ProjectDbContext;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Models.EntityModels.Sales;
 using ShopApplication.Repositories.Base;
 using ShopApplication.Repositories.IRContracts;
@@ -16,6 +19,11 @@ namespace ShopApplication.Repositories.Repositories
         public SaleRepository(Microsoft.EntityFrameworkCore.DbContext db):base(db)
         {
             this.db = db;
+        }
+
+        public IQueryable<string> GetCustomerNameByCode(string customerCode)
+        {
+            return Context.Sales.Where(c => c.Customer.CustomerCode == customerCode).Select(c=>c.SaleNo);
         }
     }
 }

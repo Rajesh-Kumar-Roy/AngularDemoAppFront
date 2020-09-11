@@ -23,7 +23,8 @@ namespace ShopApplication.Controllers.API
         public IActionResult Get()
         {
 
-
+            var result = UtilityManager.Uitlity.GetCustomerCode();
+            var resulta = UtilityManager.Uitlity.GetSaleCode();
             var sales = _SaleManager.GetAll();
             if (sales == null)
             {
@@ -37,8 +38,11 @@ namespace ShopApplication.Controllers.API
         {
             if (ModelState.IsValid)
             {
+                //string uniqueNumber = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
                 
+                //sale.Customer.CustomerCode = "c-"+uniqueNumber;
                 bool isAdded = _SaleManager.Add(sale);
+              
                 if (isAdded)
                 {
                     return Ok(sale);
@@ -75,6 +79,7 @@ namespace ShopApplication.Controllers.API
             retriveSales.SaleNo = sale.SaleNo;
             retriveSales.CustomerId = sale.CustomerId;
             
+            
             retriveSales.Date = sale.Date;
             bool isUpdate = _SaleManager.Update(retriveSales);
             if (isUpdate)
@@ -84,6 +89,23 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new { error = "Failed!" });
         }
+
+        [HttpGet("GetCustomerNameByCode/{customerCode}")]
+        public IActionResult GetCustomerNameByCode(string customerCode)
+        {
+            var customer = _SaleManager.GetCustomerNameByCode(customerCode);
+
+
+            if (customer == null)
+            {
+                return BadRequest(new { error = "Can not Get product!" });
+            }
+           
+            return Ok(customer);
+
+
+        }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

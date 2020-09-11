@@ -13,12 +13,12 @@
                             <div class="col d-flex flex-row-reverse">
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button"  class="btn btn-danger " (click)="registrationButtonClick()">Resistration
+                                        <button type="button"  class="btn btn-danger" (click)="registrationButtonClick()"> <i class="fa fa-user-plus" aria-hidden="true" fa-lg style="display: inline;"></i> <span class="ml-1">Reg</span>
                                         </button>
                                     
                                     </div>
                                     <div class="col">
-                                            <button type="button"  class="btn btn-danger  " *ngIf="regShowHide" (click)="regCancelButton()">Cancel
+                                            <button type="button"  class="btn btn-danger  " *ngIf="regShowHide" (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true" fa-lg></i>
                                                                     </button>
                                     </div>
                               
@@ -38,20 +38,14 @@
                                 <div class="col">
                                     <label for="Code" class="form-label">Code</label>
 
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                       
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                         placeholder="Enter Customer Code" />
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Customer Name is Required!!
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" name="customerCode" id="customerCode"(keyup)="findCustomer($event)"  placeholder="Enter Customer Code" />
+                                    
 
                                 </div>
                                 <div class="col">
                                     
                                     <label class="form-label">Customer Name:</label>
-                                    <input type="text" class="form-control" readonly value="Name Test"/>
+                                    <input type="text" formControlName="customerName" class="form-control"[ngModel]="customerCodeValue" readonly value="Name Test"/>
                                    
                                 </div>
                                
@@ -60,87 +54,8 @@
                         </div>
                     </div>
                         <hr/>
-                        <div *ngIf="regShowHide" class="card border-danger">
-                            <div class="card-body">
-                        <div class="form-gorup">
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="Code" class="form-label">First Name</label>
-
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="customerName"
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                         placeholder="Enter Customer Code" />
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Customer Name is Required!!
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <label for="Code" class="form-label">Last Name</label>
-
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="customerName"
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                         placeholder="Enter Last Name" />
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Last Name is Required!!
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                </div>
-                               
-                            </div>
-                             
-                        </div>
-                        <div class="form-gorup">
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="Code" class="form-label">Phone No</label>
-
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="customerName"
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                         placeholder="Enter Customer Code" />
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Phone No is Required!!
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <label for="Code" class="form-label">Email</label>
-
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="customerName"
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                         placeholder="Enter Email" />
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Last Name is Required!!
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                </div>
-                               
-                            </div>
-                             
-                        </div>
-                        <div class="form-gorup">
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="description" class="form-label">Address</label>
-                                    <textarea type="text" class="form-control" name="description" rows="1" id="address"
-                                        formControlName="description" placeholder="Enter Address"></textarea>
-                                </div>
-                                <div class="col">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <div *ngIf="regShowHide">
+                            <customer-entry></customer-entry>
                     </div>
                         <hr/>
 
@@ -151,9 +66,9 @@
                                     <label for="customerName" class="form-label">Sales Code</label>
 
                                     <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="customerName"
+                                        formControlName="saleNo"
                                         [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                        placeholder="Enter Name" placeholder="Enter Customer Name" [ngModel] ="unqDate" readonly/>
+                                        placeholder="Sales Code" placeholder="Enter Customer Name" [ngModel] ="getSaleCode" readonly/>
                                     <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
                                         <div *ngIf=" Sel.customerName.errors?.required">Sales is Required!!
                                         </div>
@@ -179,9 +94,9 @@
                         <div class="form-gorup">
                             <div class="form-row">
                                 <div class="col">
-                                    <label for="description" class="form-label">Commant</label>
+                                    <label for="description" class="form-label">Description</label>
                                     <textarea type="text" class="form-control" name="description" rows="1" id="address"
-                                        formControlName="description" placeholder="Enter Commant"></textarea>
+                                        formControlName="description" placeholder="Description"></textarea>
                                 </div>
                                 <div class="col">
 

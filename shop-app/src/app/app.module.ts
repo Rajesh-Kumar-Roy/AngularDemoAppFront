@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomerEntryComponent } from './customer-entry/customer-entry.component';
+import { CustomerListComponent } from './customer-list/customer-list.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductTypeEntryComponent,
     ProductTypeListComponent,
     SalesMasterDetailsComponent,
-    SalesDetailsComponent
+    SalesDetailsComponent,
+    CustomerEntryComponent,
+    CustomerListComponent
   ],
   imports: [
     BrowserModule,

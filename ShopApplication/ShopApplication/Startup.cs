@@ -10,7 +10,7 @@ using ShopApplication.Manager.IMContract;
 using ShopApplication.Manager.Managers;
 using ShopApplication.Repositories.IRContracts;
 using ShopApplication.Repositories.Repositories;
-using ShopApplication.Utilities;
+using ShopApplication.UtilityManager;
 
 namespace ShopApplication
 {
@@ -45,8 +45,10 @@ namespace ShopApplication
             services.AddTransient<ISaleRepository, SaleRepository>();
             services.AddTransient<ISaleManager, SaleManager>();
             services.AddTransient<ISalesDetailsManager, SalesDetailsManager>();
+            services.AddTransient<ICustomerManager, CustomerManager>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddControllers().AddNewtonsoftJson();
-            services.AddTransient<IUtilitiManager, UtilitiManager>();
+            services.AddTransient<IDropdownManager, DropdownManager>();
             services.AddAutoMapper();
             services.AddDbContext<ShopApplicationDbContext>(options =>
             {

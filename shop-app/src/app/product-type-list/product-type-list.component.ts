@@ -13,6 +13,11 @@ productType: ProductType[];
 
   ngOnInit(): void {
     this.productTypeService.getAll().subscribe(response=>{
+      if(response == null){
+        err => {
+          alert('Something went wrong!');
+        }
+      }
       this.productType=response;
     })
   }

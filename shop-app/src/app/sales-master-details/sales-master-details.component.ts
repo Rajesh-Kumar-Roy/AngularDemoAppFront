@@ -10,6 +10,8 @@ import { ProductType } from '../Model/productType';
 import {SalesDetailsService} from '../service/sales-details.service';
 import { SalesDetails } from '../Model/SaleDetails';
 import { Observable } from 'rxjs';
+import {SalesService} from "../service/sales.service"
+import {CustomerService} from '../service/customer.service'
 
 @Component({
   selector: 'sales-master-details',
@@ -32,7 +34,9 @@ export class SalesMasterDetailsComponent implements OnInit {
    productType: ProductType[];
    totalPrice: number;
    unqDate: string;
-  constructor(private fb: FormBuilder,private productService: ProductServiceService,private productTypeService: ProductTypeService,private salesDetailsService: SalesDetailsService) {
+   customerCodeValue: any;
+   getSaleCode: string;
+  constructor(private fb: FormBuilder,private customerService: CustomerService,private saleService: SalesService,private productService: ProductServiceService,private productTypeService: ProductTypeService,private salesDetailsService: SalesDetailsService) {
     this.$Model = new Sales(); this.$DetailModel = new SalesDetails();
     this.unqDate ="S-" + Date.now().toString();
  
@@ -42,12 +46,8 @@ export class SalesMasterDetailsComponent implements OnInit {
   ngOnInit(): void {
      this.salesForm = this.fb.group({
       customerName:[this.$Model.customerName, Validators.required],
-       firstName:[this.$Model.firstName,Validators.required,Validators.maxLength(20)],
-       lastName:[this.$Model.lastName,Validators.required],
-       email: [this.$Model.email],
-       saleNo:[this.$Model.saleNo],
-       address:[this.$Model.address,Validators.required],
        date: [this.$Model.date, Validators.required],
+       saleNo:[this.$Model.saleNo],
        description: [this.$Model.description, Validators.maxLength(250)],
        details:this.fb.array([
          this.addDetailsFormGroup()
@@ -119,6 +119,16 @@ export class SalesMasterDetailsComponent implements OnInit {
    return this.totalPrice =this.unitPriceByProductId * event.target.value;
         
   }
+  //Find Customer Name and Sales  Code
+  findCustomer(event):any{
+   this.customerService.getNameByCustomerCode(event.target.value).subscribe(res=>{
+     this.customerCodeValue = res;
+     this.saleService.getCustomerNameByCode(event.target.value).subscribe(res1=>{
+       this.getSaleCode = res1;
+     })
+   })
+    }
+  //Save Value
   onSave(){
     this.submitted = true;
     if(this.salesForm.invalid){

@@ -62,7 +62,7 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpPut("{id}")]
-        public IActionResult put(int id)
+        public IActionResult Put(int id) 
         {
             var retriveProductType = _productTypeManager.GetById(id);
             if (retriveProductType == null)

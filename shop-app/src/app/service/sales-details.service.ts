@@ -25,4 +25,7 @@ export class SalesDetailsService {
   getPriceByProductId(id: number):Observable<any>{
     return this.http.get(`${baseUrl1}/${id}`);
   }
+ 
+  
+
 }
