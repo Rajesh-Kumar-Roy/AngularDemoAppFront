@@ -101,7 +101,7 @@ namespace ShopApplication.Controllers.API
             retriveCustomer.Address = customer.Address;
             retriveCustomer.Email = customer.Email;
             retriveCustomer.MobileNo = customer.MobileNo;
-            retriveCustomer.CustomerCode = customer.CustomerCode;
+           // retriveCustomer.CustomerCode = retriveCustomer.CustomerCode;
             bool isUpdate = _repository.Update(retriveCustomer);
             if (isUpdate)
             {
@@ -120,7 +120,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "Customer not Found!" });
             }
 
-            bool isDelete = _repository.Remove(retriveCustomer, false);
+            bool isDelete = _repository.Remove(retriveCustomer, true);
             if (isDelete)
             {
                 return Ok(retriveCustomer);

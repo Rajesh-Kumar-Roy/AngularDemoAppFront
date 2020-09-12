@@ -29,4 +29,13 @@ export class CustomerService {
    getAll(): Observable<Customer[]>{
      return this.http.get<Customer[]>(baseUrl);
    }
+   getById(id: number): Observable<Customer>{
+    return this.http.get<Customer>(`${baseUrl}/${id}`);
+   }
+   update(customer: Customer): Observable<void>{
+     return this.http.put<void>(`${baseUrl}/${customer.id}`,customer,headerOptions);
+   }
+   deleteCustomer(id: number): Observable<void>{
+    return this.http.delete<void>(`${baseUrl}/${id}`);
+   }
 }

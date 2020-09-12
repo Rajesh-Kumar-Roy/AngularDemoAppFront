@@ -6,12 +6,16 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductTypeListComponent } from './product-type-list/product-type-list.component';
 import { SalesMasterDetailsComponent } from './sales-master-details/sales-master-details.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerEntryComponent } from './customer-entry/customer-entry.component';
 
 const routes: Routes = [
   {path: 'createProduct', component: ProductEntryComponent},
   {path:'createProductType',component: ProductTypeEntryComponent},
   {path:"Sales",component: SalesMasterDetailsComponent},
   {path: 'customerList',component: CustomerListComponent},
+  {path:'edit/:id',component:CustomerEntryComponent},
+  {path:'productedit/:id', component: ProductEntryComponent},
+  {path: 'typeEdit/:id', component: ProductTypeEntryComponent},
   {path:'productList', component: ProductListComponent},
   {path: 'productTypeList',component: ProductTypeListComponent},
  

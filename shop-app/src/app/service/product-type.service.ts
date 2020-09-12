@@ -21,4 +21,10 @@ export class ProductTypeService {
    getAll(): Observable<ProductType[]>{
      return this.http.get<ProductType[]>(baseUrl);
    }
+   getById(id: number):Observable<ProductType>{
+    return this.http.get<ProductType>(`${baseUrl}/${id}`);
+   }
+   update(productType: ProductType): Observable<void>{
+     return this.http.put<void>(`${baseUrl}/${productType.id}`,productType,headerOptions);
+   }
 }

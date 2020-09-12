@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../Model/Customer';
 import { CustomerService } from '../service/customer.service';
+import{Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -9,7 +10,7 @@ import { CustomerService } from '../service/customer.service';
 })
 export class CustomerListComponent implements OnInit {
  customers: Customer[];
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,private _router: Router) { }
 
   ngOnInit(): void {
     this.customerService.getAll().subscribe(res=>{
@@ -20,6 +21,19 @@ export class CustomerListComponent implements OnInit {
         
       }
       this.customers= res;
+    })
+  }
+  editButtonClick(customerId: number){
+    this._router.navigate(['/edit',customerId]);
+  }
+  deleteButtonClick(customerId: number){
+    this.customerService.deleteCustomer(customerId).subscribe(res=>{
+      this.fetchData();
+    })
+  }
+  fetchData(){
+    this.customerService.getAll().subscribe((res: Customer[])=>{
+      this.customers = res;
     })
   }
 

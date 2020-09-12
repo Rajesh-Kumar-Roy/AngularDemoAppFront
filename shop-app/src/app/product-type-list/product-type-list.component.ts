@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductTypeService} from '../service/product-type.service';
 import{ProductType} from '../Model/productType';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'product-type-list',
@@ -9,7 +10,7 @@ import{ProductType} from '../Model/productType';
 })
 export class ProductTypeListComponent implements OnInit {
 productType: ProductType[];
-  constructor(private productTypeService: ProductTypeService) { }
+  constructor(private productTypeService: ProductTypeService,private router: Router) { }
 
   ngOnInit(): void {
     this.productTypeService.getAll().subscribe(response=>{
@@ -20,6 +21,9 @@ productType: ProductType[];
       }
       this.productType=response;
     })
+  }
+  onEditButtonClick(typeId: number){
+   this.router.navigate(['/typeEdit',typeId]);
   }
 
 

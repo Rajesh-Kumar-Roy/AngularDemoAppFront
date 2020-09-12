@@ -26,7 +26,7 @@
                         <td>{{products.name}}</td>
                         <td>{{products.code}}</td>
                         <td>{{products.description}}</td>
-                        <td><span><i class="fas fa-pencil-alt"></i></span></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"(click)="onEditButtonClick(products.id)"></i></button></td>
                     </tr>
                 </tbody>
             </table>

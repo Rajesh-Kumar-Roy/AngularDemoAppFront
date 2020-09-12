@@ -29,12 +29,17 @@ export class ProductServiceService {
   }
   //product type name calling
   
-  getById(id: number){
+  getById(id: number):Observable<Product>{
     //api id wise product
+    return this.http.get<Product>(`${baseUrl}/${id}`);
 }
 
-update(product: Product){
+update(product: Product): Observable<void>{
     //api code for id 
-}    
+    return this.http.put<void>(`${baseUrl}/${product.id}`,product,headerOptions);
+}  
+deleteProduct(id: number): Observable<void>{
+  return this.http.delete<void>(`${baseUrl}/${id}`);
+ }  
 
 }

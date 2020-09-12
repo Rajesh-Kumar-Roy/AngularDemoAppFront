@@ -108,7 +108,7 @@ namespace ShopApplication.Controllers.API
             retriveProduct.Name = product.Name;
             retriveProduct.Price = product.Price;
             retriveProduct.Description = product.Description;
-            retriveProduct.ProductTypeId = product.ProductTypeId;
+           
             bool isUpdate = _productManager.Update(retriveProduct);
             if (isUpdate)
             {
@@ -127,7 +127,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "product not Found!" });
             }
 
-            bool isDelete = _productManager.Remove(retriveProduct, false);
+            bool isDelete = _productManager.Remove(retriveProduct, true);
             if (isDelete)
             {
                 return Ok(retriveProduct);

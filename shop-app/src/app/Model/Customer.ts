@@ -2,7 +2,7 @@ export class Customer{
     id: number;
     firstName: string;
     lastName: string;
-    moblieNo: string;
+    mobileNo: string;
     email: string;
     address: string;
     customerCode: string;

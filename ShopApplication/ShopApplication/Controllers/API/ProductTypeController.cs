@@ -62,7 +62,7 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id) 
+        public IActionResult Put(int id, [FromBody] ProductType model) 
         {
             var retriveProductType = _productTypeManager.GetById(id);
             if (retriveProductType == null)
@@ -70,6 +70,9 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new {error = "Can not get"});
             }
 
+            retriveProductType.Name = model.Name;
+            retriveProductType.Code = model.Code;
+            retriveProductType.Description = model.Description;
             bool isUpdate = _productTypeManager.Update(retriveProductType);
             if (isUpdate)
             {
