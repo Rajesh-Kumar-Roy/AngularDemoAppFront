@@ -6,5 +6,6 @@ namespace ShopApplication.Manager.IMContract
     public interface IProductManager:IBaseManager<Product>
     {
        ICollection<Product> GetProductByTypeId(int productTypeId);
+       ICollection<Product> GetAllProduct();
     }
 }

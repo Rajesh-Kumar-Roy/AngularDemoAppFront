@@ -28,5 +28,10 @@ namespace ShopApplication.Repositories.Repositories
         {
             return Context.Customers.Where(c => c.CustomerCode == customerCode).Select(c => c.FirstName);
         }
+
+        public ICollection<Customer> GetAllCustomer()
+        {
+            return Context.Customers.Where(c => c.IsDelete == false).ToList();
+        }
     }
 }

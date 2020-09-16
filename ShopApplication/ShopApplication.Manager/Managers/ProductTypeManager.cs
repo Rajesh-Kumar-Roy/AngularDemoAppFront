@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using ShopApplication.Manager.Base;
 using ShopApplication.Manager.IMContract;
@@ -24,6 +26,16 @@ namespace ShopApplication.Manager.Managers
 
             var dto = _iMapper.Map<ProductTypeDto>(model);
             return dto;
+        }
+
+        public ICollection<ProductType> GetAllProductType()
+        {
+            return Repository.GetAllProductType();
+        }
+
+        public IQueryable<string> GetProductTypeByTypeId(int id)
+        {
+            return Repository.GetProductTypeByTypeId(id);
         }
     }
 }

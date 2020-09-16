@@ -26,5 +26,10 @@ namespace ShopApplication.Repositories.Repositories
         {
             return Context.Products.Where(c => c.ProductTypeId == productTypeId).Include(c=>c.ProductType).ToList();
         }
+
+        public ICollection<Product> GetAllProduct()
+        {
+            return Context.Products.Where(c => c.IsDelete == false).Include(d=>d.ProductType).ToList();
+        }
     }
 }

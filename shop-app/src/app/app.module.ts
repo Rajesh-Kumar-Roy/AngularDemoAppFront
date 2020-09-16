@@ -17,6 +17,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerEntryComponent } from './customer-entry/customer-entry.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { ToastrModule} from 'ngx-toastr';
+
+
 
 
 @NgModule({
@@ -39,6 +42,12 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
     FormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

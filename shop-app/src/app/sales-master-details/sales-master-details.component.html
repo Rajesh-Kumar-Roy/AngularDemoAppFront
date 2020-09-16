@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="form-horizontal" [formGroup]="salesForm" (ngSubmit)="onSave()">
+    <form class="form-horizontal" [formGroup]="salesForm" (ngSubmit)="onSaveSale()">
         <div class="card border-success">
             <br />
             <div class="container">
@@ -8,71 +8,73 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
-                               Sales Info
+                                Sales Info
                             </div>
                             <div class="col d-flex flex-row-reverse">
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button"  class="btn btn-danger" (click)="registrationButtonClick()"> <i class="fa fa-user-plus" aria-hidden="true" fa-lg style="display: inline;"></i> <span class="ml-1">Reg</span>
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="registrationButtonClick()"> <i class="fa fa-user-plus"
+                                                aria-hidden="true" fa-lg style="display: inline;"></i> <span
+                                                class="ml-1">Reg</span>
                                         </button>
-                                    
+
                                     </div>
                                     <div class="col">
-                                            <button type="button"  class="btn btn-danger  " *ngIf="regShowHide" (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true" fa-lg></i>
-                                                                    </button>
+                                        <button type="button" class="btn btn-danger  " *ngIf="regShowHide"
+                                            (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true"
+                                                fa-lg></i>
+                                        </button>
                                     </div>
-                              
-                               
+
+
                                 </div>
-                                
+
 
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="card-body">
                         <div *ngIf="hideCustomerCode">
-                        <div class="form-gorup">
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="Code" class="form-label">Code</label>
+                            <div class="form-gorup">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="Code" class="form-label">Code</label>
 
-                                    <input type="text" class="form-control" name="customerCode" id="customerCode"(keyup)="findCustomer($event)"  placeholder="Enter Customer Code" />
-                                    
+                                        <input type="text" class="form-control" name="customerCode" id="customerCode"
+                                            (keyup)="findCustomer($event)" placeholder="Enter Customer Code" />
+
+
+                                    </div>
+                                    <div class="col">
+
+                                        <label class="form-label">Customer Name:</label>
+                                        <input type="text" formControlName="customerName" class="form-control"
+                                            [ngModel]="customerCodeValue" readonly value="Name Test" />
+
+                                    </div>
 
                                 </div>
-                                <div class="col">
-                                    
-                                    <label class="form-label">Customer Name:</label>
-                                    <input type="text" formControlName="customerName" class="form-control"[ngModel]="customerCodeValue" readonly value="Name Test"/>
-                                   
-                                </div>
-                               
+
                             </div>
-                             
                         </div>
-                    </div>
-                        <hr/>
+                        <hr />
                         <div *ngIf="regShowHide">
                             <customer-entry></customer-entry>
-                    </div>
-                        <hr/>
+                        </div>
+                        <hr />
 
                         <div class="form-gorup">
                             <div class="form-row">
-                                
+
                                 <div class="col">
                                     <label for="customerName" class="form-label">Sales Code</label>
 
                                     <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="saleNo"
-                                        [ngClass]="{ 'is-invalid': submitted && Sel.customerName?.errors }"
-                                        placeholder="Sales Code" placeholder="Enter Customer Name" [ngModel] ="getSaleCode" readonly/>
-                                    <div *ngIf="submitted && Sel.customerName?.errors" class="invalid-feedback">
-                                        <div *ngIf=" Sel.customerName.errors?.required">Sales is Required!!
-                                        </div>
-                                    </div>
+                                        formControlName="saleNo" placeholder="Sales Code" readonly />
+
 
                                 </div>
                                 <div class="col">
@@ -90,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="form-gorup">
                             <div class="form-row">
                                 <div class="col">
@@ -148,6 +150,7 @@
                                             <tr *ngIf="productAdded && i>0">
                                                 <td>{{i}}</td>
                                                 <td><select class="custom-select" palceholder="Select Product"
+                                                        formControlName="productTypeId"
                                                         (change)="ChangeSelectedValue($event)">
                                                         <option value=""></option>
                                                         <option>Select Product Type</option>
@@ -158,7 +161,8 @@
                                                     </select></td>
                                                 <td>
                                                     <select class="custom-select" palceholder="Select Product"
-                                                        (change)="changeProductSelectValue($event)">
+                                                        (change)="changeProductSelectValue($event)"
+                                                        formControlName="productId">
                                                         <option value=""></option>
                                                         <option>Select Product Type</option>
                                                         <option *ngFor="let product of productByType"
@@ -172,14 +176,14 @@
                                                     <input type="text" formControlName="qty" class="form-control"
                                                         (keyup)="onKey($event)"
                                                         [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }"
-                                                        [id]="'qty'+ i" palceholder="Qty" />
+                                                        [id]="'qty'+ i" palceholder="Qty" formControlName="qty" />
                                                     <div *ngIf="submitted && detail.get('qty')?.errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf=" detail.get('qty').errors?.required">Qty is required
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td fromControlName="totalPrice">
                                                     {{totalPrice}}
                                                 </td>
                                                 <td>

@@ -18,5 +18,10 @@ namespace ShopApplication.Manager.Managers
         {
             return _productRepository.GetProductByTypeId(productTypeId);
         }
+
+        public ICollection<Product> GetAllProduct()
+        {
+            return _productRepository.GetAllProduct();
+        }
     }
 }

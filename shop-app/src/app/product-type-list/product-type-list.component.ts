@@ -1,29 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductTypeService} from '../service/product-type.service';
-import{ProductType} from '../Model/productType';
-import {Router} from '@angular/router'
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductTypeService } from '../service/product-type.service';
+import { ProductType } from '../Model/productType';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'product-type-list',
+  selector: 'app-product-type-list',
   templateUrl: './product-type-list.component.html',
   styleUrls: ['./product-type-list.component.css']
 })
 export class ProductTypeListComponent implements OnInit {
-productType: ProductType[];
-  constructor(private productTypeService: ProductTypeService,private router: Router) { }
+  productType: ProductType[];
+  @Input() productTypes: ProductType;
+  constructor(private productTypeService: ProductTypeService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.productTypeService.getAll().subscribe(response=>{
-      if(response == null){
-        err => {
-          alert('Something went wrong!');
-        }
+    this.productTypeService.getAllisDeleteFalse().subscribe(response => {
+      if (response == null) {
+        alert('Something went wrong!');
       }
-      this.productType=response;
-    })
+      this.productType = response;
+      console.log(this.productTypes + 'show' );
+    });
   }
-  onEditButtonClick(typeId: number){
-   this.router.navigate(['/typeEdit',typeId]);
+  addNewProductType(): void{
+    this.productType.push(this.productTypes);
+  }
+  onEditButtonClick(typeId: number): void{
+    this.router.navigate(['/typeEdit', typeId]);
+  }
+  onDeleteproductTypeClick(typeId: number): void {
+    this.productTypeService.deleteProductType(typeId).subscribe(() => {
+      this.featchData();
+    });
+  }
+  featchData(): void {
+    this.toastr.error('Delete Successfull', 'Message');
+    this.productTypeService.getAllisDeleteFalse().subscribe(res => {
+      this.productType = res;
+    });
   }
 
 

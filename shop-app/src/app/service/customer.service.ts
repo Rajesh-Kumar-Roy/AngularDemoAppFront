@@ -4,6 +4,7 @@ import{Observable} from'rxjs';
 
 import { Customer } from '../Model/Customer';
 const baseUrl="https://localhost:44326/api/customer";
+const baseUrl2 = "https://localhost:44326/api/customer/getallfalse";
 const baseUrl1 ="https://localhost:44326/api/customer/GetNameByCustomerCode";
 
 const headerOptions = {
@@ -26,9 +27,17 @@ export class CustomerService {
   {
     return this.http.post<Customer>(baseUrl, customer,headerOptions);
    }
+  
    getAll(): Observable<Customer[]>{
      return this.http.get<Customer[]>(baseUrl);
    }
+   
+   //get all customer where isDelete False
+   getAllFalse(): Observable<Customer[]>{
+     return this.http.get<Customer[]>(baseUrl2);
+   }
+
+
    getById(id: number): Observable<Customer>{
     return this.http.get<Customer>(`${baseUrl}/${id}`);
    }

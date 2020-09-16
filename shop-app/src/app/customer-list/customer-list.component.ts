@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Customer } from '../Model/Customer';
 import { CustomerService } from '../service/customer.service';
 import{Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-customer-list',
@@ -10,10 +11,10 @@ import{Router} from '@angular/router';
 })
 export class CustomerListComponent implements OnInit {
  customers: Customer[];
-  constructor(private customerService: CustomerService,private _router: Router) { }
+  constructor(private customerService: CustomerService,private _router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.customerService.getAll().subscribe(res=>{
+    this.customerService.getAllFalse().subscribe(res=>{
       if(res==null){
         err=>{
           console.log("Something went Worng!!");
@@ -29,10 +30,12 @@ export class CustomerListComponent implements OnInit {
   deleteButtonClick(customerId: number){
     this.customerService.deleteCustomer(customerId).subscribe(res=>{
       this.fetchData();
-    })
+      this.toastr.error("Delete Successfull","Message");
+      
+    });
   }
   fetchData(){
-    this.customerService.getAll().subscribe((res: Customer[])=>{
+    this.customerService.getAllFalse().subscribe((res: Customer[])=>{
       this.customers = res;
     })
   }

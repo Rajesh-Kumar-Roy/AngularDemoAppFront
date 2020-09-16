@@ -10,5 +10,6 @@ namespace ShopApplication.Repositories.IRContracts
     public interface ICustomerRepository:IBaseRepository<Customer>
     {
         IQueryable<string> GetNameByCustomerCode(string customerCode);
+        ICollection<Customer> GetAllCustomer();
     }
 }

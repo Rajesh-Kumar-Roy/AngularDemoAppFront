@@ -5,41 +5,46 @@
                 Product Type Entry
             </div>
             <div class="card-body">
-        <form [formGroup] = "productTypeForm" (ngSubmit) = "onSubmit()"class="form-horizontal">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col">
-                      <input type="text" class="form-control" formControlName ="name" [ngClass]="{ 'is-invalid': submitted && pt.name?.errors }"  placeholder="Enter Name" name="name"/>
-                      <div *ngIf="submitted && pt.name?.errors" class="invalid-feedback">
-                          <div *ngIf=" pt.name.errors?.required">Name is Required!!</div>
-                      </div>
+                <form [formGroup]="productTypeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" formControlName="name"
+                                    [ngClass]="{ 'is-invalid': submitted && pt.name?.errors }" placeholder="Enter Name"
+                                    name="name" />
+                                <div *ngIf="submitted && pt.name?.errors" class="invalid-feedback">
+                                    <div *ngIf=" pt.name.errors?.required">Name is Required!!</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" formControlName="code"
+                                    [ngClass]="{ 'is-invalid': submitted && pt.code?.errors }" placeholder="Enter Code"
+                                    name="code">
+                                <div *ngIf="submitted && pt.code?.errors" class="invalid-feedback">
+                                    <div *ngIf="pt.code.errors?.required">code is Required!!</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                      <input type="text" class="form-control"formControlName="code" [ngClass]="{ 'is-invalid': submitted && pt.code?.errors }"  placeholder="Enter Code" name="code">
-                      <div *ngIf="submitted && pt.code?.errors" class="invalid-feedback">
-                          <div *ngIf="pt.code.errors?.required">code is Required!!</div>
-                      </div>
+                    <div class="form-group">
+                        <div class="row">
+
+                            <div class="col">
+                                <textarea class="form-control" formControlName="description" rows="3" id="Comment"
+                                    placeholder="Comment"></textarea>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                   
-                    <div class="col">
-                        <textarea class="form-control"formControlName="description" rows="3" id="Comment" placeholder="Comment"></textarea>
+                    <div class="form-gorup">
+                        <input type="submit" class="btn btn-success col-offset-2 " value="Save">
                     </div>
-                  </div>
-               
+                </form>
             </div>
-            <div class="form-gorup">
-                <input type="submit" class="btn btn-success col-offset-2 " value="Save">
-            </div>
-        </form>
+        </div>
     </div>
-    </div>
-</div>
 </div>
 
-<div >
-    <product-type-list></product-type-list>
+<div>
+    <app-product-type-list [productTypes] = "passProductType()"></app-product-type-list>
 </div>

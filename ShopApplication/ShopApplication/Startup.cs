@@ -27,40 +27,8 @@ namespace ShopApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            //services.AddMvc().AddJsonOptions(options =>
-            //{
-            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //});
-
-            services.AddMvc().AddNewtonsoftJson();
-            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddTransient<IProductManager, ProductManager>();
-            services.AddTransient<IProductTypeManager, ProductTypeManager>();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
-            services.AddTransient<Microsoft.EntityFrameworkCore.DbContext, ShopApplicationDbContext>();
-            services.AddTransient<ISalesDetailsRepository, SalesDetailsRepository>();
-            services.AddTransient<ISaleRepository, SaleRepository>();
-            services.AddTransient<ISaleManager, SaleManager>();
-            services.AddTransient<ISalesDetailsManager, SalesDetailsManager>();
-            services.AddTransient<ICustomerManager, CustomerManager>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddControllers().AddNewtonsoftJson();
-            services.AddTransient<IDropdownManager, DropdownManager>();
-            services.AddAutoMapper();
-            services.AddDbContext<ShopApplicationDbContext>(options =>
-            {
-                options.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
-            });
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
+            ServiceMapper configService = new ServiceMapper();
+            configService.ConfigServiceMapper(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

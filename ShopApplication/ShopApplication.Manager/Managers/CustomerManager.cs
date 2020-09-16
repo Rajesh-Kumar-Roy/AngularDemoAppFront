@@ -23,5 +23,10 @@ namespace ShopApplication.Manager.Managers
         {
             return _iCustomerRepository.GetNameByCustomerCode(customerCode);
         }
+
+        public ICollection<Customer> GetAllCustomer()
+        {
+            return _iCustomerRepository.GetAllCustomer();
+        }
     }
 }

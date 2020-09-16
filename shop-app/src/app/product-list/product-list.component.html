@@ -1,5 +1,5 @@
 <div class="container">
-    <product-entry (onAdd)="addNewProduct($event)"></product-entry>
+    <app-product-entry (onAdd)="addNewProduct($event)"></app-product-entry>
 </div>
 <hr/>
 <div class="container">
@@ -14,22 +14,25 @@
                 <table class="table table-bordered" style="text-align: center;">
                     <thead>
                         <tr>
+                            <th>SL</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Description</th>
-                            <th>Product Name</th>
+                            <th>Product Type Name</th>
                             <th>Action</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let products of product">
+                        <tr *ngFor="let products of product; let i = index">
+                            <td>{{i+1}}</td>
                             <td>{{products.name}}</td>
                             <td>{{products.price}}</td>
                             <td>{{products.description}}</td>
-                            <td>{{products.productTypeId}}</td>
-                            <td><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"(click)="onEditButtonClick(products.id)"></i></button> &nbsp;
-                            <button type="button" class="btn btn-danger btn-sm" (click)="deleteButtonClick(products.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            <td>{{getproductTypeNameBytyId(products.productTypeId)}}</td>
+                            
+                            <td><button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"(click)="onEditButtonClick(products.id)"></i></button> &nbsp;
+                            <button type="button" class="btn btn-default btn-sm" (click)="deleteButtonClick(products.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

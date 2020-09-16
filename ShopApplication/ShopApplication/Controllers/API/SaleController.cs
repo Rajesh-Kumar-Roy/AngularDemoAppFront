@@ -39,8 +39,8 @@ namespace ShopApplication.Controllers.API
             if (ModelState.IsValid)
             {
                 //string uniqueNumber = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
-                
-                //sale.Customer.CustomerCode = "c-"+uniqueNumber;
+
+                sale.Customer.CustomerCode = UtilityManager.Uitlity.GetSaleCode();
                 bool isAdded = _SaleManager.Add(sale);
               
                 if (isAdded)

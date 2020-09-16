@@ -5,5 +5,6 @@ export class SalesDetails{
     totalPrice: number;
     description: string;
     productId: number;
+    productTypeId: number;
     saleId: number;
 }
