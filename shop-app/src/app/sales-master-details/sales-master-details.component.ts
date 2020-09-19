@@ -1,3 +1,4 @@
+import { Customer } from './../Model/Customer';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Sales } from '../Model/Sales';
@@ -10,6 +11,8 @@ import { SalesDetailsService } from '../service/sales-details.service';
 import { SalesDetails } from '../Model/SaleDetails';
 import { SalesService } from '../service/sales.service';
 import { CustomerService } from '../service/customer.service';
+import { ToastrService } from 'ngx-toastr';
+import { TIMEOUT } from 'dns';
 
 @Component({
   selector: 'app-sales-master-details',
@@ -32,7 +35,8 @@ export class SalesMasterDetailsComponent implements OnInit {
   productType: ProductType[];
   totalPrice: number;
   unqDate: string;
-  customerCodeValue: any;
+  customerCodeValue: any = '';
+  customer: Customer[];
   getSaleCode: string;
   success = false;
   constructor(
@@ -41,7 +45,8 @@ export class SalesMasterDetailsComponent implements OnInit {
     private saleService: SalesService,
     private productService: ProductServiceService,
     private productTypeService: ProductTypeService,
-    private salesDetailsService: SalesDetailsService
+    private salesDetailsService: SalesDetailsService,
+    private toastr: ToastrService
   ) {
     this.$Model = new Sales(); this.$DetailModel = new SalesDetails();
     this.unqDate = `S-${Date.now().toString()}`;
@@ -69,12 +74,16 @@ export class SalesMasterDetailsComponent implements OnInit {
         this.products = res;
       }
     });
-    this.productTypeService.getAll().subscribe((res: ProductType[]) => {
+    this.productTypeService.getAllisDeleteFalse().subscribe((res: ProductType[]) => {
       if (res.length > 0) {
         this.productType = res;
       }
     });
-
+    this.customerService.getAllFalse().subscribe((res: Customer[]) => {
+      if (res.length > 0) {
+        this.customer = res;
+      }
+    });
 
   }
   get Sel(): any {
@@ -103,7 +112,7 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   }
   removeDetailsButton(detailsIndex: number): void {
-    const detailsFormArray = ( this.salesForm.get('details') as FormArray);
+    const detailsFormArray = (this.salesForm.get('details') as FormArray);
     detailsFormArray.removeAt(detailsIndex);
     detailsFormArray.markAsDirty();
     detailsFormArray.markAsUntouched();
@@ -127,10 +136,62 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   }
   // Find Customer Name and Sales  Code
-  findCustomer(event): any {
-    this.customerService.getNameByCustomerCode(event.target.value).subscribe(res => {
-      this.customerCodeValue = res;
-    });
+  findCustomer(event): void {
+    // tslint:disable-next-line: triple-equals
+    const len = event.target.value.length;
+    const check = event.target.value;
+    const codeUpper = check.toUpperCase();
+    // tslint:disable-next-line: one-variable-per-declaration
+    const codeCheck = codeUpper.substring(0, 3);
+    console.log(codeCheck);
+    // tslint:disable-next-line: triple-equals
+    // if ('CC-' == codeCheck) {
+    //   console.log((event.target.value).length);
+    //   this.customerService.getNameByCustomerCode(check).subscribe(res => {
+    //     this.customerCodeValue = res;
+    //   });
+    // }
+    const ii = this.customer.length;
+    for (let i = 0; i < ii; i++) {
+      // tslint:disable-next-line: no-unused-expression
+
+      const pot = this.customer[i];
+      // tslint:disable-next-line: triple-equals
+      if ('CC-' == codeCheck && check.length === 19 && check.length > 12) {
+        if (pot.customerCode === codeUpper) {
+          console.log(codeUpper);
+          console.log(pot.firstName);
+          this.customerCodeValue = pot.firstName;
+
+        }
+      }
+      // tslint:disable-next-line: max-line-length
+      // tslint:disable-next-line: triple-equals
+      else if (('013' == codeCheck || '014' === codeCheck || '015' === codeCheck || '016' === codeCheck || '017' === codeCheck ||
+      '019' === codeCheck || '018' === codeCheck) && check.length === 11) {
+        console.log(check.length);
+        if (pot.mobileNo === check) {
+          console.log(check);
+          console.log(pot.mobileNo);
+          this.customerCodeValue = pot.firstName;
+
+        }
+        if (pot.mobileNo !== check && len ===  11){
+          this.toastr.warning('Can Not Find Customer', 'Alert', {
+            timeOut: 1500
+          });
+        }
+      }
+      else if (len === 19 ) {
+        this.toastr.warning('Can Not Find Customer', 'Alert', {
+          timeOut: 1500
+        });
+      }
+      else {
+        this.customerCodeValue = ' ';
+      }
+    }
+
   }
   // Save Value
   onSaveSale(): any {
@@ -145,7 +206,7 @@ export class SalesMasterDetailsComponent implements OnInit {
   }
   addProduct(): void {
     this.productAdded = true;
-    ( this.salesForm.get('details') as FormArray).push(this.addDetailsFormGroup());
+    (this.salesForm.get('details') as FormArray).push(this.addDetailsFormGroup());
   }
   productLoop(): any {
     this.products.forEach((value1) => value1.id);

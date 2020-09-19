@@ -1,13 +1,28 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
-        <div class="card">
-            <div class="card-header bg-success text-white">
+    <div class="col-md-12">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white text-center">
                 Product Entry
             </div>
             <div class="card-body">
-                <form [formGroup]="productForm" (ngSubmit)="onSave()" class="form-horizontal">
+                <form [formGroup]="productForm" autocomplete="off" (ngSubmit)="onSave()" class="form-horizontal">
                     <div class="form-group">
                         <div class="row">
+                            <div class="col">
+                                <label for="producttype" class="form-label">Product Type</label>
+                                <select name="cars" formControlName="productTypeId" class="custom-select mb-3"
+                                    [ngClass]="{ 'is-invalid': (p.productTypeId.touched || submitted )  && p.productTypeId?.errors }">
+                                    <option value=""></option>
+                                    <option>Select Product Type</option>
+                                    <option *ngFor="let producttype of productType" [value]="producttype.id">
+                                        {{producttype.name}}</option>
+
+                                </select>
+                                <div *ngIf="(p.productTypeId.touched || submitted )  && p.productTypeId?.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="p.productTypeId.errors?.required">Product Type Is Required!!</div>
+                                </div>
+                            </div>
                             <div class="col">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" formControlName="name"
@@ -17,6 +32,14 @@
                                     <div *ngIf=" p.name.errors?.required">Name is Required!!</div>
                                 </div>
                             </div>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
+
                             <div class="col">
                                 <label for="price" class="form-label">Price</label>
                                 <input type="number" class="form-control" formControlName="price"
@@ -26,25 +49,7 @@
                                     <div *ngIf="p.price.errors?.required">Price is Required!!</div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label for="producttype" class="form-label">Product</label>
-                                <select name="cars" formControlName="productTypeId" class="custom-select mb-3"
-                                    [ngClass]="{ 'is-invalid': submitted && p.productTypeId?.errors }"
-                                    aria-palceholder="Select Product ID">
-                                    <option value=""></option>
-                                    <option>Select Product Type</option>
-                                    <option *ngFor="let producttype of productType" [value]="producttype.id">
-                                        {{producttype.name}}</option>
 
-                                </select>
-                                <div *ngIf="submitted && p.productTypeId?.errors" class="invalid-feedback">
-                                    <div *ngIf="p.productTypeId.errors?.required">Product Type Is Required!!</div>
-                                </div>
-                            </div>
                             <div class="col">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" formControlName="description" rows="1" id="Comment"
@@ -54,7 +59,14 @@
 
                     </div>
                     <div class="form-gorup">
-                        <input type="submit" class="btn btn-success col-offset-2 " value="Save">
+                        <div *ngIf="showSave">
+                            <input type="submit" class="btn btn-success col-offset-2 " value="Save">
+                        </div>
+                        <div *ngIf="showUpdate">
+                            <input type="submit" class="btn btn-success col-offset-2 " value="Update">
+                        </div>
+
+
                     </div>
                 </form>
             </div>

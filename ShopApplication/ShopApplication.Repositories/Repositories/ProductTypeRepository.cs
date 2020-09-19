@@ -28,7 +28,7 @@ namespace ShopApplication.Repositories.Repositories
 
         public IQueryable<string> GetProductTypeByTypeId(int id)
         {
-            return Context.ProductTypes.Where(c => c.Id == id).Select(d => d.Name);
+            return Context.ProductTypes.Where(c => c.Id == id && c.IsDelete == false).Select(d => d.Name);
         }
     }
 }

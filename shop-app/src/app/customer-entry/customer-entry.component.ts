@@ -16,6 +16,8 @@ export class CustomerEntryComponent implements OnInit {
   customer: Customer;
   customerForm: FormGroup;
   success = false;
+  showSave = false;
+  showUpdate = false;
   constructor(private fb: FormBuilder,
               private customerService: CustomerService,
               private route: ActivatedRoute,
@@ -36,8 +38,10 @@ export class CustomerEntryComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const csId = +params.get('id');
       if (csId) {
+        this.showUpdate = true;
         this.getCustomer(csId);
       } else {
+        this.showSave = true;
         this.customer = {
           id: null,
           firstName: '',
@@ -84,7 +88,7 @@ export class CustomerEntryComponent implements OnInit {
     if (this.customer.id) {
       this.customerService.update(this.customer).subscribe(() => {
         this.router.navigate(['customerList']);
-        this.toastr.info('Save Successfull', 'Message');
+        this.toastr.info('Update Successfull', 'Message');
       });
     } else {
       // Save new customer
@@ -110,10 +114,10 @@ export class CustomerEntryComponent implements OnInit {
   mapFormValuesToFormModel(): void {
     this.customer.firstName = this.customerForm.value.firstName;
     this.customer.lastName = this.customerForm.value.lastName;
-    this.customer.address = this.customerForm.value.address;
     this.customer.email = this.customerForm.value.email;
     this.customer.mobileNo = this.customerForm.value.mobileNo;
     this.customer.customerCode = this.customerForm.value.customerCode;
+    this.customer.address = this.customerForm.value.address;
 
   }
 

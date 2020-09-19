@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule,NgForm} from '@angular/forms'
+import {ReactiveFormsModule, NgForm} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { ToastrModule} from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),

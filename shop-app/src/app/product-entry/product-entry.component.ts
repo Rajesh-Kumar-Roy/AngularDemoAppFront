@@ -20,6 +20,8 @@ export class ProductEntryComponent implements OnInit {
   productForm: FormGroup;
   submitted = false;
   isSuccess = false;
+  showSave = false;
+  showUpdate = false;
 
   public productType: ProductType[] = [];
   // tslint:disable-next-line: no-output-on-prefix
@@ -48,8 +50,10 @@ export class ProductEntryComponent implements OnInit {
     this.route.paramMap.subscribe(parmas => {
       const pId = +parmas.get('id');
       if (pId) {
+        this.showUpdate = true;
         this.getProduct(pId);
       } else {
+        this.showSave = true;
         this.products = {
           id: null,
           name: '',
@@ -101,6 +105,7 @@ export class ProductEntryComponent implements OnInit {
     // update product
     if (this.products.id) {
       this.productService.update(this.products).subscribe(() => {
+        this.toastr.info('Update Successful', 'Message');
         this.router.navigate(['productList']);
       });
     } else {

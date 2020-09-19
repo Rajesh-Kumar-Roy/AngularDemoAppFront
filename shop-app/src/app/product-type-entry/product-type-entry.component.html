@@ -1,22 +1,27 @@
+
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card">
-            <div class="card-header bg-success text-white">
-                Product Type Entry
+            <div class="card-header bg-success text-white text-center">
+                <div *ngIf="showSave"> Product Type Entry</div>
+                <div *ngIf="showUpdate">Prouduct Type Update</div>
+               
             </div>
             <div class="card-body">
                 <form [formGroup]="productTypeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
+                                <label class="form-label" for="name">Name</label>
                                 <input type="text" class="form-control" formControlName="name"
-                                    [ngClass]="{ 'is-invalid': submitted && pt.name?.errors }" placeholder="Enter Name"
+                                    [ngClass]="{ 'is-invalid': submitted && pt.name?.errors }" placeholder="Enter Name" id="name"
                                     name="name" />
                                 <div *ngIf="submitted && pt.name?.errors" class="invalid-feedback">
                                     <div *ngIf=" pt.name.errors?.required">Name is Required!!</div>
                                 </div>
                             </div>
                             <div class="col">
+                                <label class="form-label" for="code">Product Type Code</label>
                                 <input type="text" class="form-control" formControlName="code"
                                     [ngClass]="{ 'is-invalid': submitted && pt.code?.errors }" placeholder="Enter Code"
                                     name="code">
@@ -30,14 +35,18 @@
                         <div class="row">
 
                             <div class="col">
-                                <textarea class="form-control" formControlName="description" rows="3" id="Comment"
-                                    placeholder="Comment"></textarea>
+                                <label class="form-label" for="Comment">Description</label>
+                                <textarea class="form-control" formControlName="description" rows="1" id="Comment"
+                                    placeholder="Description"></textarea>
                             </div>
                         </div>
 
                     </div>
                     <div class="form-gorup">
-                        <input type="submit" class="btn btn-success col-offset-2 " value="Save">
+                        <div *ngIf="showSave"> <input type="submit" class="btn btn-success col-offset-2 " value="Save"></div>
+                        <div *ngIf="showUpdate"><input type="submit" class="btn btn-success col-offset-2 " value="Update" ></div>
+                       
+                        
                     </div>
                 </form>
             </div>

@@ -1,9 +1,6 @@
-<div class="container">
-    <form class="form-horizontal" [formGroup]="salesForm" (ngSubmit)="onSaveSale()">
-        <div class="card border-success">
+<div class="container-fluid">
+    <form class="form-horizontal" autocomplete="off" [formGroup]="salesForm" (ngSubmit)="onSaveSale()">
             <br />
-            <div class="container">
-
                 <div class="card border-danger">
                     <div class="card-header">
                         <div class="row">
@@ -13,7 +10,7 @@
                             <div class="col d-flex flex-row-reverse">
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button" class="btn btn-danger"
+                                        <button type="button" class="btn btn-outline-danger"
                                             (click)="registrationButtonClick()"> <i class="fa fa-user-plus"
                                                 aria-hidden="true" fa-lg style="display: inline;"></i> <span
                                                 class="ml-1">Reg</span>
@@ -21,7 +18,7 @@
 
                                     </div>
                                     <div class="col">
-                                        <button type="button" class="btn btn-danger  " *ngIf="regShowHide"
+                                        <button type="button" class="btn btn-outline-danger" *ngIf="regShowHide"
                                             (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true"
                                                 fa-lg></i>
                                         </button>
@@ -41,10 +38,10 @@
                             <div class="form-gorup">
                                 <div class="form-row">
                                     <div class="col">
-                                        <label for="Code" class="form-label">Code</label>
+                                        <label for="Code" class="form-label">Customer Code/Phone No</label>
 
                                         <input type="text" class="form-control" name="customerCode" id="customerCode"
-                                            (keyup)="findCustomer($event)" placeholder="Enter Customer Code" />
+                                            (keyup)="findCustomer($event)" placeholder="Enter Customer Code or Phone No" />
 
 
                                     </div>
@@ -62,7 +59,7 @@
                         </div>
                         <hr />
                         <div *ngIf="regShowHide">
-                            <customer-entry></customer-entry>
+                            <app-customer-entry></app-customer-entry>
                         </div>
                         <hr />
 
@@ -131,7 +128,7 @@
                                     *ngFor="let detail of salesForm.get('details')['controls']; let i = index">
                                     <div [formGroupName]="i">
                                         <thead>
-                                            <tr *ngIf="i==1">
+                                            <tr >
                                                 <th>
                                                     SL
                                                 </th>
@@ -212,9 +209,9 @@
                 <div class="row d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-success mr-3">Save</button>
                 </div>
-            </div>
+            
 
-        </div>
+       
 
     </form>
 </div>

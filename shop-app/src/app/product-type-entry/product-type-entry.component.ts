@@ -18,6 +18,8 @@ export class ProductTypeEntryComponent implements OnInit {
   isSuccess = false;
   ptTypes: ProductType;
   passProuductTypeValue: ProductType;
+  showSave = false;
+  showUpdate = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,8 +40,10 @@ export class ProductTypeEntryComponent implements OnInit {
     this.route.paramMap.subscribe(parmas => {
       const ptId = +parmas.get('id');
       if (ptId) {
+        this.showUpdate = true;
         this.getProductType(ptId);
       } else {
+        this.showSave = true;
         this.ptTypes = {
           id: null,
           name: '',
@@ -62,7 +66,7 @@ export class ProductTypeEntryComponent implements OnInit {
     this.mapFormValuesToFormModel();
     if (this.ptTypes.id) {
       this.productTypeService.update(this.ptTypes).subscribe(() => {
-        this.toastr.info('Save Succesfull', 'Message');
+        this.toastr.info('Update Succesfull', 'Message');
         this.router.navigate(['productTypeList']);
       });
     } else {

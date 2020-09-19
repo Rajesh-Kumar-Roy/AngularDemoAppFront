@@ -1,6 +1,11 @@
-<form [formGroup]="customerForm" (ngSubmit) = "onSave()">
+
+<form [formGroup]="customerForm" autocomplete="off" (ngSubmit) = "onSave()">
     <div class="card border-danger">
+        <div class="card-header text-center" style="color: red;" *ngIf="showUpdate">
+            Customer Update
+        </div>
           <div class="card-body">
+            
             <div class="form-gorup">
                 <div class="form-row">
                     <div class="col">
@@ -37,12 +42,12 @@
             <div class="form-gorup">
                 <div class="form-row">
                     <div class="col">
-                        <label for="Code" class="form-label">Phone No <i class="fa fa-volume-control-phone" aria-hidden="true"></i></label>
+                        <label for="Code" class="form-label">Phone No</label>
 
                         <input type="text" class="form-control" name="mobileNo" id="mobileNo"
                             formControlName="mobileNo"
                             [ngClass]="{ 'is-invalid': submitted && c.mobileNo?.errors }"
-                             placeholder="Enter Customer Code" />
+                             placeholder="Enter Phone No" />
                         <div *ngIf="submitted &&  c.mobileNo?.errors" class="invalid-feedback">
                             <div *ngIf="  c.mobileNo.errors?.required">Phone No is Required!!
                             </div>
@@ -54,10 +59,11 @@
 
                         <input type="text" class="form-control" name="email" id="customerName"
                             formControlName="email"
-                            
+                            [ngClass]="{ 'is-invalid': c.email?.errors }"
                              placeholder="Enter Email" />
                         
-                        
+                             <div class="invalid-feedback" *ngIf="  c.email.errors?.email">Enter correct Email!
+                            </div>
                        
                     </div>
                    
@@ -67,8 +73,8 @@
             <div class="form-gorup">
                 <div class="form-row">
                     <div class="col">
-                        <label for="description" class="form-label">Address</label>
-                        <textarea type="text" class="form-control" name="description" rows="1" id="address"
+                        <label for="address1" class="form-label">Address</label>
+                        <textarea type="text" class="form-control" name="description" rows="1" id="address1"
                             formControlName="address" placeholder="Enter Address"></textarea>
                     </div>
                     <div class="col">
@@ -78,7 +84,8 @@
                 </div>
             </div>
             <div class="row d-flex flex-row-reverse">
-                <button type="submit" class="btn btn-danger" style="margin-right: 25px;">Save</button>
+                <button type="submit" class="btn btn-danger" style="margin-right: 25px;" *ngIf="showSave">Save</button>
+                <button type="submit" class="btn btn-primary" style="margin-right: 25px;" *ngIf="showUpdate">Update</button>
             </div>
         </div>
     </div>

@@ -47,12 +47,8 @@ export class ProductListComponent implements OnInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.ii; i++){
         // tslint:disable-next-line: no-unused-expression
-        console.log(typeId);
         const pot = this.productTypes[i];
         if (pot.id === typeId){
-          this.name = pot.name;
-          console.log(pot.name);
-          console.log('type ID:', typeId, ' potid ', pot.id);
           return pot.name;
 
         }

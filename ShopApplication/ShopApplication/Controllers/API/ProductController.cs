@@ -118,6 +118,7 @@ namespace ShopApplication.Controllers.API
             retriveProduct.Name = product.Name;
             retriveProduct.Price = product.Price;
             retriveProduct.Description = product.Description;
+            retriveProduct.ProductTypeId = product.ProductTypeId;
            
             bool isUpdate = _productManager.Update(retriveProduct);
             if (isUpdate)
