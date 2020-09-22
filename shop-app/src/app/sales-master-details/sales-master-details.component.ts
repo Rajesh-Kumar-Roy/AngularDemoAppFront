@@ -12,7 +12,7 @@ import { SalesDetails } from '../Model/SaleDetails';
 import { SalesService } from '../service/sales.service';
 import { CustomerService } from '../service/customer.service';
 import { ToastrService } from 'ngx-toastr';
-import { TIMEOUT } from 'dns';
+
 
 @Component({
   selector: 'app-sales-master-details',
@@ -37,7 +37,7 @@ export class SalesMasterDetailsComponent implements OnInit {
   unqDate: string;
   customerCodeValue: any = '';
   customer: Customer[];
-  getSaleCode: string;
+  loadSaleCode: any;
   success = false;
   constructor(
     private fb: FormBuilder,
@@ -69,19 +69,28 @@ export class SalesMasterDetailsComponent implements OnInit {
         this.salesDetails = response;
       }
     }));
+    // get All Product
     this.productService.getAll().subscribe((res: Product[]) => {
       if (res.length > 0) {
         this.products = res;
       }
     });
+    // get all product Type where isDelete IS false
     this.productTypeService.getAllisDeleteFalse().subscribe((res: ProductType[]) => {
       if (res.length > 0) {
         this.productType = res;
       }
     });
+    // get all Customer where isDelete Is false
     this.customerService.getAllFalse().subscribe((res: Customer[]) => {
       if (res.length > 0) {
         this.customer = res;
+      }
+    });
+      // get sale code when page reload
+    this.saleService.getSaleCode().subscribe(res => {
+      if (res?.length > 0 ){
+        this.loadSaleCode = res;
       }
     });
 
@@ -124,11 +133,20 @@ export class SalesMasterDetailsComponent implements OnInit {
       }
     });
   }
-  // get unit price by product id
+  // get  price by product id
   changeProductSelectValue($event): void {
-    this.salesDetailsService.getPriceByProductId($event.target.value).subscribe(res => {
-      this.unitPriceByProductId = res;
-    });
+    // this.salesDetailsService.getPriceByProductId($event.target.value).subscribe(res => {
+    //   this.unitPriceByProductId = res;
+    // });
+    const pId =  $event.target.value;
+    const plen = this.products.length;
+    for (let i = 0; i < plen; i++){
+      const produ = this.products[i];
+      // tslint:disable-next-line: triple-equals
+      if (produ.id == pId) {
+         this.unitPriceByProductId = produ.price;
+       }
+    }
   }
   // get qty
   onKey(event): any {
@@ -143,7 +161,6 @@ export class SalesMasterDetailsComponent implements OnInit {
     const codeUpper = check.toUpperCase();
     // tslint:disable-next-line: one-variable-per-declaration
     const codeCheck = codeUpper.substring(0, 3);
-    console.log(codeCheck);
     // tslint:disable-next-line: triple-equals
     // if ('CC-' == codeCheck) {
     //   console.log((event.target.value).length);
@@ -159,8 +176,6 @@ export class SalesMasterDetailsComponent implements OnInit {
       // tslint:disable-next-line: triple-equals
       if ('CC-' == codeCheck && check.length === 19 && check.length > 12) {
         if (pot.customerCode === codeUpper) {
-          console.log(codeUpper);
-          console.log(pot.firstName);
           this.customerCodeValue = pot.firstName;
 
         }
@@ -171,8 +186,6 @@ export class SalesMasterDetailsComponent implements OnInit {
       '019' === codeCheck || '018' === codeCheck) && check.length === 11) {
         console.log(check.length);
         if (pot.mobileNo === check) {
-          console.log(check);
-          console.log(pot.mobileNo);
           this.customerCodeValue = pot.firstName;
 
         }
@@ -193,6 +206,7 @@ export class SalesMasterDetailsComponent implements OnInit {
     }
 
   }
+
   // Save Value
   onSaveSale(): any {
     this.submitted = true;

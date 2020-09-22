@@ -49,7 +49,7 @@
 
                                         <label class="form-label">Customer Name:</label>
                                         <input type="text" formControlName="customerName" class="form-control"
-                                            [ngModel]="customerCodeValue" readonly value="Name Test" />
+                                            [ngModel]="customerCodeValue" readonly />
 
                                     </div>
 
@@ -67,10 +67,10 @@
                             <div class="form-row">
 
                                 <div class="col">
-                                    <label for="customerName" class="form-label">Sales Code</label>
+                                    <label for="saleCode" class="form-label">Sales Code</label>
 
-                                    <input type="text" class="form-control" name="customerName" id="customerName"
-                                        formControlName="saleNo" placeholder="Sales Code" readonly />
+                                    <input type="text" class="form-control" name="saleCode" id="saleCode"
+                                        formControlName="saleNo" placeholder="Sales Code" [ngModel] ="loadSaleCode" readonly />
 
 
                                 </div>
@@ -124,11 +124,11 @@
 
                         <div class="table-responsive">
                             <table class="table table-bordered ">
-                                <div formArrayName="details"
+                                <ng-container formArrayName="details"
                                     *ngFor="let detail of salesForm.get('details')['controls']; let i = index">
-                                    <div [formGroupName]="i">
-                                        <thead>
-                                            <tr >
+                                    <ng-container [formGroupName]="i">
+                                        <thead *ngIf="i==1">
+                                            <tr>
                                                 <th>
                                                     SL
                                                 </th>
@@ -196,8 +196,8 @@
                                             </tr>
 
                                         </tbody>
-                                    </div>
-                                </div>
+                                    </ng-container>
+                                </ng-container>
                             </table>
 
                         </div>

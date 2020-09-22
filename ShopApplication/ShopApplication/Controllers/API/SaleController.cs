@@ -10,6 +10,7 @@ using ShopApplication.Models.EntityModels.Sales;
 namespace ShopApplication.Controllers.API
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class SaleController : ControllerBase
     {
@@ -106,6 +107,20 @@ namespace ShopApplication.Controllers.API
 
         }
 
+        [HttpGet("GetSaleCode")]
+       
+        public IActionResult GetSaleCode()
+        {
+            var saleCode = UtilityManager.Uitlity.GetSaleCode();
+            if (saleCode == null)
+            {
+                return BadRequest(new {error = "Can not Get Sale Code!"});
+            }
+           
+
+            return Ok(saleCode);
+        }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -124,5 +139,6 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new { error = "Failed To Delete!" });
         }
+
     }
 }
