@@ -1,10 +1,12 @@
 import { SalesDetails } from '../Model/SaleDetails';
 export class Sales {
-    id: number;
-    customerName: number;
-    saleNo: string;
-    description: string;
+    id = 0;
+    customerId = 0;
+    customerName = '';
+    saleNo = '';
+    description = '';
     date: Date = new Date();
     productValueCheck: number;
-    details: SalesDetails[];
+    isDelete = false;
+    salesDetails: SalesDetails[];
 }

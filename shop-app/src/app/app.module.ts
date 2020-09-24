@@ -43,10 +43,12 @@ import { ToastrModule} from 'ngx-toastr';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 1500,
       progressBar: true,
       progressAnimation: 'increasing',
-      preventDuplicates: true
+      preventDuplicates: true,
+      positionClass: 'toast-top-center',
+
     })
   ],
   providers: [],

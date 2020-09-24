@@ -1,217 +1,197 @@
 <div class="container-fluid">
     <form class="form-horizontal" autocomplete="off" [formGroup]="salesForm" (ngSubmit)="onSaveSale()">
-            <br />
-                <div class="card border-danger">
-                    <div class="card-header">
+        <br />
+        <div class="card border-danger">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        Sales Info
+                    </div>
+                    <div class="col d-flex flex-row-reverse">
                         <div class="row">
                             <div class="col">
-                                Sales Info
-                            </div>
-                            <div class="col d-flex flex-row-reverse">
-                                <div class="row">
-                                    <div class="col">
-                                        <button type="button" class="btn btn-outline-danger"
-                                            (click)="registrationButtonClick()"> <i class="fa fa-user-plus"
-                                                aria-hidden="true" fa-lg style="display: inline;"></i> <span
-                                                class="ml-1">Reg</span>
-                                        </button>
-
-                                    </div>
-                                    <div class="col">
-                                        <button type="button" class="btn btn-outline-danger" *ngIf="regShowHide"
-                                            (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true"
-                                                fa-lg></i>
-                                        </button>
-                                    </div>
-
-
-                                </div>
-
+                                <button type="button" class="btn btn-outline-danger" (click)="registrationButtonClick()"> <i class="fa fa-user-plus" aria-hidden="true" fa-lg style="display: inline;"></i> <span class="ml-1">Reg</span>
+                                </button>
 
                             </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-danger" *ngIf="regShowHide" (click)="regCancelButton()"><i class="fa fa-window-close" aria-hidden="true" fa-lg></i>
+                                </button>
+                            </div>
+
+
                         </div>
+
+
                     </div>
+                </div>
+            </div>
 
 
-                    <div class="card-body">
-                        <div *ngIf="hideCustomerCode">
-                            <div class="form-gorup">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label for="Code" class="form-label">Customer Code/Phone No</label>
+            <div class="card-body">
+                <div *ngIf="hideCustomerCode">
+                    <div class="form-gorup">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="Code" class="form-label">Customer Code/Phone No</label>
 
-                                        <input type="text" class="form-control" name="customerCode" id="customerCode"
-                                            (keyup)="findCustomer($event)" placeholder="Enter Customer Code or Phone No" />
-
-
-                                    </div>
-                                    <div class="col">
-
-                                        <label class="form-label">Customer Name:</label>
-                                        <input type="text" formControlName="customerName" class="form-control"
-                                            [ngModel]="customerCodeValue" readonly />
-
-                                    </div>
-
+                                <input type="text" class="form-control" name="customerCode" id="customerCode" (keyup)="findCustomer($event)" placeholder="Enter Customer Code or Phone No" [ngClass]="{'is-invalid': submitted && Sel.customerName?.errors}" />
+                                <div *ngIf="submitted && Sel.customerId?.errors" class="invalid-feedback">
+                                    <div *ngIf=" Sel.customerId.errors?.required">Customer is required</div>
                                 </div>
+
 
                             </div>
-                        </div>
-                        <hr />
-                        <div *ngIf="regShowHide">
-                            <app-customer-entry></app-customer-entry>
-                        </div>
-                        <hr />
+                            <div class="col">
 
-                        <div class="form-gorup">
-                            <div class="form-row">
+                                <label class="form-label">Customer Name:</label>
+                                <input type="text" class="form-control" [value]="customerCodeValue" readonly />
+                                <input type="hidden" formControlName="customerId" class="form-control" [ngModel]="csId"/>
 
-                                <div class="col">
-                                    <label for="saleCode" class="form-label">Sales Code</label>
-
-                                    <input type="text" class="form-control" name="saleCode" id="saleCode"
-                                        formControlName="saleNo" placeholder="Sales Code" [ngModel] ="loadSaleCode" readonly />
-
-
-                                </div>
-                                <div class="col">
-                                    <label for="date" class="form-label">Date </label>
-
-                                    <input type="text" bsDatepicker class="form-control" name="customername" id="date"
-                                        formControlName="date" [ngClass]="{'is-invalid': submitted && Sel.date?.errors}"
-                                        [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
-                                    <div *ngIf="submitted && Sel.date?.errors" class="invalid-feedback">
-                                        <div *ngIf="Sel.date.errors?.required">
-                                            Date is Required!!
-                                        </div>
-                                    </div>
-
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-gorup">
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea type="text" class="form-control" name="description" rows="1" id="address"
-                                        formControlName="description" placeholder="Description"></textarea>
-                                </div>
-                                <div class="col">
-
-                                </div>
-                            </div>
                         </div>
 
                     </div>
                 </div>
-                <br />
-                <div class="card border-warning">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col">
-                                Details Info
-                            </div>
-                            <div class="col d-flex flex-row-reverse">
+                <hr />
+                <div *ngIf="regShowHide">
+                    <app-customer-entry></app-customer-entry>
+                </div>
+                <hr />
 
-                                <button type="button" (click)="addProduct()" class="btn btn-warning ">Add
-                                    Product</button>
+                <div class="form-gorup">
+                    <div class="form-row">
 
+                        <div class="col">
+                            <label for="saleCode" class="form-label">Sales Code</label>
+
+                            <input type="text" class="form-control" name="saleCode" id="saleCode" formControlName="saleNo" placeholder="Sales Code" [ngModel]="loadSaleCode" readonly />
+
+
+                        </div>
+                        <div class="col">
+                            <label for="date" class="form-label">Date </label>
+
+                            <input type="text" bsDatepicker class="form-control" name="date" id="date" formControlName="date" [ngClass]="{'is-invalid': submitted && Sel.date?.errors}" [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
+                            <div *ngIf="submitted && Sel.date?.errors" class="invalid-feedback">
+                                <div *ngIf="Sel.date.errors?.required">
+                                    Date is Required!!
+                                </div>
                             </div>
+
                         </div>
                     </div>
-                    <div class="card-body">
+                </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered ">
-                                <ng-container formArrayName="details"
-                                    *ngFor="let detail of salesForm.get('details')['controls']; let i = index">
-                                    <ng-container [formGroupName]="i">
-                                        <thead *ngIf="i==1">
-                                            <tr>
-                                                <th>
-                                                    SL
-                                                </th>
-                                                <th>Product Type</th>
-                                                <th> Product </th>
-                                                <th>UnitPrice</th>
-                                                <th>Qty</th>
-                                                <th>Total Price</th>
-                                                <th>Description</th>
-                                                <th>Remove Action</th>
-                                            </tr>
-                                        </thead>
+                <div class="form-gorup">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea type="text" class="form-control" name="description" rows="1" id="address" formControlName="description" placeholder="Description"></textarea>
+                        </div>
+                        <div class="col">
 
-                                        <tbody>
+                        </div>
+                    </div>
+                </div>
 
-                                            <tr *ngIf="productAdded && i>0">
-                                                <td>{{i}}</td>
-                                                <td><select class="custom-select" palceholder="Select Product"
-                                                        formControlName="productTypeId"
-                                                        (change)="ChangeSelectedValue($event)">
-                                                        <option value=""></option>
-                                                        <option>Select Product Type</option>
-                                                        <option *ngFor="let producttype of productType"
-                                                            [value]="producttype.id">
-                                                            {{producttype.name}}</option>
+            </div>
+        </div>
+        <br />
+        <div class="card border-warning">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        Details Info
+                    </div>
+                    <div class="col d-flex flex-row-reverse">
 
-                                                    </select></td>
-                                                <td>
-                                                    <select class="custom-select" palceholder="Select Product"
-                                                        (change)="changeProductSelectValue($event)"
-                                                        formControlName="productId">
-                                                        <option value=""></option>
-                                                        <option>Select Product Type</option>
-                                                        <option *ngFor="let product of productByType"
-                                                            [value]="product.id">
-                                                            {{product.name}}</option>
+                        <button type="button" (click)="addProduct()" class="btn btn-warning ">Add
+                            Product</button>
 
-                                                    </select>
-                                                </td>
-                                                <td>{{unitPriceByProductId}}</td>
-                                                <td>
-                                                    <input type="text" formControlName="qty" class="form-control"
-                                                        (keyup)="onKey($event)"
-                                                        [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }"
-                                                        [id]="'qty'+ i" palceholder="Qty" formControlName="qty" />
-                                                    <div *ngIf="submitted && detail.get('qty')?.errors"
-                                                        class="invalid-feedback">
-                                                        <div *ngIf=" detail.get('qty').errors?.required">Qty is required
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td fromControlName="totalPrice">
-                                                    {{totalPrice}}
-                                                </td>
-                                                <td>
-                                                    <textarea type="text" class="form-control" name="description"
-                                                        rows="1" id="address" formControlName="description"
-                                                        placeholder="Commant"></textarea>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        (click)="removeDetailsButton(i)">Remove</button>
-                                                </td>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
 
-                                            </tr>
+                <div class="table-responsive">
+                    <table class="table table-bordered ">
+                        <thead class="text-center">
+                            <tr>
+                                <th>SL</th>
+                                <th>Product Type</th>
+                                <th> Product </th>
+                                <th>UnitPrice</th>
+                                <th>Qty</th>
+                                <th>Total Price</th>
+                                <th>Description</th>
+                                <th>Remove Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container formArrayName="salesDetails" *ngFor="let detail of salesForm.get('salesDetails')['controls']; let i = index">
+                                <ng-container [formGroupName]="i">
+                                    <tr *ngIf="productAdded">
+                                        <td>{{i+1}}</td>
+                                        <td>
+                                            <select class="custom-select" palceholder="Select Product Type" (change)="changeSelectedValue($event)">
+                                                <option value=null>---Select---</option>
+                                                <option *ngFor="let producttype of productType" [value]="producttype.id">
+                                                    {{producttype.name}}</option>
 
-                                        </tbody>
-                                    </ng-container>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="custom-select" palceholder="Select Product" (change)="changeProductSelectValue($event)" formControlName="productId" [ngClass]="{'is-invalid':submitted && detail.get('productId')?.errors }">
+                                                <option>---Select---</option>
+                                                <option *ngFor="let product of productList" [value]="product.id">
+                                                    {{product.name}}</option>
+                                            </select>
+
+                                            <div *ngIf="submitted && detail.get('productId')?.errors" class="invalid-feedback">
+                                                <div *ngIf=" detail.get('productId').errors?.required">Product is
+                                                    required
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            {{unitPriceByProductId}}
+                                            <input type="hidden" formControlName="unitPrice" class="form-control" [ngModel]="unitPriceByProductId" />
+                                        </td>
+                                        <td>
+                                            <input type="number" formControlName="qty" class="form-control" (keyup)="onKey($event)" [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }" palceholder="Qty" />
+                                            <div *ngIf="submitted && detail.get('qty')?.errors" class="invalid-feedback">
+                                                <div *ngIf=" detail.get('qty').errors?.required">Qty is required </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{totalPrices}}
+                                            <input type="hidden" formControlName="totalPrice" class="form-control" [ngModel]="totalPrices"/>
+
+                                        </td>
+                                        <td>
+                                            <textarea type="text" class="form-control" rows="1" formControlName="description" placeholder="description"></textarea>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm" (click)="removeDetailsButton(i)">Remove</button>
+                                        </td>
+
+                                    </tr>
+
                                 </ng-container>
-                            </table>
-
-                        </div>
-                    </div>
-
+                            </ng-container>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
-                <br>
-                <div class="row d-flex flex-row-reverse">
-                    <button type="submit" class="btn btn-success mr-3">Save</button>
-                </div>
-            
+        </div>
 
-       
-
+        <br>
+        <div class="row d-flex flex-row-reverse">
+            <button type="submit" class="btn btn-success mr-2">Save</button>
+        </div>
     </form>
 </div>

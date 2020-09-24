@@ -1,5 +1,5 @@
 import { Customer } from './../Model/Customer';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Sales } from '../Model/Sales';
 import { Product } from '../Product';
@@ -12,6 +12,7 @@ import { SalesDetails } from '../Model/SaleDetails';
 import { SalesService } from '../service/sales.service';
 import { CustomerService } from '../service/customer.service';
 import { ToastrService } from 'ngx-toastr';
+import { Console } from 'console';
 
 
 @Component({
@@ -28,17 +29,22 @@ export class SalesMasterDetailsComponent implements OnInit {
   hideCustomerCode = true;
   submitted = false;
   regShowHide = false;
-  productAdded = false;
+  productAdded = true;
   products: Product[];
   unitPriceByProductId: number;
-  productByType: Product[];
+  productList: Product[];
+  productByTypeList: any[] = [];
   productType: ProductType[];
-  totalPrice: number;
+  totalPrices: number;
   unqDate: string;
   customerCodeValue: any = '';
   customer: Customer[];
+  lastItem: any[];
   loadSaleCode: any;
   success = false;
+  @Input() untPrce: number;
+  @Input() tolprc: number;
+  csId: number;
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
@@ -56,11 +62,12 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.salesForm = this.fb.group({
-      customerName: [this.$Model.customerName, Validators.required],
+      id: [this.$Model.id],
+      customerId: [this.csId, Validators.required],
       date: [this.$Model.date, Validators.required],
       saleNo: [this.$Model.saleNo],
       description: [this.$Model.description, Validators.maxLength(250)],
-      details: this.fb.array([
+      salesDetails: this.fb.array([
         this.addDetailsFormGroup()
       ])
     });
@@ -87,9 +94,9 @@ export class SalesMasterDetailsComponent implements OnInit {
         this.customer = res;
       }
     });
-      // get sale code when page reload
+    // get sale code when page reload
     this.saleService.getSaleCode().subscribe(res => {
-      if (res?.length > 0 ){
+      if (res?.length > 0) {
         this.loadSaleCode = res;
       }
     });
@@ -100,12 +107,14 @@ export class SalesMasterDetailsComponent implements OnInit {
   }
   addDetailsFormGroup(): FormGroup {
     return this.fb.group({
-      productTypeId: [this.$DetailModel.productTypeId, Validators.required],
+      // productTypeId: [this.$DetailModel.productTypeId, Validators.required],
+      id: [this.$DetailModel.id],
       productId: [this.$DetailModel.productId, Validators.required],
       unitPrice: [this.$DetailModel.unitPrice, Validators.required],
       qty: [this.$DetailModel.qty, Validators.required],
       totalPrice: [this.$DetailModel.totalPrice, Validators.required],
-      description: [this.$DetailModel.description, Validators.maxLength(100)]
+      description: [this.$DetailModel.description, Validators.maxLength(100)],
+      saleId: [this.$DetailModel.saleId]
     });
   }
 
@@ -118,39 +127,37 @@ export class SalesMasterDetailsComponent implements OnInit {
   regCancelButton(): void {
     this.regShowHide = false;
     this.hideCustomerCode = true;
-
   }
+
   removeDetailsButton(detailsIndex: number): void {
     const detailsFormArray = (this.salesForm.get('details') as FormArray);
     detailsFormArray.removeAt(detailsIndex);
     detailsFormArray.markAsDirty();
     detailsFormArray.markAsUntouched();
   }
-  ChangeSelectedValue($event): any {
+
+  changeSelectedValue($event): any {
     this.productService.getProductByTypeId(($event.target.value)).subscribe((res: Product[]) => {
       if (res.length > 0) {
-        this.productByType = res;
+        this.productList = res;
       }
     });
   }
+
   // get  price by product id
   changeProductSelectValue($event): void {
-    // this.salesDetailsService.getPriceByProductId($event.target.value).subscribe(res => {
-    //   this.unitPriceByProductId = res;
-    // });
-    const pId =  $event.target.value;
+    const pId = $event.target.value;
     const plen = this.products.length;
-    for (let i = 0; i < plen; i++){
+    for (let i = 0; i < plen; i++) {
       const produ = this.products[i];
-      // tslint:disable-next-line: triple-equals
       if (produ.id == pId) {
-         this.unitPriceByProductId = produ.price;
-       }
+        this.unitPriceByProductId = produ.price;
+      }
     }
   }
   // get qty
   onKey(event): any {
-    return this.totalPrice = this.unitPriceByProductId * event.target.value;
+    return this.totalPrices = this.unitPriceByProductId * event.target.value;
 
   }
   // Find Customer Name and Sales  Code
@@ -177,25 +184,27 @@ export class SalesMasterDetailsComponent implements OnInit {
       if ('CC-' == codeCheck && check.length === 19 && check.length > 12) {
         if (pot.customerCode === codeUpper) {
           this.customerCodeValue = pot.firstName;
+          this.csId = pot.id;
 
         }
       }
       // tslint:disable-next-line: max-line-length
       // tslint:disable-next-line: triple-equals
       else if (('013' == codeCheck || '014' === codeCheck || '015' === codeCheck || '016' === codeCheck || '017' === codeCheck ||
-      '019' === codeCheck || '018' === codeCheck) && check.length === 11) {
+        '019' === codeCheck || '018' === codeCheck) && check.length === 11) {
         console.log(check.length);
         if (pot.mobileNo === check) {
           this.customerCodeValue = pot.firstName;
+          this.csId = pot.id;
 
         }
-        if (pot.mobileNo !== check && len ===  11){
+        if (pot.mobileNo !== check && len === 11) {
           this.toastr.warning('Can Not Find Customer', 'Alert', {
             timeOut: 1500
           });
         }
       }
-      else if (len === 19 ) {
+      else if (len === 19) {
         this.toastr.warning('Can Not Find Customer', 'Alert', {
           timeOut: 1500
         });
@@ -209,22 +218,22 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   // Save Value
   onSaveSale(): any {
+    this.salesForm.value.customerId = this.csId;
     this.submitted = true;
-    if (this.salesForm.invalid) {
-      return;
-    }
-    console.log('save button');
-    this.saleService.create(this.salesForm.value).subscribe(() => {
-      this.success = true;
+    if (this.salesForm.invalid) { return; }
+    this.saleService.create(this.salesForm.value).subscribe(res => {
+      if (res) {
+        this.toastr.success('Save successfully', 'Sale');
+      }
+
     });
   }
+
   addProduct(): void {
     this.productAdded = true;
     (this.salesForm.get('details') as FormArray).push(this.addDetailsFormGroup());
   }
-  productLoop(): any {
-    this.products.forEach((value1) => value1.id);
-  }
+
 
 
 }

@@ -1,10 +1,10 @@
-export class SalesDetails{
-    id: number;
-    unitPrice: number;
-    qty: number;
-    totalPrice: number;
-    description: string;
-    productId: number;
-    productTypeId: number;
-    saleId: number;
+export class SalesDetails {
+    id = 0;
+    unitPrice = 0;
+    qty = 0;
+    totalPrice = 0;
+    description = '';
+    productId = 0;
+    saleId = 0;
+    isDelete = false;
 }

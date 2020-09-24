@@ -78,7 +78,6 @@ export class CustomerEntryComponent implements OnInit {
   // Save Value
   onSave(): void {
     this.submitted = true;
-    console.log(this.submitted);
     if (this.customerForm.invalid) {
       return;
     }
@@ -88,7 +87,7 @@ export class CustomerEntryComponent implements OnInit {
     if (this.customer.id) {
       this.customerService.update(this.customer).subscribe(() => {
         this.router.navigate(['customerList']);
-        this.toastr.info('Update Successfull', 'Message');
+        this.toastr.info('Update Successfull', 'Customer');
       });
     } else {
       // Save new customer
@@ -105,7 +104,7 @@ export class CustomerEntryComponent implements OnInit {
 
   }
   showToastr(): void {
-    this.toastr.success('Save Successfull', 'Message');
+    this.toastr.success('Save Successfull', 'Customer');
   }
   cleanTextBox(): void {
     this.customerForm.reset();
