@@ -3,9 +3,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-success text-white text-center">
-                <div *ngIf="showSave"> Product Type Entry</div>
-                <div *ngIf="showUpdate">Prouduct Type Update</div>
-               
+                <h5 class="card-title">
+                <span *ngIf="showSave"> Product Type Entry</span>
+                <span *ngIf="showUpdate">Prouduct Type Update</span>
+               </h5>
             </div>
             <div class="card-body">
                 <form [formGroup]="productTypeForm" autocomplete="off" (ngSubmit)="onSubmit()" class="form-horizontal">

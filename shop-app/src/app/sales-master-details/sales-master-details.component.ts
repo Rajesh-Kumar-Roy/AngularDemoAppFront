@@ -31,19 +31,18 @@ export class SalesMasterDetailsComponent implements OnInit {
   regShowHide = false;
   productAdded = true;
   products: Product[];
-  unitPriceByProductId: number;
-  productList: Product[];
-  productByTypeList: any[] = [];
-  productType: ProductType[];
-  totalPrices: number;
-  unqDate: string;
+  unitPriceByProductId: Array<number> = [];
+  productList: Array<Product> = [];
+  productType: Array<ProductType> = [];
+  result: any;
+  totalPrices: Array<number> = [];
   customerCodeValue: any = '';
   customer: Customer[];
-  lastItem: any[];
   loadSaleCode: any;
   success = false;
   @Input() untPrce: number;
   @Input() tolprc: number;
+  pdTypeId: number;
   csId: number;
   constructor(
     private fb: FormBuilder,
@@ -55,8 +54,6 @@ export class SalesMasterDetailsComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.$Model = new Sales(); this.$DetailModel = new SalesDetails();
-    this.unqDate = `S-${Date.now().toString()}`;
-
   }
 
 
@@ -71,6 +68,7 @@ export class SalesMasterDetailsComponent implements OnInit {
         this.addDetailsFormGroup()
       ])
     });
+    this.productList = [];
     this.salesDetailsService.getAll().subscribe((response => {
       if (response.length > 0) {
         this.salesDetails = response;
@@ -100,24 +98,40 @@ export class SalesMasterDetailsComponent implements OnInit {
         this.loadSaleCode = res;
       }
     });
+    this.productService.getAllisDeleteFase().subscribe(res => this.productList = res);
 
   }
   get Sel(): any {
     return this.salesForm.controls;
   }
+   // tslint:disable-next-line: typedef
+   get salesDetail() {
+    return this.salesForm.get('salesDetails') as FormArray;
+  }
   addDetailsFormGroup(): FormGroup {
     return this.fb.group({
-      // productTypeId: [this.$DetailModel.productTypeId, Validators.required],
+      productTypeId: [''],
       id: [this.$DetailModel.id],
       productId: [this.$DetailModel.productId, Validators.required],
       unitPrice: [this.$DetailModel.unitPrice, Validators.required],
       qty: [this.$DetailModel.qty, Validators.required],
       totalPrice: [this.$DetailModel.totalPrice, Validators.required],
       description: [this.$DetailModel.description, Validators.maxLength(100)],
-      saleId: [this.$DetailModel.saleId]
     });
+
   }
 
+ // tslint:disable-next-line: typedef
+ private newDetailsFormGroup(){
+    return new FormGroup({
+      productTypeId: new FormControl(null),
+      productId: new FormControl(null),
+      unitPrice: new FormControl(null),
+      qty: new FormControl(null),
+      totalPrice: new FormControl(null),
+      description: new FormControl(''),
+    });
+  }
   // registration Button CLick
   registrationButtonClick(): void {
     this.regShowHide = true;
@@ -130,35 +144,45 @@ export class SalesMasterDetailsComponent implements OnInit {
   }
 
   removeDetailsButton(detailsIndex: number): void {
-    const detailsFormArray = (this.salesForm.get('details') as FormArray);
+    const detailsFormArray = (this.salesForm.get('salesDetails') as FormArray);
     detailsFormArray.removeAt(detailsIndex);
     detailsFormArray.markAsDirty();
     detailsFormArray.markAsUntouched();
   }
 
-  changeSelectedValue($event): any {
-    this.productService.getProductByTypeId(($event.target.value)).subscribe((res: Product[]) => {
-      if (res.length > 0) {
-        this.productList = res;
-      }
-    });
-  }
+  // changeProductSelectValue($event): void {
+  //   const pId = $event.target.value;
+  //   const plen = this.products.length;
+  //   for (let i = 0; i < plen; i++) {
+  //     const produ = this.products[i];
+  //     // tslint:disable-next-line: triple-equals
+  //     if (produ.id == pId) {
+  //       this.unitPriceByProductId.push(produ.price) ;
+  //     }
+  //   }
+  //   console.log(this.unitPriceByProductId);
+  // }
+
 
   // get  price by product id
-  changeProductSelectValue($event): void {
-    const pId = $event.target.value;
-    const plen = this.products.length;
-    for (let i = 0; i < plen; i++) {
-      const produ = this.products[i];
-      if (produ.id == pId) {
-        this.unitPriceByProductId = produ.price;
-      }
-    }
+  getProductUnitPrice(inputId: number): Product[]{
+    return this.productList.filter(item => item.id == inputId);
   }
-  // get qty
-  onKey(event): any {
-    return this.totalPrices = this.unitPriceByProductId * event.target.value;
 
+    // get qty
+    onKey(event, n: number): any {
+      this.totalPrices.push(1200 * event.target.value);
+        // this.totalPrices.push (event.target.value * Number(this.getProductUnitPrice(n)));
+    }
+  // product dropdown value set
+  getProduct(inputId: number): Product[] {
+    return this.productList.filter(item => item.productTypeId == inputId);
+  }
+
+  getTotalPrice(n: number): number{
+    for (let i = 0; i < n + 1; i++ ){
+        return this.totalPrices[i];
+    }
   }
   // Find Customer Name and Sales  Code
   findCustomer(event): void {
@@ -168,13 +192,6 @@ export class SalesMasterDetailsComponent implements OnInit {
     const codeUpper = check.toUpperCase();
     // tslint:disable-next-line: one-variable-per-declaration
     const codeCheck = codeUpper.substring(0, 3);
-    // tslint:disable-next-line: triple-equals
-    // if ('CC-' == codeCheck) {
-    //   console.log((event.target.value).length);
-    //   this.customerService.getNameByCustomerCode(check).subscribe(res => {
-    //     this.customerCodeValue = res;
-    //   });
-    // }
     const ii = this.customer.length;
     for (let i = 0; i < ii; i++) {
       // tslint:disable-next-line: no-unused-expression
@@ -218,12 +235,18 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   // Save Value
   onSaveSale(): any {
-    this.salesForm.value.customerId = this.csId;
+    console.log(this.salesForm.value);
     this.submitted = true;
-    if (this.salesForm.invalid) { return; }
+    if (this.salesForm.invalid)
+    {
+      this.toastr.error('Fill the Form Correctly!', 'Sale');
+      return;
+    }
     this.saleService.create(this.salesForm.value).subscribe(res => {
       if (res) {
         this.toastr.success('Save successfully', 'Sale');
+        this.salesForm.reset();
+        this.submitted = false;
       }
 
     });
@@ -231,7 +254,8 @@ export class SalesMasterDetailsComponent implements OnInit {
 
   addProduct(): void {
     this.productAdded = true;
-    (this.salesForm.get('details') as FormArray).push(this.addDetailsFormGroup());
+    const ctrl = (this.salesForm.get('salesDetails') as FormArray);
+    ctrl.push(this.newDetailsFormGroup());
   }
 
 

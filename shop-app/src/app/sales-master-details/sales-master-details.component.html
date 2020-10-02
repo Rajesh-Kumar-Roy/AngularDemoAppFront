@@ -7,8 +7,8 @@
                     <div class="col">
                         Sales Info
                     </div>
-                    <div class="col d-flex flex-row-reverse">
-                        <div class="row">
+                    <div class="col">
+                        <div class="row float-right">
                             <div class="col">
                                 <button type="button" class="btn btn-outline-danger" (click)="registrationButtonClick()"> <i class="fa fa-user-plus" aria-hidden="true" fa-lg style="display: inline;"></i> <span class="ml-1">Reg</span>
                                 </button>
@@ -33,7 +33,7 @@
                     <div class="form-gorup">
                         <div class="form-row">
                             <div class="col">
-                                <label for="Code" class="form-label">Customer Code/Phone No</label>
+                                <label for="Code" class="form-label required">Customer Code/Phone No</label>
 
                                 <input type="text" class="form-control" name="customerCode" id="customerCode" (keyup)="findCustomer($event)" placeholder="Enter Customer Code or Phone No" [ngClass]="{'is-invalid': submitted && Sel.customerName?.errors}" />
                                 <div *ngIf="submitted && Sel.customerId?.errors" class="invalid-feedback">
@@ -46,7 +46,7 @@
 
                                 <label class="form-label">Customer Name:</label>
                                 <input type="text" class="form-control" [value]="customerCodeValue" readonly />
-                                <input type="hidden" formControlName="customerId" class="form-control" [ngModel]="csId"/>
+                                <input type="hidden" formControlName="customerId" class="form-control" [ngModel]="csId" />
 
                             </div>
 
@@ -54,7 +54,6 @@
 
                     </div>
                 </div>
-                <hr />
                 <div *ngIf="regShowHide">
                     <app-customer-entry></app-customer-entry>
                 </div>
@@ -105,10 +104,10 @@
                     <div class="col">
                         Details Info
                     </div>
-                    <div class="col d-flex flex-row-reverse">
+                    <div class="col">
 
-                        <button type="button" (click)="addProduct()" class="btn btn-warning ">Add
-                            Product</button>
+                        <button type="button" (click)="addProduct()" class="btn btn-warning float-right"> Add Product
+                            </button>
 
                     </div>
                 </div>
@@ -130,12 +129,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container formArrayName="salesDetails" *ngFor="let detail of salesForm.get('salesDetails')['controls']; let i = index">
+                            
+                            <ng-container formArrayName="salesDetails" *ngFor="let detail of salesDetail.controls; let i = index">
                                 <ng-container [formGroupName]="i">
                                     <tr *ngIf="productAdded">
                                         <td>{{i+1}}</td>
                                         <td>
-                                            <select class="custom-select" palceholder="Select Product Type" (change)="changeSelectedValue($event)">
+                                            <select class="custom-select" formControlName ="productTypeId" palceholder="Select Product Type" >
                                                 <option value=null>---Select---</option>
                                                 <option *ngFor="let producttype of productType" [value]="producttype.id">
                                                     {{producttype.name}}</option>
@@ -143,9 +143,9 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="custom-select" palceholder="Select Product" (change)="changeProductSelectValue($event)" formControlName="productId" [ngClass]="{'is-invalid':submitted && detail.get('productId')?.errors }">
-                                                <option>---Select---</option>
-                                                <option *ngFor="let product of productList" [value]="product.id">
+                                            <select id="100+i" class="custom-select" palceholder="Select Product" formControlName="productId" [ngClass]="{'is-invalid':submitted && detail.get('productId')?.errors }">
+                                                <option value="0">---Select---</option>
+                                                <option *ngFor="let product of getProduct(detail.controls['productTypeId'].value)" [value]="product.id">
                                                     {{product.name}}</option>
                                             </select>
 
@@ -157,41 +157,47 @@
 
                                         </td>
                                         <td>
-                                            {{unitPriceByProductId}}
-                                            <input type="hidden" formControlName="unitPrice" class="form-control" [ngModel]="unitPriceByProductId" />
+                                            <ng-container *ngFor="let item of getProductUnitPrice(detail.controls['productId'].value)">
+                                                {{item.price}}
+                                                <input type="hidden" formControlName="unitPrice" class="form-control" [ngModel]="item.price" />
+                                            </ng-container>
+                                          
+                                            
                                         </td>
                                         <td>
-                                            <input type="number" formControlName="qty" class="form-control" (keyup)="onKey($event)" [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }" palceholder="Qty" />
+                                            <input type="number" formControlName="qty" class="form-control" (keyup)="onKey($event,i)" [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }" palceholder="Qty" />
                                             <div *ngIf="submitted && detail.get('qty')?.errors" class="invalid-feedback">
                                                 <div *ngIf=" detail.get('qty').errors?.required">Qty is required </div>
                                             </div>
                                         </td>
                                         <td>
-                                            {{totalPrices}}
-                                            <input type="hidden" formControlName="totalPrice" class="form-control" [ngModel]="totalPrices"/>
+                                            {{getTotalPrice(i)}}
+                                            <input type="hidden" formControlName="totalPrice" class="form-control" [ngModel]="getTotalPrice(i)" />
 
                                         </td>
                                         <td>
                                             <textarea type="text" class="form-control" rows="1" formControlName="description" placeholder="description"></textarea>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm" (click)="removeDetailsButton(i)">Remove</button>
+                                            <button type="button" class="btn btn-danger " (click)="removeDetailsButton(i)"><i class="fa fa-minus-circle" ></i> Remove</button>
                                         </td>
 
                                     </tr>
 
                                 </ng-container>
                             </ng-container>
+                           
                         </tbody>
                     </table>
                 </div>
+                <div class="float-right">
+                    <button type="submit" class="btn btn-success ">Save</button>
+                </div>
             </div>
-
+         
         </div>
 
         <br>
-        <div class="row d-flex flex-row-reverse">
-            <button type="submit" class="btn btn-success mr-2">Save</button>
-        </div>
+
     </form>
 </div>

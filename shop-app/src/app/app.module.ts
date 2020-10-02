@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerEntryComponent } from './customer-entry/customer-entry.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { ToastrModule} from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -40,6 +41,7 @@ import { ToastrModule} from 'ngx-toastr';
     HttpClientModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
+    NgSelectModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
