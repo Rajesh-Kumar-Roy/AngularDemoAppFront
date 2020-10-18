@@ -13,10 +13,11 @@
             <div class="card-body">
                 <table class="table table-bordered" style="text-align: center;">
                     <thead>
-                        <tr>
+                        <tr class="table-secondary">
                             <th>SL</th>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>Model</th>
                             <th>Description</th>
                             <th>Product Type Name</th>
                             <th>Action</th>
@@ -28,6 +29,7 @@
                             <td>{{i+1}}</td>
                             <td>{{products.name}}</td>
                             <td>{{products.price}}</td>
+                            <td>{{products.code}}</td>
                             <td>{{products.description}}</td>
                             <td>{{getproductTypeNameBytyId(products.productTypeId)}}</td>
                             

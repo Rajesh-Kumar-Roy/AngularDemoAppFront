@@ -6,7 +6,7 @@ export class Sales {
     saleNo = '';
     description = '';
     date: Date = new Date();
-    productValueCheck: number;
+    paymentStatusId = 0;
     isDelete = false;
     salesDetails: SalesDetails[];
 }

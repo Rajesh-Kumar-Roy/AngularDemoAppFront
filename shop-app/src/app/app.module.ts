@@ -19,9 +19,11 @@ import { CustomerEntryComponent } from './customer-entry/customer-entry.componen
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { ToastrModule} from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SalesViewComponent } from './sales-details/sales-view/sales-view.component';
 
 
-
+import { PaymentTypeListComponent } from './paymentMethod/payment-type-list/payment-type-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SalesMasterDetailsComponent,
     SalesDetailsComponent,
     CustomerEntryComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    SalesViewComponent,
+    PaymentTypeListComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
       preventDuplicates: true,
       positionClass: 'toast-top-center',
 
-    })
+    }),
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

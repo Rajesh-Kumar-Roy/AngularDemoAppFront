@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Product } from '../Product';
+import { Product } from '../Model/Product';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ProductServiceService } from '../service/product-service.service';
 import { ProductType } from '../Model/productType';
@@ -58,8 +58,10 @@ export class ProductEntryComponent implements OnInit {
           id: null,
           name: '',
           price: null,
+          code: '',
           description: '',
-          productTypeId: null
+          productTypeId: null,
+          isDelete: false
         };
       }
     });
@@ -70,6 +72,7 @@ export class ProductEntryComponent implements OnInit {
     this.productForm = this.fb.group({
       name: [this.$model.name, Validators.required],
       price: [this.$model.price, Validators.required],
+      code: [this.$model.code, Validators.required],
       productTypeId: [this.$model.productTypeId, Validators.required],
       description: [''],
 
@@ -86,6 +89,7 @@ export class ProductEntryComponent implements OnInit {
     this.productForm.patchValue({
       name: products.name,
       price: products.price,
+      code: products.code,
       description: products.description,
       productTypeId: products.productTypeId
 
@@ -105,7 +109,7 @@ export class ProductEntryComponent implements OnInit {
     // update product
     if (this.products.id) {
       this.productService.update(this.products).subscribe(() => {
-        this.toastr.info('Update Successful', 'Message');
+        this.toastr.info('Update Successful', 'Product');
         this.router.navigate(['productList']);
       });
     } else {
@@ -138,6 +142,7 @@ export class ProductEntryComponent implements OnInit {
   mapFormValuesToFormModel(): void {
     this.products.name = this.productForm.value.name;
     this.products.price = this.productForm.value.price;
+    this.products.code = this.productForm.value.code;
     this.products.description = this.productForm.value.description;
     this.products.productTypeId = this.productForm.value.productTypeId;
   }

@@ -33,6 +33,16 @@ namespace ShopApplication.Controllers.API
             }
             return Ok(sales);
         }
+        [HttpGet("getAllFalse")]
+        public IActionResult getAllFalse()
+        {
+            var sales = _SaleManager.GetAllSale();
+            if (sales == null)
+            {
+                return BadRequest(new { error = "Empty Sale Item!" });
+            }
+            return Ok(sales);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Sale sale)
@@ -41,8 +51,8 @@ namespace ShopApplication.Controllers.API
             {
                 //string uniqueNumber = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
 
+
                
-                
                 bool isAdded = _SaleManager.Add(sale);
               
                 if (isAdded)
@@ -66,23 +76,34 @@ namespace ShopApplication.Controllers.API
 
             return Ok(sale);
         }
+
+
+        [HttpGet("getSaleBySaleId/{id:int}")]
+        public IActionResult GetSaleBySaleId(int id)
+        {
+            var sale = _SaleManager.GetSaleWithDetailsById(id);
+            if (sale == null)
+            {
+                return BadRequest(new {error = "Sale Item Can not Found!!"});
+            }
+
+            return Ok(sale);
+        }
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Sale sale)
         {
             var retriveSales = _SaleManager.GetById(id);
             if (retriveSales == null)
             {
-                return BadRequest(new { error = "product not Found!" });
+                return BadRequest(new {error = "product not Found!"});
             }
 
-          
-           
             retriveSales.Description = sale.Description;
             retriveSales.SaleNo = sale.SaleNo;
             retriveSales.CustomerId = sale.CustomerId;
-            
-            
             retriveSales.Date = sale.Date;
+            retriveSales.SalesDetails = sale.SalesDetails;
             bool isUpdate = _SaleManager.Update(retriveSales);
             if (isUpdate)
             {

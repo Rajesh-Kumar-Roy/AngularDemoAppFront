@@ -5,5 +5,6 @@ export class SalesDetails {
     totalPrice = 0;
     description = '';
     productId = 0;
+    productTypeId = 0;
     isDelete = false;
 }

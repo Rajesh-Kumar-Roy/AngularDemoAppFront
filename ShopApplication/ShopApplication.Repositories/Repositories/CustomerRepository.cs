@@ -31,7 +31,7 @@ namespace ShopApplication.Repositories.Repositories
 
         public ICollection<Customer> GetAllCustomer()
         {
-            return Context.Customers.Where(c => c.IsDelete == false).ToList();
+            return Context.Customers.Where(c => c.IsDelete == false).OrderByDescending(c=>c.Id).ToList();
         }
     }
 }

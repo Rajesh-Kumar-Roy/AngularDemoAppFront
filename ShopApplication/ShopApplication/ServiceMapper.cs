@@ -33,6 +33,8 @@ namespace ShopApplication
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddControllers().AddNewtonsoftJson();
             services.AddTransient<IDropdownManager, DropdownManager>();
+            services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
+            services.AddTransient<IPaymentTypeManager, PaymentTypeManager>();
             services.AddAutoMapper();
             services.AddDbContext<ShopApplicationDbContext>(options =>
             {

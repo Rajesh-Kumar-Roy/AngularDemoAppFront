@@ -2,7 +2,7 @@ import { element } from 'protractor';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductServiceService } from '../service/product-service.service';
-import { Product } from '../Product';
+import { Product } from '../Model/Product';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductTypeService } from '../service/product-type.service';

@@ -21,17 +21,17 @@ export class CustomerListComponent implements OnInit {
       this.customers = res;
     });
   }
-  editButtonClick(customerId: number) {
+  editButtonClick(customerId: number): void {
     this._router.navigate(['/edit', customerId]);
   }
-  deleteButtonClick(customerId: number) {
+  deleteButtonClick(customerId: number): void{
     this.customerService.deleteCustomer(customerId).subscribe(res => {
       this.fetchData();
       this.toastr.error('Delete Successfull', 'Customer');
 
     });
   }
-  fetchData() {
+  fetchData(): void {
     this.customerService.getAllFalse().subscribe((res: Customer[]) => {
       this.customers = res;
     });

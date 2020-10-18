@@ -1,0 +1,46 @@
+
+<div class="justify-content-center">
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <app-customer-entry></app-customer-entry>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header bg-secondary text-white text-center">
+                    <h5 class="card-title">Customer List</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Sl</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                               <th>Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pItem of paymentTypes; let i = index">
+                                <td class="text-center">{{i+1}}</td>
+
+                                <td>{{pItem.name}}</td>
+                                <td>{{pItem.description}}</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button> &nbsp;
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

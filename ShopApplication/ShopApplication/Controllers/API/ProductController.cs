@@ -86,7 +86,6 @@ namespace ShopApplication.Controllers.API
         public IActionResult GetProductByTypeId(int typeId)
         {
             var product = _productManager.GetProductByTypeId(typeId);
-            
             if (product == null)
             {
                 return BadRequest(new { error = "Can not Get product!" });
@@ -117,6 +116,7 @@ namespace ShopApplication.Controllers.API
 
             retriveProduct.Name = product.Name;
             retriveProduct.Price = product.Price;
+            retriveProduct.Code = product.Code;
             retriveProduct.Description = product.Description;
             retriveProduct.ProductTypeId = product.ProductTypeId;
            

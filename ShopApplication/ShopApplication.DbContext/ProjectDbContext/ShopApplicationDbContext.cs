@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopApplication.Models.EntityModels.Customers;
+using ShopApplication.Models.EntityModels.PaymentModels;
 using ShopApplication.Models.EntityModels.ProductModel;
 using ShopApplication.Models.EntityModels.Sales;
 
@@ -33,6 +34,9 @@ namespace ShopApplication.Context.ProjectDbContext
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SalesDetails { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MobileBankingType> MobileBankingTypes { get; set; }
+        public DbSet<PaymentOption> PaymentOptions { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
 
         #endregion
 

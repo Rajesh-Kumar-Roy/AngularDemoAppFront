@@ -36,7 +36,7 @@
                                 <label for="Code" class="form-label required">Customer Code/Phone No</label>
 
                                 <input type="text" class="form-control" name="customerCode" id="customerCode" formControlName="customerCode" (keyup)="findCustomer($event)" placeholder="Enter Customer Code or Phone No" />
-                               
+
 
 
                             </div>
@@ -104,8 +104,8 @@
                     </div>
                     <div class="col">
 
-                        <button type="button" (click)="addProduct()" class="btn btn-warning float-right"[disabled]="salesForm.get('salesDetails').invalid"> Add Product
-                            </button>
+                        <button type="button" (click)="addProduct()" class="btn btn-warning float-right" [disabled]="salesForm.get('salesDetails').invalid"> Add Product
+                        </button>
 
                     </div>
                 </div>
@@ -127,13 +127,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <ng-container formArrayName="salesDetails" *ngFor="let detail of salesDetail.controls; let i = index">
+
+                            <ng-container formArrayName="salesDetails" *ngFor="let $detail of salesDetail.controls; let i = index">
                                 <ng-container [formGroupName]="i">
                                     <tr *ngIf="productAdded">
                                         <td>{{i+1}}</td>
                                         <td>
-                                            <select class="custom-select" formControlName ="productTypeId" palceholder="Select Product Type" >
+                                            <select class="custom-select" formControlName="productTypeId" palceholder="Select Product Type">
                                                 <option value=null>---Select---</option>
                                                 <option *ngFor="let producttype of productType" [value]="producttype.id">
                                                     {{producttype.name}}</option>
@@ -141,59 +141,60 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select  class="custom-select" palceholder="Select Product" formControlName="productId" [ngClass]="{'is-invalid':submitted && detail.get('productId')?.errors }">
+                                            <select class="custom-select" palceholder="Select Product" formControlName="productId" [ngClass]="{'is-invalid':submitted && $detail.get('productId')?.errors }">
                                                 <option value=null>---Select---</option>
-                                                <option *ngFor="let product of getProduct(detail.controls['productTypeId'].value)" [value]="product.id">
+                                                <option *ngFor="let product of getProduct($detail.controls['productTypeId'].value)" [value]="product.id">
                                                     {{product.name}}</option>
                                             </select>
 
-                                            <div *ngIf="submitted && detail.get('productId')?.errors" class="invalid-feedback">
-                                                <div *ngIf=" detail.get('productId').errors?.required">Product is
+                                            <div *ngIf="submitted && $detail.get('productId')?.errors" class="invalid-feedback">
+                                                <div *ngIf=" $detail.get('productId').errors?.required">Product is
                                                     required
                                                 </div>
                                             </div>
 
                                         </td>
                                         <td>
-                                            <ng-container *ngFor="let item of getProductUnitPrice(detail.controls['productId'].value)">
+                                            <ng-container *ngFor="let item of getProductUnitPrice($detail.controls['productId'].value)">
                                                 {{item.price}}
-                                                <input type="hidden" formControlName="unitPrice" class="form-control" [ngModel]="item.price"/>
+                                                <input type="hidden" formControlName="unitPrice" class="form-control" [ngModel]="item.price" />
                                             </ng-container>
-                                          
-                                            
+
+
                                         </td>
                                         <td>
-                                            <input type="number" formControlName="qty" class="form-control"  [ngClass]="{'is-invalid':submitted && detail.get('qty')?.errors }" palceholder="Qty" />
-                                            <div *ngIf="submitted && detail.get('qty')?.errors" class="invalid-feedback">
-                                                <div *ngIf=" detail.get('qty').errors?.required">Qty is required </div>
+                                            <input type="number" formControlName="qty" class="form-control" [ngClass]="{'is-invalid':submitted && $detail.get('qty')?.errors }" palceholder="Qty" />
+                                            <div *ngIf="submitted && $detail.get('qty')?.errors" class="invalid-feedback">
+                                                <div *ngIf=" $detail.get('qty').errors?.required">Qty is required </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <ng-container *ngFor="let items of getProductUnitPrice(detail.controls['productId'].value)">
-                                            {{getTotalPrice(detail.controls['qty'].value,items.price)}}
-                                            <input type="hidden" formControlName="totalPrice" class="form-control" [ngModel]="getTotalPrice(detail.controls['qty'].value,items.price)" />
-                                          </ng-container>
+                                            <ng-container *ngFor="let items of getProductUnitPrice($detail.controls['productId'].value)">
+                                                {{getTotalPrice($detail.controls['qty'].value,items.price)}}
+                                                <input type="hidden" formControlName="totalPrice" class="form-control" [ngModel]="getTotalPrice($detail.controls['qty'].value,items.price)" />
+                                            </ng-container>
                                         </td>
                                         <td>
                                             <textarea type="text" class="form-control" rows="1" formControlName="description" placeholder="description"></textarea>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-danger " (click)="removeDetailsButton(i)"><i class="fa fa-minus-circle" ></i> Remove</button>
+                                            <button type="button" class="btn btn-danger " (click)="removeDetailsButton(i)"><i class="fa fa-minus-circle"></i> Remove</button>
                                         </td>
 
                                     </tr>
 
                                 </ng-container>
                             </ng-container>
-                           
+
                         </tbody>
                     </table>
                 </div>
                 <div class="float-right">
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success" *ngIf="showSaveButton">Save</button>
+                    <button type="submit" class="btn btn-success" *ngIf="showUpdateButton">Update</button>
                 </div>
             </div>
-         
+
         </div>
 
         <br>

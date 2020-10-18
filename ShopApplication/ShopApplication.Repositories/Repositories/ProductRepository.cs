@@ -29,7 +29,7 @@ namespace ShopApplication.Repositories.Repositories
 
         public ICollection<Product> GetAllProduct()
         {
-            return Context.Products.Where(c => c.IsDelete == false).Include(d=>d.ProductType).ToList();
+            return Context.Products.Where(c => c.IsDelete == false).OrderByDescending(c => c.Id).Include(d=>d.ProductType).ToList();
         }
     }
 }

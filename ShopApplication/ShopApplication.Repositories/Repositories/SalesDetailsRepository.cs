@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Models.EntityModels.Sales;
 using ShopApplication.Repositories.Base;
@@ -19,10 +21,22 @@ namespace ShopApplication.Repositories.Repositories
         {
             this.db = db;
         }
-
-        public IQueryable<double> GetPriceByProductId(int id)
+        public ICollection<SaleDetail> GetAllSaleDetail()
         {
-            return Context.SalesDetails.Where(c => c.ProductId == id).Select(c => c.UnitPrice);
+            return Context.SalesDetails.Where(c => c.IsDelete == false)
+                .Include(c => c.Product)
+                .ThenInclude(d => d.ProductType)
+                .Include(c => c.Sale)
+                .ThenInclude(c => c.Customer)
+                .ToList();
+        }
+
+        public ICollection<SaleDetail> GetSaleDetailBySaleId(int id)
+        {
+            return Context.SalesDetails.Where(c => c.SaleId == id)
+                .Include(c=>c.Product)
+                .ThenInclude(d=>d.ProductType)
+                .ToList();
         }
     }
 }

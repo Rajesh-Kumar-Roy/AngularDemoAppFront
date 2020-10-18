@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Product} from '../Product';
+import {Product} from '../Model/Product';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 const baseUrl = 'https://localhost:44326/api/product';

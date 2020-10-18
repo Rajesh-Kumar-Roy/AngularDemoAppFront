@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ShopApplication.Manager.Base;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.EntityModels.Sales;
@@ -14,10 +15,14 @@ namespace ShopApplication.Manager.Managers
             _salesDetailsRepository = salesDetailsRepository;
         }
 
-
-        public IQueryable<double> GetPriceByProductId(int id)
+        public ICollection<SaleDetail> GetAllSaleDetail()
         {
-            return _salesDetailsRepository.GetPriceByProductId(id);
+            return _salesDetailsRepository.GetAllSaleDetail();
+        }
+
+        public ICollection<SaleDetail> GetSaleDetailBySaleId(int id)
+        {
+            return _salesDetailsRepository.GetSaleDetailBySaleId(id);
         }
     }
 }

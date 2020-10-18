@@ -4,14 +4,14 @@
     </div>
     <div class="card-body">
         <form [formGroup]="customerForm" autocomplete="off" (ngSubmit)="onSave()">
-            <div class="form-gorup">
+            <div class="form-group">
                 <div class="form-row">
                     <div class="col">
                         <label for="firstName" class="form-label">First Name</label>
 
                         <input type="text" class="form-control" name="firstName" id="firstName"
                             formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && c.firstName.errors }"
-                            placeholder="Enter Customer Code" />
+                            placeholder="Enter First Name" />
                         <div *ngIf="submitted &&c.firstName?.errors" class="invalid-feedback">
                             <div *ngIf=" c.firstName.errors?.required">First Name is Required!!
                             </div>
@@ -35,7 +35,7 @@
                 </div>
 
             </div>
-            <div class="form-gorup">
+            <div class="form-group">
                 <div class="form-row">
                     <div class="col">
                         <label for="Code" class="form-label">Phone No</label>
@@ -63,7 +63,7 @@
                 </div>
 
             </div>
-            <div class="form-gorup">
+            <div class="form-group">
                 <div class="form-row">
                     <div class="col">
                         <label for="address1" class="form-label">Address</label>

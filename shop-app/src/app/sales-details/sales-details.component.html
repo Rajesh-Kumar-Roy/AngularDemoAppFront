@@ -1,1 +1,50 @@
-<p>sales-details works!</p>
+<div class="justify-content-center">
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <app-customer-entry></app-customer-entry>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header bg-secondary text-white text-center">
+                    <h5 class="card-title">Sale Details</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead class="text-center table-secondary">
+                            <tr>
+                                <th>Sl</th>
+                                <th>Customer Name</th>
+                                <th>Sale No</th>
+                                <th>Date</th>
+
+
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let saleItem of sale; let i = index">
+                                <td class="text-center">{{i+1}}</td>
+                                <td>{{saleItem.customer.firstName}} {{saleItem.customer.lastName}}</td>
+                                <td>{{saleItem.saleNo}}</td>
+                                <td class="text-center">{{ saleItem.date | date: 'd MMM, yyyy' }}</td>
+
+
+                                <td class="text-center">
+                                    <button title="view" type="button" class="btn btn-default btn-sm" (click)="onViewButtonClick(saleItem.id)"><i class="fa fa-eye" aria-hidden="true"></i></button> &nbsp;
+                                    <button title="view" type="button" class="btn btn-default btn-sm" (click)="onEditButtonClick(saleItem.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button> &nbsp;
+
+                                    <button title="Delete" type="button" class="btn btn-default btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

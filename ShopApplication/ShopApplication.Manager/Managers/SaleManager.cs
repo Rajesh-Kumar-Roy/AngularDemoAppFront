@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore.Query;
 using ShopApplication.Manager.Base;
 using ShopApplication.Manager.IMContract;
@@ -15,9 +16,19 @@ namespace ShopApplication.Manager.Managers
             _saleRepository = saleRepository;
         }
 
+        public Sale GetSaleWithDetailsById(int id)
+        {
+            return _saleRepository.GetSalaWithDetailsById(id);
+        }
+
         public IQueryable<string> GetCustomerNameByCode(string customerCode)
         {
             return _saleRepository.GetCustomerNameByCode(customerCode);
+        }
+
+        public ICollection<Sale> GetAllSale()
+        {
+            return _saleRepository.GetAllSale();
         }
     }
 }
