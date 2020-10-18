@@ -1,29 +1,26 @@
+import { ProductTypeListComponent } from './Products/product-type-list/product-type-list.component';
+import { CustomerListComponent } from './Customers/customer-list/customer-list.component';
+import { ProductListComponent } from './Products/product-list/product-list.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule, NgForm} from '@angular/forms';
-
+import { ReactiveFormsModule, NgForm } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductEntryComponent } from './product-entry/product-entry.component';
-import { ProductTypeEntryComponent } from './product-type-entry/product-type-entry.component';
-import { ProductTypeListComponent } from './product-type-list/product-type-list.component';
-import { SalesMasterDetailsComponent } from './sales-master-details/sales-master-details.component';
-import { SalesDetailsComponent } from './sales-details/sales-details.component';
 import { FormsModule } from '@angular/forms';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomerEntryComponent } from './customer-entry/customer-entry.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
-import { ToastrModule} from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SalesViewComponent } from './sales-details/sales-view/sales-view.component';
-
-
-import { PaymentTypeListComponent } from './paymentMethod/payment-type-list/payment-type-list.component';
+import { SalesViewComponent } from './Sales/sales-view/sales-view.component';
 import { CommonModule } from '@angular/common';
+import { PaymentTypeEntryComponent } from './Payments/payment-type-entry/payment-type-entry.component';
+import { ProductEntryComponent } from './Products/product-entry/product-entry.component';
+import { PaymentTypeListComponent } from './Payments/payment-type-list/payment-type-list.component';
+import { ProductTypeEntryComponent } from './Products/product-type-entry/product-type-entry.component';
+import { CustomerEntryComponent } from './Customers/customer-entry/customer-entry.component';
+import { SalesEntryComponent } from './Sales/sale-entry/sales-entry.component';
+import { SalesListComponent } from './Sales/sales-list/sales-list.component';
 
 @NgModule({
   declarations: [
@@ -32,18 +29,20 @@ import { CommonModule } from '@angular/common';
     ProductEntryComponent,
     ProductTypeEntryComponent,
     ProductTypeListComponent,
-    SalesMasterDetailsComponent,
-    SalesDetailsComponent,
+    SalesEntryComponent,
+    SalesListComponent,
     CustomerEntryComponent,
     CustomerListComponent,
     SalesViewComponent,
-    PaymentTypeListComponent
+    PaymentTypeEntryComponent,
+    PaymentTypeListComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     FormsModule,
     NgSelectModule,
     BrowserAnimationsModule,

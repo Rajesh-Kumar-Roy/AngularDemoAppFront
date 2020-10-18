@@ -1,0 +1,41 @@
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.deps.json
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.dll
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csprojAssemblyReference.cache
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfoInputs.cache
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfo.cs
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.dll
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.DbContext.dll
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.dll
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.DbContext.pdb
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
+E:\c#\C# Work\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CopyComplete
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.deps.json
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.dll
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.DbContext.dll
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.dll
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.DbContext.pdb
+D:\C# project\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csprojAssemblyReference.cache
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfoInputs.cache
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfo.cs
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CoreCompileInputs.cache
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CopyComplete
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.dll
+D:\C# project\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csprojAssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfoInputs.cache
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfo.cs
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CoreCompileInputs.cache
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.dll
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.deps.json
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.dll
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.dll
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CopyComplete
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Context.dll
+D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Context.pdb
