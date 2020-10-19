@@ -21,8 +21,8 @@
                     <div class="col">
                         <label for="description" class="form-label"> Description</label>
 
-                        <input type="text" class="form-control" name="description" id="description" formControlName="description"
-                            placeholder="Enter Description" />
+                        <textarea type="text" class="form-control" rows="1" name="description" id="description" formControlName="description"
+                            placeholder="Enter Description"> </textarea>
                         
 
                     </div>
@@ -33,9 +33,9 @@
          
          
             <div class="btn-toolbar float-right ">
-                <button type="submit" class="btn btn-danger mr-2">Save</button>
-                <!-- <button type="submit" class="btn btn-primary mr-2" *ngIf="showUpdate">Update</button>
-                <button type="button" class="btn btn-info" [routerLink]="['/customerList']" routerLinkActive="router-link-active">Search</button> -->
+                <button type="submit" class="btn btn-danger mr-2"*ngIf="showSaveButton">Save</button>
+                 <button type="submit" class="btn btn-primary mr-2" *ngIf="showUpdateButton">Update</button>
+               <!-- <button type="button" class="btn btn-info" [routerLink]="['/customerList']" routerLinkActive="router-link-active">Search</button> -->
 
             </div>
         </form>

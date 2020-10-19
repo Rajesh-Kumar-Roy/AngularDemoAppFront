@@ -1,3 +1,4 @@
+import { PaymentTypeListComponent } from './Payments/payment-type-list/payment-type-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerEntryComponent } from './Customers/customer-entry/customer-entry.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'productTypeList', component: ProductTypeListComponent },
   { path: 'saleDetail/:id', component: SalesEntryComponent },
   { path: 'saleView/:id', component: SalesViewComponent },
-  { path: 'createPaymentType', component: PaymentTypeEntryComponent },
+  { path: 'createPaymentType', component: PaymentTypeListComponent },
+  { path: 'paymentTypeEdit/:id', component: PaymentTypeEntryComponent },
   { path: '', redirectTo: '/productList', pathMatch: 'full' }
 ];
 

@@ -1,15 +1,16 @@
 
 <div class="justify-content-center">
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-md-12">
-            <app-payment-type-entry></app-payment-type-entry>
+            <app-payment-type-entry (onAdd) ="newPaymentTypeAdd($event)"></app-payment-type-entry>
         </div>
-    </div> -->
+    </div>
+    <br/>
     <div class="row">
         <div class="col-md-12">
             <div class="card ">
                 <div class="card-header bg-secondary text-white text-center">
-                    <h5 class="card-title">Customer List</h5>
+                    <h5 class="card-title">Payment Type</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -31,11 +32,15 @@
                                 <td>{{pItem.description}}</td>
 
                                 <td>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button> &nbsp;
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil-square" aria-hidden="true" (click) = "onEditButtonClick(pItem.id)"></i></button> &nbsp;
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </td>
-
+                               
                             </tr>
+                            <tr *ngIf="notFoundMess">
+                                <td class="text-center" colspan="4" style="color: coral;"><h3>No Data Found!!</h3></td>
+                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

@@ -36,6 +36,18 @@ namespace ShopApplication.Controllers.API
 
             return Ok(item);
         }
+        [HttpGet("GetAllFalse")]
+        // api/paymentType/getAllFalseData
+        public IActionResult GetAllFalseDate()
+        {
+            var items = _iPaymentTypeManager.GetALLFalse();
+            if (items == null)
+            {
+                return BadRequest(new {error = "Data Not Found!!"});
+            }
+
+            return Ok(items);
+        }
         [HttpPost]
         public IActionResult Post([FromBody] PaymentTypeDto model)
         {
@@ -53,6 +65,18 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new {error = "Not Valid Payment Type!!"});
 
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var paymentTypeItem = _iPaymentTypeManager.GetById(id);
+            if (paymentTypeItem == null)
+            {
+                return BadRequest(new {error = "Can not found Payment type!!"});
+            }
+
+            return Ok(paymentTypeItem);
         }
 
         [HttpPut("{id}")]

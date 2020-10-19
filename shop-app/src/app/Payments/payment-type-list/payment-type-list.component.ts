@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { PaymentsService } from '../../Services/payment/payments.service';
 import { PaymentType } from '../../Models/payment-models/paymentType';
 
@@ -10,15 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentTypeListComponent implements OnInit {
 
-  paymentTypes: PaymentType[];
-  constructor(private paymentTypeService: PaymentsService) { }
+  paymentTypes: PaymentType[] = new Array();
+  notFoundMess = false;
+  constructor(private paymentTypeService: PaymentsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.paymentTypeService.getAll().subscribe((res: PaymentType[]) => {
+    this.paymentTypeService.getAllFalse().subscribe((res: PaymentType[]) => {
       if (res.length > 0){
         this.paymentTypes = res;
+      }else{
+        this.notFoundMess = true;
       }
+
     });
+  }
+  newPaymentTypeAdd(paymentType: PaymentType): void{
+    this.notFoundMess = false;
+    this.paymentTypes?.unshift(paymentType);
+  }
+  onEditButtonClick(paymentTypeId: number): void{
+    this.router.navigate(['/paymentTypeEdit', paymentTypeId]);
   }
 
 }

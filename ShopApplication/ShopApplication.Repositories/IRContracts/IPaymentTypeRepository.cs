@@ -7,5 +7,6 @@ namespace ShopApplication.Repositories.IRContracts
 {
     public interface IPaymentTypeRepository: IBaseRepository<PaymentType>
     {
+        ICollection<PaymentType> GetALLFalse();
     }
 }

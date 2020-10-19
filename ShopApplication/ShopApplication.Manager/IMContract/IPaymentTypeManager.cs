@@ -7,5 +7,6 @@ namespace ShopApplication.Manager.IMContract
 {
     public interface IPaymentTypeManager: IBaseManager<PaymentType>
     {
+        ICollection<PaymentType> GetALLFalse();
     }
 }

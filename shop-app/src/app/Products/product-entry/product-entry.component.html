@@ -59,16 +59,19 @@
                     </div>
                 </div>
             </div>
-            <div class="form-gorup float-right">
+            
+            <div class="btn-toolbar float-right ">
                 <div *ngIf="showSave">
-                    <input type="submit" class="btn btn-success col-offset-2 " value="Save">
+                    <input type="submit" class="btn btn-success" value="Save">
                 </div>
                 <div *ngIf="showUpdate">
-                    <input type="submit" class="btn btn-success col-offset-2 " value="Update">
+                    <input type="submit" class="btn btn-success " value="Update"> &nbsp;
+                    <button type="button" class="btn btn-info" [routerLink]="['/productList']" routerLinkActive="router-link-active">Search</button>
                 </div>
-
-
             </div>
+
+
+           
         </form>
     </div>
 </div>
