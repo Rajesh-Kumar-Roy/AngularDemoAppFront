@@ -1,5 +1,9 @@
+import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
+import { MobileBankingTypeEntryComponent } from 'src/app/Payments/mobile-banking-type-entry/mobile-banking-type-entry.component';
+import { PaymentOptionListComponent } from 'src/app/Payments/payment-option-list/payment-option-list.component';
+import { PaymentOptionEntryComponent } from './Payments/payment-option-entry/payment-option-entry.component';
 import { PaymentTypeListComponent } from './Payments/payment-type-list/payment-type-list.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerEntryComponent } from './Customers/customer-entry/customer-entry.component';
 import { CustomerListComponent } from './Customers/customer-list/customer-list.component';
@@ -27,6 +31,11 @@ const routes: Routes = [
   { path: 'saleView/:id', component: SalesViewComponent },
   { path: 'createPaymentType', component: PaymentTypeListComponent },
   { path: 'paymentTypeEdit/:id', component: PaymentTypeEntryComponent },
+  { path: 'paymentOptionEntry', component: PaymentOptionEntryComponent },
+  { path: 'paymentOptionList', component: PaymentOptionListComponent },
+  { path: 'paymentOptionEdit/:id', component: PaymentOptionEntryComponent },
+  { path: 'mobileBankingEdit/:id', component: MobileBankingTypeEntryComponent },
+  { path: 'mobileBankingList', component: MobileBankingTypeListComponent },
   { path: '', redirectTo: '/productList', pathMatch: 'full' }
 ];
 

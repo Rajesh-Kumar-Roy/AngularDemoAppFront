@@ -1,4 +1,3 @@
-
 import { SalesDetails } from '../../Models/Sale-models/SaleDetails';
 import { Customer } from '../../Models/customer-models/Customer';
 import { Component, Input, OnInit } from '@angular/core';
@@ -16,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { PaymentStatusEnum } from '../../Enums/PaymentStatusEnum';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -53,6 +53,7 @@ export class SalesEntryComponent implements OnInit {
   findCs: Customer[];
   detailsSale: Sales;
   prod: Array<any> = [];
+  pt: any;
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
@@ -137,7 +138,7 @@ export class SalesEntryComponent implements OnInit {
     this.saleService.getSaleBySaleId(id).subscribe((res: Sales) => {
       this.editSaleDetails(res);
       this.detailsSale = res;
-      console.log(this.detailsSale);
+      console.log('show me', this.detailsSale);
     });
   }
   editSaleDetails(sale: Sales): void {
@@ -157,6 +158,7 @@ export class SalesEntryComponent implements OnInit {
       formArray.push(this.fb.group({
         id: d.id,
         productTypeId: this.findproductTypeId(d.productId),
+        //  console.log('find Product', this.findproductTypeId(d.productId)),
         productId: d.productId,
         unitPrice: d.unitPrice,
         qty: d.qty,
@@ -248,7 +250,7 @@ export class SalesEntryComponent implements OnInit {
   // }
 
 
-   // product dropdown value set
+  // product dropdown value set
   getProduct(inputId: number): Product[] {
     // tslint:disable-next-line: triple-equals
     return this.productList.filter(item => item.productTypeId == inputId);
@@ -258,22 +260,25 @@ export class SalesEntryComponent implements OnInit {
   getTotalPrice(qty: number, unitPrice: number): number {
     return qty * unitPrice;
   }
-  // when edit find product type Id
-  findproductTypeId(id: number): void {
+  // // when edit find product type Id
+  public findproductTypeId(id: number): void {
+    console.log(this.products);
+    console.log(this.productType, 'Product Type is Recent');
     this.productService.getAllisDeleteFase().subscribe(res => {
       const result = res;
-      for (let i = 0; i < res?.length; i++) {
-        const cs = result[i];
-        if (cs.id === id) {
-          this.salesDetail.patchValue([
-            { productTypeId: cs.productTypeId }
-          ]
-          );
-          this.productService.getProductByTypeId(Number(cs.productTypeId)).subscribe(res1 => {
-            this.prod = res1;
-          });
+      console.log('product', res);
+      // for (let i = 0; i < res?.length; i++) {
+      //   const cs = result[i];
+      //   if (cs.id === id) {
+      //   this.pt = cs.productTypeId;
+      //   }
+      // }
+      result.forEach(e => {
+        if (e.id === id){
+          console.log('Show product Type', e.productTypeId);
+          return e.productTypeId;
         }
-      }
+      });
     });
   }
   // when edit find customer name

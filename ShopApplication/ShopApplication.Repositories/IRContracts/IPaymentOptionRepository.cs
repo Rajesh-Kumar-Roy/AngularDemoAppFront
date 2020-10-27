@@ -7,5 +7,6 @@ namespace ShopApplication.Repositories.IRContracts
 {
     public interface IPaymentOptionRepository: IBaseRepository<PaymentOption>
     {
+        ICollection<PaymentOption> GetAllFalseData();
     }
 }

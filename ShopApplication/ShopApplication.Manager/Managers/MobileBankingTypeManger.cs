@@ -15,5 +15,10 @@ namespace ShopApplication.Manager.Managers
         {
             _iMobileBankingTypeRepository = iMobileBankingTypeRepository;
         }
+
+        public ICollection<MobileBankingType> GetAllFalse()
+        {
+            return _iMobileBankingTypeRepository.GetAllFalse();
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace ShopApplication.Manager.IMContract
 {
     public interface IPaymentOptionManager: IBaseManager<PaymentOption>
     {
+        ICollection<PaymentOption> GetAllFalseData();
     }
 }

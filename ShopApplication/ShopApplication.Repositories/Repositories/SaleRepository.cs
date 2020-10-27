@@ -41,8 +41,9 @@ namespace ShopApplication.Repositories.Repositories
 
         public ICollection<Sale> GetAllSale()
         {
-            return Context.Sales.Where(c => c.IsDelete == false).Include(c => c.SalesDetails).ThenInclude(d=>d.Product).ThenInclude(d=>d.ProductType)
-                .Include(c=>c.Customer).OrderByDescending(d=>d.Id)
+            return Context.Sales.Where(c => c.IsDelete == false)
+                .Include(c=>c.Customer)
+                .OrderByDescending(d=>d.Id)
                 .ToList();
         }
     }

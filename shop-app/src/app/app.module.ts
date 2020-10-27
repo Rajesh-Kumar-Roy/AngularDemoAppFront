@@ -21,6 +21,10 @@ import { ProductTypeEntryComponent } from './Products/product-type-entry/product
 import { CustomerEntryComponent } from './Customers/customer-entry/customer-entry.component';
 import { SalesEntryComponent } from './Sales/sale-entry/sales-entry.component';
 import { SalesListComponent } from './Sales/sales-list/sales-list.component';
+import { PaymentOptionEntryComponent } from 'src/app/Payments/payment-option-entry/payment-option-entry.component';
+import { PaymentOptionListComponent } from 'src/app/Payments/payment-option-list/payment-option-list.component';
+import { MobileBankingTypeEntryComponent } from './Payments/mobile-banking-type-entry/mobile-banking-type-entry.component';
+import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,10 @@ import { SalesListComponent } from './Sales/sales-list/sales-list.component';
     SalesViewComponent,
     PaymentTypeEntryComponent,
     PaymentTypeListComponent,
+    PaymentOptionEntryComponent,
+    PaymentOptionListComponent,
+    MobileBankingTypeEntryComponent,
+    MobileBankingTypeListComponent,
 
   ],
   imports: [

@@ -11,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentTypeListComponent implements OnInit {
 
-  paymentTypes: PaymentType[] = new Array();
+  paymentTypes: PaymentType[] = null;
   notFoundMess = false;
-  constructor(private paymentTypeService: PaymentsService, private router: Router) { }
+  constructor(private paymentTypeService: PaymentsService, private router: Router) {
+     this.paymentTypes = new Array();
+   }
 
   ngOnInit(): void {
     this.paymentTypeService.getAllFalse().subscribe((res: PaymentType[]) => {

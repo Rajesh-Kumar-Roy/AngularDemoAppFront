@@ -15,5 +15,10 @@ namespace ShopApplication.Manager.Managers
         {
             _iPaymentOptionRepository = iPaymentOptionRepository;
         }
+
+        public ICollection<PaymentOption> GetAllFalseData()
+        {
+            return _iPaymentOptionRepository.GetAllFalseData();
+        }
     }
 }

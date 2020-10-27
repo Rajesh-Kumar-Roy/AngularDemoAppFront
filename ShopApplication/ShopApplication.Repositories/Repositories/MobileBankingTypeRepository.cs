@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ShopApplication.Context.ProjectDbContext;
@@ -19,6 +20,11 @@ namespace ShopApplication.Repositories.Repositories
         public MobileBankingTypeRepository(DbContext db) : base(db)
         {
             this.db = db;
+        }
+
+        public ICollection<MobileBankingType> GetAllFalse()
+        {
+            return Context.MobileBankingTypes.Where(c => c.IsDelete == false).OrderByDescending(d => d.Id).ToList();
         }
     }
 }

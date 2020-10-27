@@ -7,5 +7,6 @@ namespace ShopApplication.Repositories.IRContracts
 {
     public interface IMobileBankingTypeRepository: IBaseRepository<MobileBankingType>
     {
+        ICollection<MobileBankingType> GetAllFalse();
     }
 }

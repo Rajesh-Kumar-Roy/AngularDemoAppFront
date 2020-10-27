@@ -7,5 +7,6 @@ namespace ShopApplication.Manager.IMContract
 {
     public interface IMobileBankingTypeManager: IBaseManager<MobileBankingType>
     {
+        ICollection<MobileBankingType> GetAllFalse();
     }
 }
