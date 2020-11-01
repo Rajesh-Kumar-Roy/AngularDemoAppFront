@@ -37,6 +37,7 @@ namespace ShopApplication.Context.ProjectDbContext
         public DbSet<MobileBankingType> MobileBankingTypes { get; set; }
         public DbSet<PaymentOption> PaymentOptions { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         #endregion
 

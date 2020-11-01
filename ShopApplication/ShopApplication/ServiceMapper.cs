@@ -39,6 +39,8 @@ namespace ShopApplication
             services.AddTransient<IPaymentOptionRepository, PaymentOptionRepository>();
             services.AddTransient<IMobileBankingTypeRepository, MobileBankingTypeRepository>();
             services.AddTransient<IMobileBankingTypeManager, MobileBankingTypeManger>();
+            services.AddTransient<IPaymentManager, PaymentManger>();
+            services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddAutoMapper();
             services.AddDbContext<ShopApplicationDbContext>(options =>
             {

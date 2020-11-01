@@ -25,6 +25,7 @@ import { PaymentOptionEntryComponent } from 'src/app/Payments/payment-option-ent
 import { PaymentOptionListComponent } from 'src/app/Payments/payment-option-list/payment-option-list.component';
 import { MobileBankingTypeEntryComponent } from './Payments/mobile-banking-type-entry/mobile-banking-type-entry.component';
 import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
+import { PaymentEntryComponent } from './Payments/payment-entry/payment-entry.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-l
     PaymentOptionListComponent,
     MobileBankingTypeEntryComponent,
     MobileBankingTypeListComponent,
+    PaymentEntryComponent,
 
   ],
   imports: [

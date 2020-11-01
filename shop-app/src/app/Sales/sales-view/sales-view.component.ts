@@ -55,5 +55,8 @@ export class SalesViewComponent implements OnInit {
   onEditButtonClick(saleId: number): void {
     this.router.navigate(['/saleDetail', saleId]);
   }
+  onPaymentClick(saleId: number): void{
+    this.router.navigate(['/paymentPay', saleId]);
+  }
 
 }

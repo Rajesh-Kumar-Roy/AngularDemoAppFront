@@ -91,7 +91,7 @@
 
                     </div>
                     <div class="float-right mr-4">
-                        <button title="Edit" type="button" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> Payment</button>&nbsp;
+                        <button title="Edit" type="button" class="btn btn-warning" (click) = "onPaymentClick(sale?.id)"><i class="fa fa-cc-amazon-pay"></i> Payment</button>&nbsp;
                         <button title="Edit" type="button" class="btn btn-primary" (click) = "onEditButtonClick(sale?.id)"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</button> &nbsp;
                         <button type="button" class="btn btn-info" [routerLink]="['/saleDetails']" routerLinkActive="router-link-active">Search</button>
                     </div>

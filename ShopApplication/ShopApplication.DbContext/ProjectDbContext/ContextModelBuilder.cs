@@ -82,6 +82,16 @@ namespace ShopApplication.Context.ProjectDbContext
             modelBuilder.Entity<PaymentType>().ToTable("PaymentType");
 
             #endregion
+
+            #region Payment
+
+            modelBuilder.Entity<Payment>().HasKey(c => c.Id);
+            modelBuilder.Entity<Payment>().Property(c => c.Amount).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.VatAmount).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.Pay).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.PaymentDate).IsRequired();
+
+            #endregion
         }
     }
 }

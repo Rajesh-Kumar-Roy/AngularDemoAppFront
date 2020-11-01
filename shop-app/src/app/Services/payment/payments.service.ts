@@ -1,3 +1,4 @@
+import { Payment } from './../../Models/payment-models/payment';
 import { MobileBankingType } from './../../Models/payment-models/mobileBankingType';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -66,5 +67,11 @@ export class PaymentsService {
   MobileBankingTypeAdd(mobileBanking: MobileBankingType): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/api/mobileBankingType/AddOrUpdate' + `/${0}`, mobileBanking, headerOptions);
   }
+  //#endregion
+  //#region Payment
+  PaymentCreate(payment: Payment): Observable<any>{
+    return this.http.post<any>(this.baseUrl + '/api/payment/AddOrUpdate' + `/${0}`, payment, headerOptions);
+  }
+
   //#endregion
 }

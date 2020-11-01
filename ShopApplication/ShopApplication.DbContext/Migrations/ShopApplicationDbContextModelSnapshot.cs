@@ -77,6 +77,90 @@ namespace ShopApplication.Context.Migrations
                     b.ToTable("MobileBankingType");
                 });
 
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.PaymentModels.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CVVNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CardEndMonth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CardEndYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CardHolderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CheckIssueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CheckNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Due")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("DuePaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MobBankRefNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MobBankTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MobileBankingNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OperationBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OperationId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Pay")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentOptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("VatAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MobBankTypeId");
+
+                    b.HasIndex("PaymentOptionId");
+
+                    b.HasIndex("PaymentTypeId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("ShopApplication.Models.EntityModels.PaymentModels.PaymentOption", b =>
                 {
                     b.Property<int>("Id")
@@ -248,6 +332,23 @@ namespace ShopApplication.Context.Migrations
                     b.HasIndex("SaleId");
 
                     b.ToTable("SaleDetail");
+                });
+
+            modelBuilder.Entity("ShopApplication.Models.EntityModels.PaymentModels.Payment", b =>
+                {
+                    b.HasOne("ShopApplication.Models.EntityModels.PaymentModels.MobileBankingType", "MobBankType")
+                        .WithMany()
+                        .HasForeignKey("MobBankTypeId");
+
+                    b.HasOne("ShopApplication.Models.EntityModels.PaymentModels.PaymentOption", "PaymentOption")
+                        .WithMany()
+                        .HasForeignKey("PaymentOptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopApplication.Models.EntityModels.PaymentModels.PaymentType", "PaymentType")
+                        .WithMany()
+                        .HasForeignKey("PaymentTypeId");
                 });
 
             modelBuilder.Entity("ShopApplication.Models.EntityModels.ProductModel.Product", b =>

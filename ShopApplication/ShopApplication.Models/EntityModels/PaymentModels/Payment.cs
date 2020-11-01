@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ShopApplication.Models.ModelContracts;
 
 namespace ShopApplication.Models.EntityModels.PaymentModels
 {
-    public class Payment
+    public class Payment : IEntity,IDelete
     {
         public int Id { get; set; }
         public double Amount { get; set; }
@@ -30,7 +31,7 @@ namespace ShopApplication.Models.EntityModels.PaymentModels
        
         
      
-        public int PaymentTypeId { get; set; }
+        public int? PaymentTypeId { get; set; }
         public int OperationId { get; set; }
         public string OperationBy { get; set; }
         public PaymentType PaymentType { get; set; }
@@ -39,5 +40,6 @@ namespace ShopApplication.Models.EntityModels.PaymentModels
         public MobileBankingType MobBankType { get; set; }
 
 
+        public bool IsDelete { get; set; }
     }
 }
