@@ -101,34 +101,49 @@
                                     <div class="card-body">
                                         <ng-container class="form-group">
                                             <label for="cardHolderName">Holder Name</label>
-                                            <input type="text" class="form-control"  formControlName="cardHolderName" placeholder="Enter Card Holder Name" required />
-                                            
+                                            <input type="text" class="form-control"  formControlName="cardHolderName"  [ngClass]="{ 'is-invalid': (pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors }" placeholder="Enter Card Holder Name" required />
+                                            <div *ngIf="(pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.cardHolderName.errors?.required">Holder Name Is Required!!</div>
+                                            </div>
                                         </ng-container>
                                         <ng-container class="form-group">
                                             <label for="vatAmount">Card No</label>
-                                            <input type="text" class="form-control" formControlName="cardNo" maxlength="16" placeholder="Enter Card No" />
+                                            <input type="text" class="form-control" formControlName="cardNo"  [ngClass]="{ 'is-invalid': (pty.cardNo.touched || submitted )  && pty.cardNo?.errors }" maxlength="16" placeholder="Enter Card No" />
+                                            <div *ngIf="(pty.cardNo.touched || submitted )  && pty.cardNo?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.cardNo.errors?.required">Card No Is Required!!</div>
+                                            </div>
                                         </ng-container>
 
                                         <div class="form-row">
                                             <div class="col">
                                                 <ng-container class="form-group">
                                                     <label for="vatAmount">End Month</label>
-                                                    <select class="form-control" formControlName="cardEndMonth">
+                                                    <select class="form-control"  formControlName="cardEndMonth"  [ngClass]="{ 'is-invalid': (pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors }">
                                                         <option *ngFor="let key of keys; index as i" [value]="i+1" [label]="monthEnum[key]"></option>
                                                     </select>
+                                                    <div *ngIf="(pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors" class="invalid-feedback">
+                                                        <div *ngIf="pty.cardEndMonth.errors?.required">End Month Is Required!!</div>
+                                                    </div>
                                                     <!-- <input type="text" class="form-control" formControlName="cardEndMonth" placeholder="Enter End Month" /> -->
                                                 </ng-container>
                                             </div>
                                             <div class="col">
                                                 <ng-container class="form-group">
                                                     <label>End Year</label>
-                                                    <input class="form-control" type="number" formControlName="cardEndYear"  placeholder="Enter End Year" />
+                                                    <input class="form-control" type="number"  formControlName="cardEndYear"  [ngClass]="{ 'is-invalid': (pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors }"  placeholder="Enter End Year" />
+                                                    <div *ngIf="(pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors" class="invalid-feedback">
+                                                        <div *ngIf="pty.cardEndYear.errors?.required">Card End Year Is Required!!</div>
+                                                    </div>
+                                                    
                                                 </ng-container>
                                             </div>
                                             <div class="col">
                                                 <ng-container class="form-group">
                                                     <label for="vatAmount">CVV No</label>
-                                                    <input type="text" class="form-control" formControlName="cVVNo" placeholder="Enter CVV No" maxlength="4" />
+                                                    <input type="text" class="form-control" formControlName="cVVNo"  [ngClass]="{ 'is-invalid': (pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors }" placeholder="Enter CVV No" maxlength="4" />
+                                                    <div *ngIf="(pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors" class="invalid-feedback">
+                                                        <div *ngIf="pty.cVVNo.errors?.required">CVV NO Is Required!!</div>
+                                                    </div>
                                                 </ng-container>
                                             </div>
                                         </div>
@@ -155,13 +170,19 @@
                                         </ng-container>
                                         <ng-container class="form-group">
                                             <label for="Mobile Number">Mobile No</label>
-                                            <input type="text" class="form-control" maxlength="11" formControlName="mobileBankingNo" placeholder="Enter Mobile Nubmer" />
+                                            <input type="text" class="form-control" maxlength="11" formControlName="mobileBankingNo"  [ngClass]="{ 'is-invalid': (pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors }" placeholder="Enter Mobile Nubmer" />
                                             <div *ngIf="pty.mobileBankingNo?.errors?.pattern" class="text-danger">Please, Enter 11 digit Mobile Number.</div>
+                                            <div *ngIf="(pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.mobileBankingNo.errors?.required">Mobile Banking No Is Required!!</div>
+                                            </div>
                                         </ng-container>
 
                                         <ng-container class="form-group">
                                             <label for="vatAmount">Reference No</label>
-                                            <input type="text" class="form-control" formControlName="mobBankRefNo" placeholder="Enter Reference No" />
+                                            <input type="text" class="form-control" formControlName="mobBankRefNo" [ngClass]="{ 'is-invalid': (pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors }" placeholder="Enter Reference No" />
+                                            <div *ngIf="(pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.mobBankRefNo.errors?.required">Mobile Ref No Is Required!!</div>
+                                            </div>
                                         </ng-container>
 
                                     </div>
@@ -175,11 +196,17 @@
                                     <div class="card-body">
                                         <ng-container class="form-group">
                                             <label for="bankName">Bank Name</label>
-                                            <input type="text" class="form-control" id="bankName" formControlName="bankName" placeholder="Enter Bank Name" />
+                                            <input type="text" class="form-control" id="bankName" [ngClass]="{ 'is-invalid': (pty.bankName.touched || submitted )  && pty.bankName?.errors }" formControlName="bankName" placeholder="Enter Bank Name" />
+                                            <div *ngIf="(pty.bankName.touched || submitted )  && pty.bankName?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.bankName.errors?.required">Bank Name Is Required!!</div>
+                                            </div>
                                         </ng-container>
                                         <ng-container class="form-group">
                                             <label for="checkNo">Check No</label>
-                                            <input type="text" id="checkNo" class="form-control" formControlName="checkNo" maxlength="12" placeholder="Enter Check Nubmer" />
+                                            <input type="text" id="checkNo" class="form-control" formControlName="checkNo" [ngClass]="{ 'is-invalid': (pty.checkNo.touched || submitted )  && pty.checkNo?.errors }" maxlength="12" placeholder="Enter Check Nubmer" />
+                                            <div *ngIf="(pty.checkNo.touched || submitted )  && pty.checkNo?.errors" class="invalid-feedback">
+                                                <div *ngIf="pty.checkNo.errors?.required">Check No Is Required!!</div>
+                                            </div>
                                         </ng-container>
 
                                         <ng-container class="form-group">

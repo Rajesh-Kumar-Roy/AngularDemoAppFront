@@ -10,8 +10,8 @@ import { PaymentsService } from 'src/app/Services/payment/payments.service';
 import { Payment } from './../../Models/payment-models/payment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { PaymentOption} from 'src/app/Models/payment-models/paymentOption';
-import {FormsModule} from '@angular/forms';
+import { PaymentOption } from 'src/app/Models/payment-models/paymentOption';
+import { FormsModule } from '@angular/forms';
 import { CalendarCellViewModel } from 'ngx-bootstrap/datepicker/models';
 
 
@@ -51,11 +51,10 @@ export class PaymentEntryComponent implements OnInit {
     private saleService: SalesService,
     private saleDetailService: SalesDetailsService,
     private toastr: ToastrService
-    )
-    {
+  ) {
     this.$model = new Payment();
     this.keys = Object.keys(this.monthEnum).filter(f => !isNaN(Number(f)));
-   }
+  }
 
   ngOnInit(): void {
     this.paymetMethodForm = this.fb.group({
@@ -69,7 +68,7 @@ export class PaymentEntryComponent implements OnInit {
       paymentOptionId: [this.$model.paymentOptionId, Validators.required],
 
       mobBankTypeId: [this.$model.mobBankTypeId],
-      mobileBankingNo: [this.$model.mobileBankingNo, Validators.pattern('^((\\+88-?)|0)?[0-9]{11}$')],
+      mobileBankingNo: [this.$model.mobileBankingNo],
       mobBankRefNo: [this.$model.mobBankRefNo],
 
       bankName: [this.$model.bankName],
@@ -82,20 +81,20 @@ export class PaymentEntryComponent implements OnInit {
       cVVNo: [this.$model.cVVno, Validators.maxLength(4)],
       cardHolderName: [this.$model.cardHolderName],
 
-      paymentTypeId: [this.$model.paymentTypeId,Validators.required],
+      paymentTypeId: [this.$model.paymentTypeId, Validators.required],
       operationId: [this.$model.operationId],
       operationBy: [this.$model.operationId],
       isDelete: [this.$model.isDetele]
 
     });
 
-      // get route link
+    // get route link
     this.route.paramMap.subscribe(parms => {
-        const sId = +parms.get('id');
-        if (sId) {
-          this.getSale(sId);
-        }
-      });
+      const sId = +parms.get('id');
+      if (sId) {
+        this.getSale(sId);
+      }
+    });
     this.paymentService.PaymentOptionGetAllFalseData().subscribe(res => {
       this.paymentOption = res;
       this.paymentOptionDefaultSet();
@@ -103,8 +102,8 @@ export class PaymentEntryComponent implements OnInit {
     this.paymentService.MobileBankingTypeGetAllFalseData().subscribe(res => {
       this.mobileBankingTypes = res;
     });
-    this.paymentService.getAllFalse().subscribe (res => {
-      this.paymentType  = res;
+    this.paymentService.getAllFalse().subscribe(res => {
+      this.paymentType = res;
     });
   }
 
@@ -130,83 +129,171 @@ export class PaymentEntryComponent implements OnInit {
     console.log(this.grandTotal);
     return total;
   }
-  checkDue(event): void{
-    if ( this.grandTotal == event.target.value){
-       this.showDue = false;
-       this.paymetMethodForm.patchValue({
+  checkDue(event): void {
+    if (this.grandTotal == event.target.value) {
+      this.showDue = false;
+      this.paymetMethodForm.patchValue({
         due: 0
-       });
-    }else{
+      });
+    } else {
       this.dueTo = this.grandTotal - event.target.value;
       this.showDue = true;
     }
   }
-  get pty(): any{
+  get pty(): any {
     return this.paymetMethodForm.controls;
   }
-// only for year Picker
+  // only for year Picker
   onOpenCalendarYear(container): any {
 
     container.setViewMode('year');
 
     container.yearSelectHandler = (event: CalendarCellViewModel): void => {
 
-    container.value =  event.date;
+      container.value = event.date;
 
-    return;
-};
-}
-
-
+      return;
+    };
+  }
 
 
-  paymentOptionDefaultSet(): any{
+
+
+  paymentOptionDefaultSet(): any {
     this.paymentOption.forEach(e => {
-      if (e.name.toLocaleUpperCase() == 'Card'){
+      if (e.name.toLocaleUpperCase() == 'Card') {
         this.nrSelect = e.id;
       }
     });
   }
-  changingEvent(id: number): void{
-    if (id ==1){
+  setRequired(): any {
+    return [Validators.required];
+  }
+  changingEvent(id: number): void {
+    // on Cash
+    if (id == 1) {
       this.sowCashDetail = true;
       this.showMobileBankingDetail = false;
       this.showCheckDetail = false;
       this.showCardDetail = false;
       this.showAlert = true;
+      // create check and mobile banking Null
+
+      //  check validation Null
+      this.paymetMethodForm.get('bankName').setValidators(null);
+      this.paymetMethodForm.get('checkNo').setValidators(null);
+      this.paymetMethodForm.get('checkIssueDate').setValidators(null);
+
+      // Mobile Validation Create Null
+      this.paymetMethodForm.get('mobBankTypeId').setValidators(null);
+      this.paymetMethodForm.get('mobileBankingNo').setValidators(null);
+      this.paymetMethodForm.get('mobBankRefNo').setValidators(null);
+
+      // card validation Create Null
+      this.paymetMethodForm.get('cardNo').setValidators(null);
+      this.paymetMethodForm.get('cardEndMonth').setValidators(null);
+      this.paymetMethodForm.get('cardEndYear').setValidators(null);
+      this.paymetMethodForm.get('cVVNo').setValidators(null);
+      this.paymetMethodForm.get('cardHolderName').setValidators(null);
     }
-    else if (id == 2){
+    if (id == 2) {
+      // on Mobile Banking
+      // create Validation
+      this.paymetMethodForm.get('mobBankTypeId').setValidators(this.setRequired());
+      this.paymetMethodForm.get('mobileBankingNo').setValidators([Validators.required, Validators.pattern('^((\\+88-?)|0)?[0-9]{11}$')]);
+      this.paymetMethodForm.get('mobBankRefNo').setValidators(this.setRequired());
+
+      //  check validation Null
+      this.paymetMethodForm.get('bankName').setValidators(null);
+      this.paymetMethodForm.get('checkNo').setValidators(null);
+      this.paymetMethodForm.get('checkIssueDate').setValidators(null);
+
+      // card validation Create Null
+      this.paymetMethodForm.get('cardNo').setValidators(null);
+      this.paymetMethodForm.get('cardEndMonth').setValidators(null);
+      this.paymetMethodForm.get('cardEndYear').setValidators(null);
+      this.paymetMethodForm.get('cVVNo').setValidators(null);
+      this.paymetMethodForm.get('cardHolderName').setValidators(null);
+
       this.showMobileBankingDetail = true;
       this.showCheckDetail = false;
       this.showCardDetail = false;
       this.sowCashDetail = false;
       this.showAlert = false;
     }
-    else if (id == 3){
+    if (id == 3) {
+      // on Check
+      this.paymetMethodForm.get('bankName').setValidators(this.setRequired());
+      this.paymetMethodForm.get('checkNo').setValidators(this.setRequired());
+      this.paymetMethodForm.get('checkIssueDate').setValidators(this.setRequired());
+
+      // Mobile Validation Create Null
+      this.paymetMethodForm.get('mobBankTypeId').setValidators(null);
+      this.paymetMethodForm.get('mobileBankingNo').setValidators(null);
+      this.paymetMethodForm.get('mobBankRefNo').setValidators(null);
+
+      // card validation Create Null
+      this.paymetMethodForm.get('cardNo').setValidators(null);
+      this.paymetMethodForm.get('cardEndMonth').setValidators(null);
+      this.paymetMethodForm.get('cardEndYear').setValidators(null);
+      this.paymetMethodForm.get('cVVNo').setValidators(null);
+      this.paymetMethodForm.get('cardHolderName').setValidators(null);
+
+
       this.showCheckDetail = true;
       this.showCardDetail = false;
       this.sowCashDetail = false;
       this.showMobileBankingDetail = false;
       this.showAlert = false;
     }
-    else if ( id == 4){
+    if (id == 4) {
+      // on Card
+      // create Validation
+      this.paymetMethodForm.get('cardNo').setValidators(this.setRequired());
+      this.paymetMethodForm.get('cardEndMonth').setValidators(this.setRequired());
+      this.paymetMethodForm.get('cardEndYear').setValidators(this.setRequired());
+      this.paymetMethodForm.get('cVVNo').setValidators(this.setRequired());
+      this.paymetMethodForm.get('cardHolderName').setValidators(this.setRequired());
+
+      //  check validation Null
+      this.paymetMethodForm.get('bankName').setValidators(null);
+      this.paymetMethodForm.get('checkNo').setValidators(null);
+      this.paymetMethodForm.get('checkIssueDate').setValidators(null);
+
+      // Mobile Validation Create Null
+      this.paymetMethodForm.get('mobBankTypeId').setValidators(null);
+      this.paymetMethodForm.get('mobileBankingNo').setValidators(null);
+      this.paymetMethodForm.get('mobBankRefNo').setValidators(null);
+
       this.showCardDetail = true;
       this.sowCashDetail = false;
       this.showMobileBankingDetail = false;
       this.showCheckDetail = false;
       this.showAlert = false;
     }
-    else{
-      console.log('please Check Data properly!!');
-    }
+    this.paymetMethodForm.get('mobBankTypeId').updateValueAndValidity();
+    this.paymetMethodForm.get('mobileBankingNo').updateValueAndValidity();
+    this.paymetMethodForm.get('mobBankRefNo').updateValueAndValidity();
+
+    this.paymetMethodForm.get('bankName').updateValueAndValidity();
+    this.paymetMethodForm.get('checkNo').updateValueAndValidity();
+    this.paymetMethodForm.get('checkIssueDate').updateValueAndValidity();
+
+    this.paymetMethodForm.get('cardNo').updateValueAndValidity();
+    this.paymetMethodForm.get('cardEndMonth').updateValueAndValidity();
+    this.paymetMethodForm.get('cardEndYear').updateValueAndValidity();
+    this.paymetMethodForm.get('cVVNo').updateValueAndValidity();
+    this.paymetMethodForm.get('cardHolderName').updateValueAndValidity();
+    console.log('please Check Data properly!!');
+
   }
-  onSave(): void{
+  onSave(): void {
     this.submitted = true;
-    if (this.paymetMethodForm.invalid){
+    if (this.paymetMethodForm.invalid) {
       return;
     }
     console.log(this.paymetMethodForm.value);
-    this.paymentService.PaymentCreate(this.paymetMethodForm.value).subscribe( res => {
+    this.paymentService.PaymentCreate(this.paymetMethodForm.value).subscribe(res => {
       this.toastr.success('Save Successfull', 'Payment');
       this.paymetMethodForm.reset();
       this.submitted = false;

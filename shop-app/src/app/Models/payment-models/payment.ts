@@ -17,7 +17,7 @@ checkIssueDate = new Date();
 cardHolderName = '';
 cardNo = '';
 cardEndMonth = 0;
-cardEndYear = null;
+cardEndYear = 0;
 cVVno = '';
 
 paymentTypeId = null;
