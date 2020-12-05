@@ -34,6 +34,31 @@ namespace ShopApplication.Controllers.API
 
             return Ok(result);
         }
+
+        [HttpGet("getPaymentById/{id:int}")]
+        public IActionResult GetPaymentById(int id)
+        {
+            var result = _iPaymentManager.GetById(id);
+            if (result == null)
+            {
+                return BadRequest(new {error = "Can not found Data!!"});
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("getLastRow")]
+        public IActionResult GetLastRow()
+        {
+            var result = _iPaymentManager.GetLastRow();
+            if (result == null)
+            {
+                return BadRequest(new {error = "Can not found Last Data!!"});
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost("AddOrUpdate/{id:int}")]
         public IActionResult AddOrUpdate(int id,[FromBody] PaymentDto model)
         {

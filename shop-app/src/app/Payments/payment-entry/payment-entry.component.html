@@ -218,9 +218,10 @@
                                 </div>
                             </div>
                             <br />
-                            <button class='form-control btn btn-primary submit-button' type='submit'> Pay</button>
-
-
+                            <button class='form-control btn btn-primary submit-button' *ngIf="payButtonHide" type='submit'> Continue</button>
+                            <div class="alert alert-danger text-center" *ngIf="paymentAlert">....Payment Already Collect....</div>
+                            <button class='form-control btn btn-warning submit-button'  [routerLink]="['/saleDetails']" routerLinkActive="router-link-active"  *ngIf="paymentAlert" type='button'> Back</button>
+                            
 
 
                         </div>

@@ -7,5 +7,6 @@ namespace ShopApplication.Manager.IMContract
 {
     public interface IPaymentManager: IBaseManager<Payment>
     {
+        Payment GetLastRow();
     }
 }

@@ -17,5 +17,10 @@ namespace ShopApplication.Manager.Managers
         {
             _iPaymentRepository = iPaymentRepository;
         }
+
+        public Payment GetLastRow()
+        {
+           return _iPaymentRepository.GetLastRow();
+        }
     }
 }

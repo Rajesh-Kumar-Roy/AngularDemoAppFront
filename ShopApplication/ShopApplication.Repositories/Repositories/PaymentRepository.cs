@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ShopApplication.Context.ProjectDbContext;
@@ -20,6 +21,11 @@ namespace ShopApplication.Repositories.Repositories
         public ShopApplicationDbContext Context
         {
             get { return (ShopApplicationDbContext) db; }
+        }
+
+        public Payment GetLastRow()
+        {
+            return Context.Payments.ToList().LastOrDefault();
         }
     }
 }

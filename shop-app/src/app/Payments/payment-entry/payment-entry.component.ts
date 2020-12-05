@@ -1,3 +1,4 @@
+import { PaymentStatusEnum } from './../../Enums/PaymentStatusEnum';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentType } from './../../Models/payment-models/paymentType';
 import { MonthEnum } from './../../Enums/MonthEnum';
@@ -5,7 +6,7 @@ import { MobileBankingType } from './../../Models/payment-models/mobileBankingTy
 import { SalesDetailsService } from './../../Services/sales-details.service';
 import { SalesDetails } from 'src/app/Models/Sale-models/SaleDetails';
 import { SalesService } from './../../Services/sales.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentsService } from 'src/app/Services/payment/payments.service';
 import { Payment } from './../../Models/payment-models/payment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentOption } from 'src/app/Models/payment-models/paymentOption';
 import { FormsModule } from '@angular/forms';
 import { CalendarCellViewModel } from 'ngx-bootstrap/datepicker/models';
+
 
 
 
@@ -42,6 +44,9 @@ export class PaymentEntryComponent implements OnInit {
   monthEnum = MonthEnum;
   keys = [];
   paymentType: PaymentType[];
+  saleId: number;
+  payButtonHide = true;
+  paymentAlert = false;
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -50,7 +55,8 @@ export class PaymentEntryComponent implements OnInit {
     private route: ActivatedRoute,
     private saleService: SalesService,
     private saleDetailService: SalesDetailsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.$model = new Payment();
     this.keys = Object.keys(this.monthEnum).filter(f => !isNaN(Number(f)));
@@ -88,11 +94,14 @@ export class PaymentEntryComponent implements OnInit {
 
     });
 
+
     // get route link
     this.route.paramMap.subscribe(parms => {
       const sId = +parms.get('id');
       if (sId) {
         this.getSale(sId);
+        // chcek paid or not paid
+        this.checkPaid(sId);
       }
     });
     this.paymentService.PaymentOptionGetAllFalseData().subscribe(res => {
@@ -109,6 +118,7 @@ export class PaymentEntryComponent implements OnInit {
 
 
   getSale(id: number): void {
+    this.saleId = id;
     this.saleService.getSaleBySaleId(id).subscribe(res => {
       if (res != null) {
         this.sale = res;
@@ -287,14 +297,25 @@ export class PaymentEntryComponent implements OnInit {
     console.log('please Check Data properly!!');
 
   }
+  checkPaid(sal: number): void{
+    this.saleService.getSaleBySaleId(sal).subscribe(res => {
+      if ( PaymentStatusEnum.Paid == res.paymentStatusId ){
+        this.payButtonHide = false;
+        this.paymentAlert = true;
+      }else{
+        this.payButtonHide = true;
+      }
+    });
+
+  }
   onSave(): void {
     this.submitted = true;
     if (this.paymetMethodForm.invalid) {
       return;
     }
-    console.log(this.paymetMethodForm.value);
     this.paymentService.PaymentCreate(this.paymetMethodForm.value).subscribe(res => {
       this.toastr.success('Save Successfull', 'Payment');
+      this.router.navigate(['/invoice', this.saleId]);
       this.paymetMethodForm.reset();
       this.submitted = false;
     });

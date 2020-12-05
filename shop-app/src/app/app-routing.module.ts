@@ -1,3 +1,4 @@
+import { InvoiceComponent } from './Payments/invoice/invoice.component';
 import { PaymentEntryComponent } from './Payments/payment-entry/payment-entry.component';
 import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
 import { MobileBankingTypeEntryComponent } from 'src/app/Payments/mobile-banking-type-entry/mobile-banking-type-entry.component';
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'mobileBankingEdit/:id', component: MobileBankingTypeEntryComponent },
   { path: 'mobileBankingList', component: MobileBankingTypeListComponent },
   { path: 'paymentEntry', component: PaymentEntryComponent },
-  {path: 'paymentPay/:id', component: PaymentEntryComponent},
+  { path: 'paymentPay/:id', component: PaymentEntryComponent },
+  {path: 'invoice/:id', component: InvoiceComponent},
   { path: '', redirectTo: '/productList', pathMatch: 'full' }
 ];
 

@@ -7,5 +7,6 @@ namespace ShopApplication.Repositories.IRContracts
 {
     public interface IPaymentRepository: IBaseRepository<Payment>
     {
+        Payment GetLastRow();
     }
 }

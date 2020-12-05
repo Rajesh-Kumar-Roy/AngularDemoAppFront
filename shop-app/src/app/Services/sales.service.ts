@@ -1,8 +1,10 @@
+import { Base } from 'src/app/Url/Base';
 import { HttpResponse, HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { Injectable, } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sales } from 'src/app/Models/Sale-models/Sales';
+
 
 
 const baseUrl = 'https://localhost:44326/api/sale';
@@ -21,11 +23,12 @@ const headerOptions = {
   providedIn: 'root'
 })
 export class SalesService {
+  rootBaseUrl = Base.baseUrl;
 
   constructor(private http: HttpClient) { }
 
   create(sale: Sales): Observable<Sales> {
-    return this.http.post<Sales>(baseUrl, sale, headerOptions);
+    return this.http.post<Sales>(this.rootBaseUrl + '/api/sale', sale, headerOptions);
 
   }
   getCustomerNameByCode(customerCode: string): Observable<any> {
@@ -45,5 +48,8 @@ export class SalesService {
   }
   update(sale: Sales): Observable<void> {
     return this.http.put<void>(`${baseUrl}/${sale.id}`, sale, headerOptions);
+  }
+  PaymentStatus(id: number, statusId: number): Observable<void>{
+    return this.http.put<void>(this.rootBaseUrl + '/api/sale/PaymentStatus' + `/${id}`, statusId, headerOptions);
   }
 }

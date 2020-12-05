@@ -112,6 +112,23 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new { error = "Failed!" });
         }
+        [HttpPut("PaymentStatus/{id:int}")]
+        public IActionResult PaymentStatus(int id, [FromBody] int status)
+        {
+            var retriveSales = _SaleManager.GetById(id);
+            if (retriveSales == null)
+            {
+                return BadRequest(new { error = "product not Found!" });
+            }
+            retriveSales.PaymentStatusId = status;
+            bool isUpdate = _SaleManager.Update(retriveSales);
+            if (isUpdate)
+            {
+                return Ok(retriveSales);
+            }
+
+            return BadRequest(new { error = "Failed!" });
+        }
 
         [HttpGet("GetCustomerNameByCode/{customerCode}")]
         public IActionResult GetCustomerNameByCode(string customerCode)

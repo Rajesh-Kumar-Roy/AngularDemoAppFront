@@ -36,6 +36,9 @@ export class PaymentsService {
   update(paymentType: PaymentType): Observable<void>{
     return this.http.put<void>(this.baseUrl + '/api/paymentType' + `/${paymentType.id}`, paymentType, headerOptions);
   }
+  getLastRow(): Observable<Payment>{
+    return this.http.get<Payment>(this.baseUrl + '/api/payment/getLastRow');
+  }
   //#endregion
 
   //#region payment Option
@@ -52,6 +55,7 @@ export class PaymentsService {
   PaymentOptionUpdate(paymentOption: PaymentOption): Observable<void>{
     return this.http.put<void>(this.baseUrl + '/api/paymentOption' + `/${paymentOption.id}`, paymentOption, headerOptions);
   }
+
   //#endregion
 
   //#region Mobile Banking Type
@@ -68,10 +72,13 @@ export class PaymentsService {
     return this.http.post<any>(this.baseUrl + '/api/mobileBankingType/AddOrUpdate' + `/${0}`, mobileBanking, headerOptions);
   }
   //#endregion
+
   //#region Payment
   PaymentCreate(payment: Payment): Observable<any>{
     return this.http.post<any>(this.baseUrl + '/api/payment/AddOrUpdate' + `/${0}`, payment, headerOptions);
   }
-
+  getPaymentById(PaymentId: number): Observable<Payment>{
+    return this.http.get<Payment>(this.baseUrl + '/api/payment/getPaymentById' + `/${PaymentId}`);
+  }
   //#endregion
 }

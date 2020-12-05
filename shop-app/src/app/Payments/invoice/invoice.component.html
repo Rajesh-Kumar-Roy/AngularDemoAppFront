@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1 style="color: aqua;">SHOP NAME</h1>
+            <address style="font-style: italic;">Dotto Market, Birgonj Dinajpur<br>
+                Birgonj,Dinajpur, 5200<br>
+                017451122112, 012245785623<br>
+                company@gmail.com</address>
+
+        </div>
+        <div class="col-md-3 offset-5 text-center">
+            <h1 style="color: aqua;">INVOICE</h1>
+            <address style="font-style: italic;">
+                Date: <span> {{sale?.date | date: 'd MMM, yyyy' }}</span><br>
+                Invoice ID: <span>#0{{sale?.id}}</span><br>
+                <div *ngIf="showDue">
+                    Due Date: <span> {{lastPayment?.duePaymentDate | date: 'd MMM, yyyy' }}</span>
+                </div>
+                
+            </address>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-offset-1">
+            <h6 style="background-color: aqua;">Bill To</h6>
+            <address style="font-style: italic;">
+                Name: <span>{{opId}}</span><br>
+                Address: Dotto Market, Birgonj, Dinajpur<br>
+            </address>
+           
+        </div>
+        <div class="col-md-3 col-offset-1">
+            <h6 style="background-color: aqua;">Ship To</h6>
+            <address style="font-style: italic;">
+            Name: <span> {{sale?.customer.firstName}} {{sale?.customer.lastName}}</span><br>
+            Phone No: <span> {{sale?.customer.mobileNo}}</span><br>
+            Address: <span> {{sale?.customer.address}}</span><br>
+            Email: <span> {{sale?.customer.email}}</span><br>
+            </address>
+            
+        </div>
+        <div class="col-md-3 col-offset-1">
+            <h6 style="background-color: aqua;">Payment Status</h6>
+            <address style="font-style: italic;">
+                Status: <span>{{dueAmountStatus}}</span> <br>
+                Due Amount: <span>{{lastPayment?.due}}</span> <br>
+               Sale No: <span> {{sale?.saleNo}}</span><br>
+               CS Code: <span> {{sale?.customer.customerCode}}</span><br>
+            </address>
+        </div>
+
+    </div>
+    <div class="row">
+        <table class="table table-borderless">
+            <thead>
+                <tr style="background-color: aqua;">
+                    <th scope="col">SL No</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Amount</th>
+
+                    <th scope="col">Sub Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of saleDetail; let i = index" style="border-bottom: 1px solid black">
+                    <td>{{i+1}}</td>
+
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.product.productType.name}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{item.unitPrice | number:'1.0':'en-US' }} <strong> TK</strong></td>
+
+                    <td>{{item.totalPrice | number:'1.0':'en-US' }} <strong> TK</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td rowspan="1" colspan="5" style="text-align: right;"><strong>Total Amount</strong></td>
+                    <td><strong>{{getTotalPrice() | number:'1.0':'en-US' }} TK</strong></td>
+                </tr>
+                <tr>
+                    <td rowspan="1" colspan="5" style="text-align: right;"><strong>Vat(5%)</strong></td>
+                    <td><strong>{{vat | number:'1.0':'en-US' }} TK</strong></td>
+                </tr>
+                <tr>
+                    <td rowspan="1" colspan="5" style="text-align: right;"><strong>Grand Total</strong></td>
+                    <td><strong>{{grandTotal | number:'1.0':'en-US' }} TK</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="page-footer font-small ">
+        <div class="row">
+            <div class="col-md-4">
+                <h6>Term and Condition</h6>
+                <p>Due must pay in 30 days.</p>
+            </div>
+            <div class="col-md-8 text-center" *ngIf="buttonHide">
+                <label class="form-label">Payment Status: </label> &nbsp;
+                
+                    <button type="button" *ngIf="paidShow" class="btn btn-outline-primary " (click) = "onClickPaidButton()">Paid</button> &nbsp;
+                <button type="button" *ngIf="showDue" class="btn btn-outline-warning"  (click) = "onClickDueButton()">Due</button> &nbsp;
+                <button type="button"  class="btn btn-outline-info"  (click) = "onClickDraftButton()">Draft</button> &nbsp;
+                <button type="button" class="btn btn-outline-danger"  (click) = "onClickRejectButton()">Reject</button>
+
+            </div>
+            <div class=" offset-4 col-md-4 text-center float-right" *ngIf="buttonPrint">
+                <button type="button" class="btn btn-outline-primary doNotPrint mr-auto"  (click) = "onClickPrintButton()">Print</button>
+            </div>
+        </div>
+        
+      
+      </footer>
+    <!-- Footer -->
+<footer class="page-footer font-small " style="background-color: aqua;">
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https:google.com/"> Shop@.com</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+  <br>
+</div>
