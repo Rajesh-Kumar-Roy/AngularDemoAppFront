@@ -1,3 +1,7 @@
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserComponent } from './user/user/user.component';
+import { RegistraionComponent } from './user/registraion/registraion.component';
+import { LoginComponent } from './user/login/login.component';
 import { InvoiceComponent } from './Payments/invoice/invoice.component';
 import { PaymentEntryComponent } from './Payments/payment-entry/payment-entry.component';
 import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
@@ -41,7 +45,14 @@ const routes: Routes = [
   { path: 'paymentEntry', component: PaymentEntryComponent },
   { path: 'paymentPay/:id', component: PaymentEntryComponent },
   {path: 'invoice/:id', component: InvoiceComponent},
-  { path: '', redirectTo: '/productList', pathMatch: 'full' }
+  {path: 'user', component: UserComponent,
+children: [
+  {path: 'login', component: LoginComponent},
+  {path: 'registration', component: RegistraionComponent}
+]
+},
+{path: 'profile', component: UserProfileComponent},
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
 ];
 
 @NgModule({

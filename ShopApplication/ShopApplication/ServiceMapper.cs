@@ -42,10 +42,10 @@ namespace ShopApplication
             services.AddTransient<IPaymentManager, PaymentManger>();
             services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddAutoMapper();
-            services.AddDbContext<ShopApplicationDbContext>(options =>
-            {
-                options.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
-            });
+            // services.AddDbContext<ShopApplicationDbContext>(options =>
+            // {
+            //     options.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
+            // });
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

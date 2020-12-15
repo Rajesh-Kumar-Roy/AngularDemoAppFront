@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using ShopApplication.Manager.IMContract;
 using ShopApplication.Manager.Managers;
 using ShopApplication.Repositories.IRContracts;
 using ShopApplication.Repositories.Repositories;
+
 using ShopApplication.UtilityManager;
 
 namespace ShopApplication
@@ -29,6 +31,8 @@ namespace ShopApplication
             services.AddControllersWithViews();
             ServiceMapper configService = new ServiceMapper();
             configService.ConfigServiceMapper(services);
+            services.AddDbContext<ShopApplicationDbContext>(option => 
+                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

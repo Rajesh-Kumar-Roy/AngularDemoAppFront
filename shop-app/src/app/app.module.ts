@@ -27,6 +27,11 @@ import { MobileBankingTypeEntryComponent } from './Payments/mobile-banking-type-
 import { MobileBankingTypeListComponent } from './Payments/mobile-banking-type-list/mobile-banking-type-list.component';
 import { PaymentEntryComponent } from './Payments/payment-entry/payment-entry.component';
 import { InvoiceComponent } from './Payments/invoice/invoice.component';
+import { RegistraionComponent } from './user/registraion/registraion.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserComponent } from './user/user/user.component';
+import { UserProfileComponent } from '../app/user/user-profile/user-profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -48,6 +53,11 @@ import { InvoiceComponent } from './Payments/invoice/invoice.component';
     MobileBankingTypeListComponent,
     PaymentEntryComponent,
     InvoiceComponent,
+    RegistraionComponent,
+    LoginComponent,
+    UserComponent,
+    UserProfileComponent,
+
 
   ],
   imports: [
@@ -68,6 +78,7 @@ import { InvoiceComponent } from './Payments/invoice/invoice.component';
 
     }),
     CommonModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

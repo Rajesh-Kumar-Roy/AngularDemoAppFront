@@ -54,6 +54,8 @@ export class SalesEntryComponent implements OnInit {
   detailsSale: Sales;
   prod: Array<any> = [];
   pt: any;
+  customerForm: FormGroup;
+  public $customerModel: Customer = null;
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
@@ -66,6 +68,7 @@ export class SalesEntryComponent implements OnInit {
     private toastr: ToastrService,
   ) {
     this.$Model = new Sales(); this.$DetailModel = new SalesDetails();
+    this.$customerModel = new Customer();
   }
 
   ngOnInit(): void {
@@ -81,6 +84,16 @@ export class SalesEntryComponent implements OnInit {
         this.addDetailsFormGroup()
       ])
     });
+    if (this.regShowHide === true){
+      console.log('ok is True');
+      this.customerForm = this.fb.group({
+        firstName: [this.$customerModel.firstName, Validators.required],
+        lastName: [this.$customerModel.lastName],
+        mobileNo: [this.$customerModel.mobileNo, [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+        address: [this.$customerModel.address, Validators.maxLength(250)],
+        email: [this.$customerModel.email, Validators.email]
+      });
+    }
     this.productList = [];
     this.salesDetailsService.getAll().subscribe((response => {
       if (response.length > 0) {

@@ -1,26 +1,9 @@
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.deps.json
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.dll
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csprojAssemblyReference.cache
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfoInputs.cache
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfo.cs
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.dll
-E:\c#\C# Work\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\C# project\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.deps.json
-D:\C# project\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.dll
-D:\C# project\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfoInputs.cache
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfo.cs
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.dll
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csproj.CoreCompileInputs.cache
-D:\C# project\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csprojAssemblyReference.cache
-D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.deps.json
-D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.dll
-D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
+D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csprojAssemblyReference.cache
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfoInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.AssemblyInfo.cs
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csproj.CoreCompileInputs.cache
+D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.deps.json
+D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.dll
+D:\gitproj\ShopApplication\ShopApplication.Models\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.dll
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csprojAssemblyReference.cache

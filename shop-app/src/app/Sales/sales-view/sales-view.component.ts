@@ -3,6 +3,7 @@ import { SalesService } from '../../Services/sales.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SalesDetails } from '../../Models/Sale-models/SaleDetails';
+import { PaymentStatusEnum } from 'src/app/Enums/PaymentStatusEnum';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class SalesViewComponent implements OnInit {
   saleDetail: SalesDetails[];
   vat: any;
   grandTotal: number;
+  paymentEnum = PaymentStatusEnum;
   // tslint:disable-next-line: max-line-length
   constructor(
     private saleService: SalesService,
