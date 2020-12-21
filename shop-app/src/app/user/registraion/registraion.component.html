@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         <label>Phone No</label>
-        <input type="text" class="form-control" formControlName="PhoneNO" [ngClass]="{ 'is-invalid': (reg.PhoneNO?.touched || submitted ) && reg.PhoneNO?.errors }">
+        <input type="text" class="form-control" formControlName="PhoneNO" [ngClass]="{ 'is-invalid': (reg.PhoneNO?.touched || submitted ) && reg.PhoneNO?.errors }" maxlength="11">
         <div *ngIf="( reg.PhoneNO?.touched || submitted ) && reg.PhoneNO?.errors" class="invalid-feedback">
             Phone No Is Required!!
         </div>
@@ -28,12 +28,12 @@
     <div formGroupName="Passwords">
         <div class="form-group required">
             <label>Password</label>
-            <input type="password" class="form-control" formControlName="Password" [ngClass]="{'is-invalid': (formModel.get('Passwords.Password')?.touched || submitted) && formModel.get('Passwords.Password')?.errors }" minlength="4">
+            <input type="password" class="form-control" formControlName="Password" [ngClass]="{'is-invalid': (formModel.get('Passwords.Password')?.touched || submitted) && formModel.get('Passwords.Password')?.errors }" minlength="5">
             <div *ngIf="(formModel.get('Passwords.Password')?.touched || submitted ) && formModel.get('Passwords.Password')?.errors" class="invalid-feedback">
                 Password Is Required!!
             </div>
             <div *ngIf="formModel.get('Passwords.Password')?.errors?.minlength" class="invalid-feedback">
-               Password must be at least 4 characters long.
+               Password must be at least 5 characters long.
             </div>
         </div>
         <div class="form-group required">

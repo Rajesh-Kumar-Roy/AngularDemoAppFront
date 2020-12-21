@@ -15,6 +15,7 @@ export class UserService {
  baseUrl = Base.baseUrl;
   constructor(private http: HttpClient) { }
   create(body: any): Observable<any>{
-    return this.http.post<any>(this.baseUrl, headerOption);
+   console.log(body)
+    return this.http.post<any>(this.baseUrl + '/api/applicationUser/registration', body, headerOption);
   }
 }

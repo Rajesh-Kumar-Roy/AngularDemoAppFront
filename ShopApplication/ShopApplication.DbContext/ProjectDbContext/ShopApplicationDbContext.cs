@@ -1,14 +1,16 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ShopApplication.Models.EntityModels.Customers;
 using ShopApplication.Models.EntityModels.PaymentModels;
 using ShopApplication.Models.EntityModels.ProductModel;
 using ShopApplication.Models.EntityModels.Sales;
+using ShopApplication.Models.UserModels;
 
 namespace ShopApplication.Context.ProjectDbContext
 {
-    public class ShopApplicationDbContext : DbContext
+    public class ShopApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ShopApplicationDbContext()
         {
@@ -48,6 +50,7 @@ namespace ShopApplication.Context.ProjectDbContext
         public DbSet<PaymentOption> PaymentOptions { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         #endregion
 
@@ -57,6 +60,7 @@ namespace ShopApplication.Context.ProjectDbContext
         {
             ContextModelBuilder cont = new ContextModelBuilder();
             cont.AllModelBuilder(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
         }
 

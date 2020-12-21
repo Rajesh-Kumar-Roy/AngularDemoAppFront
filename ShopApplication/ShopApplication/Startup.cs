@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Manager.Managers;
+using ShopApplication.Models.UserModels;
 using ShopApplication.Repositories.IRContracts;
 using ShopApplication.Repositories.Repositories;
 
@@ -29,10 +30,13 @@ namespace ShopApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ShopApplicationDbContext>(option =>
+                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<ShopApplicationDbContext>();
             ServiceMapper configService = new ServiceMapper();
             configService.ConfigServiceMapper(services);
-            services.AddDbContext<ShopApplicationDbContext>(option => 
-                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +57,7 @@ namespace ShopApplication
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Manager.IMContract;
@@ -16,6 +18,7 @@ namespace ShopApplication
 {
     public class ServiceMapper
     {
+        public IConfiguration Configuration { get; }
         public void ConfigServiceMapper(IServiceCollection services)
         {
             services.AddMvc().AddNewtonsoftJson();
@@ -42,6 +45,22 @@ namespace ShopApplication
             services.AddTransient<IPaymentManager, PaymentManger>();
             services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddAutoMapper();
+
+            #region Add db sting and Identity
+
+           
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 5;
+            });
+
+            #endregion
+            
+
             // services.AddDbContext<ShopApplicationDbContext>(options =>
             // {
             //     options.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");

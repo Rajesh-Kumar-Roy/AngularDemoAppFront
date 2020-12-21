@@ -6,11 +6,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201219182952_identity_db_create.cs" />
+    <Compile Remove="Migrations\20201219182952_identity_db_create.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+
+    
+ <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.0" />
+
+
    
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.0" />
+    
+   
   </ItemGroup>
 
   <ItemGroup>

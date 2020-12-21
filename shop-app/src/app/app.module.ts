@@ -70,7 +70,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 1500,
+      timeOut: 2000,
       progressBar: true,
       progressAnimation: 'increasing',
       preventDuplicates: true,

@@ -1,3 +1,4 @@
+
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './../../Services/User/user.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
@@ -11,15 +12,19 @@ import { Component, OnInit } from '@angular/core';
 export class RegistraionComponent implements OnInit {
  formModel: FormGroup;
  submitted = false;
-  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) { }
+ public $model = null;
+
+  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
+ 
+   }
 
   ngOnInit(): void {
     this.formModel = this.fb.group({
       UserName: ['', Validators.required],
       Email: ['', [Validators.email, Validators.required]],
-      PhoneNO: ['', Validators.required],
+      PhoneNO: ['', [Validators.required, Validators.pattern("[0-9 ]{11}")]],
       Passwords: this.fb.group({
-        Password: ['', [Validators.required, Validators.minLength(4)]],
+        Password: ['', [Validators.required, Validators.minLength(5)]],
         ConfirmPassword: ['', Validators.required]
       }, {validator: this.comparePasswords}),
     });
@@ -45,12 +50,22 @@ export class RegistraionComponent implements OnInit {
     if (this.formModel.invalid) {
       return;
     }
-    this.userService.create(this.formModel.value).subscribe( (res: any) => {
+    const body = {
+      UserName:  this.formModel.value.UserName,
+      Email: this.formModel.value.Email,
+      PhoneNo: this.formModel.value.PhoneNO,
+      Password: this.formModel.value.Passwords.Password
+    }
+    
+    this.userService.create(body).subscribe( (res: any) => {
       if (res.succeeded){
         this.formModel.reset();
         this.toastr.success('New User Created', 'Registaration Successfull');
-      }else{
-        res.errors.foreach( element => {
+        
+      }
+      else{
+        
+        res.errors.forEach( element => {
           switch (element.code){
             case 'DuplicateUserName':
               this.toastr.error('User Name is already taken', 'Registration Failed!');

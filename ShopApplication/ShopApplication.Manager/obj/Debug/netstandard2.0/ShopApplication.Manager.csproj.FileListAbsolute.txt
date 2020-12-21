@@ -1,7 +1,3 @@
-D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.csprojAssemblyReference.cache
-D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.AssemblyInfoInputs.cache
-D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.AssemblyInfo.cs
-D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.csproj.CoreCompileInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Manager.deps.json
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Manager.dll
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Manager.pdb
@@ -11,6 +7,10 @@ D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\Shop
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Repositories.pdb
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Context.pdb
 D:\gitproj\ShopApplication\ShopApplication.Manager\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
+D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.csprojAssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.AssemblyInfoInputs.cache
+D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.AssemblyInfo.cs
+D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.csproj.CoreCompileInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.csproj.CopyComplete
 D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.dll
 D:\gitproj\ShopApplication\ShopApplication.Manager\obj\Debug\netstandard2.0\ShopApplication.Manager.pdb

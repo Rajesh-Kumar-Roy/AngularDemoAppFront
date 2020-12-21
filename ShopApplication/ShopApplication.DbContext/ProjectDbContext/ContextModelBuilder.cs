@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ShopApplication.Models.EntityModels.Customers;
 using ShopApplication.Models.EntityModels.PaymentModels;
@@ -92,6 +93,14 @@ namespace ShopApplication.Context.ProjectDbContext
             modelBuilder.Entity<Payment>().Property(c => c.PaymentDate).IsRequired();
 
             #endregion
+
+            #region Application User
+
+            // modelBuilder.Entity<ApplicationUser>().Property(c => c.PhoneNo).IsRequired();
+            // modelBuilder.Entity<ApplicationUser>().Property(c => c.PhoneNo).HasMaxLength(15);
+
+            #endregion
+
         }
     }
 }
