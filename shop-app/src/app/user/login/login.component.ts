@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from './../../Services/User/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
  logInForm: FormGroup;
  submitted = false;
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') != null){
@@ -29,6 +31,17 @@ export class LoginComponent implements OnInit {
     if (this.logInForm.invalid){
       return;
     }
+    
+    this.userService.createUserLogin(this.logInForm.value).subscribe((res: any) =>{
+      localStorage.setItem('token', res.token);
+      this.router.navigateByUrl('/profile');
+    },
+    err =>{
+      if(err.status == 400){
+        this.toastr.error("User Name or Password Incorrect!!", "Authentication Failed!!");
+      }
+    }
+    );
   }
 
 }

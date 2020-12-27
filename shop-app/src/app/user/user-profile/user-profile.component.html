@@ -1,1 +1,15 @@
-<p>user-profile works!</p>
+
+
+<div class="card m-5" style="width: 18rem;" *ngIf="userDetails">
+    <div class="card-header">
+        <div class="card-title">User Information</div>
+    </div>
+    <div class="card-body">
+         <ul class="list-group">
+        <li class="list-group-item"><strong>FullName: </strong>{{userDetails.userName}}</li>
+        <li class="list-group-item"><strong>UserName: </strong>{{userDetails.phoneNo}}</li>
+        <li class="list-group-item"><strong>Email: </strong>{{userDetails.email}}</li>
+    </ul>
+    </div>
+   
+</div>

@@ -14,8 +14,21 @@ const headerOption = {
 export class UserService {
  baseUrl = Base.baseUrl;
   constructor(private http: HttpClient) { }
+  //#regionRegistration
   create(body: any): Observable<any>{
-   console.log(body)
     return this.http.post<any>(this.baseUrl + '/api/applicationUser/registration', body, headerOption);
   }
+  //#endregion
+  //#region Login
+  createUserLogin(body: any): Observable<any>{
+    return this.http.post<any>(this.baseUrl + '/api/applicationUser/Login', body, headerOption);
+  }
+  //#endregion
+  //#region User Profile
+  getUserProfile(): any{
+    //  const tokenHeader = new HttpHeaders({Authorization: 'Bearer ' + localStorage.getItem('token')});
+   
+    return this.http.get(this.baseUrl+ '/api/UserProfile/getUserProfile');
+  }
+  //#endregion
 }

@@ -59,7 +59,7 @@ namespace ShopApplication
             });
 
             #endregion
-            
+
 
             // services.AddDbContext<ShopApplicationDbContext>(options =>
             // {
@@ -72,7 +72,6 @@ namespace ShopApplication
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
-
         }
     }
 }

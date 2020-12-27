@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './../../Services/User/user.service';
@@ -14,7 +15,7 @@ export class RegistraionComponent implements OnInit {
  submitted = false;
  public $model = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService, private router: Router) {
  
    }
 
@@ -59,9 +60,9 @@ export class RegistraionComponent implements OnInit {
     
     this.userService.create(body).subscribe( (res: any) => {
       if (res.succeeded){
-        this.formModel.reset();
         this.toastr.success('New User Created', 'Registaration Successfull');
-        
+        this.router.navigateByUrl('/user/login');
+        this.formModel.reset();
       }
       else{
         

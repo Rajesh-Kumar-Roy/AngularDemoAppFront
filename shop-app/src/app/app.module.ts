@@ -1,9 +1,10 @@
+import { UserService } from './Services/User/user.service';
 import { ProductTypeListComponent } from './Products/product-type-list/product-type-list.component';
 import { CustomerListComponent } from './Customers/customer-list/customer-list.component';
 import { ProductListComponent } from './Products/product-list/product-list.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, NgForm } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,8 @@ import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user/user.component';
 import { UserProfileComponent } from '../app/user/user-profile/user-profile.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HomeComponent } from './home/home/home.component';
+import { AuthInterceptor } from 'src/app/auth/auth.Interceptor';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginComponent,
     UserComponent,
     UserProfileComponent,
+    HomeComponent,
 
 
   ],
@@ -80,7 +84,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     NgxPaginationModule,
   ],
-  providers: [],
+  providers: [
+    HttpClientModule, UserService,
+    {provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+       multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

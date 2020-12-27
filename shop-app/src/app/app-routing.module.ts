@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home/home.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserComponent } from './user/user/user.component';
 import { RegistraionComponent } from './user/registraion/registraion.component';
@@ -21,13 +22,14 @@ import { ProductTypeListComponent } from './Products/product-type-list/product-t
 import { SalesEntryComponent } from './Sales/sale-entry/sales-entry.component';
 import { SalesListComponent } from './Sales/sales-list/sales-list.component';
 import { SalesViewComponent } from './Sales/sales-view/sales-view.component';
+import { AuthGuard}  from 'src/app/auth/auth.guard';
 
 const routes: Routes = [
   { path: 'createProduct', component: ProductEntryComponent },
   { path: 'createProductType', component: ProductTypeEntryComponent },
   { path: 'Sales', component: SalesEntryComponent },
   { path: 'saleDetails', component: SalesListComponent },
-  { path: 'customerList', component: CustomerListComponent },
+  { path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: CustomerEntryComponent },
   { path: 'productedit/:id', component: ProductEntryComponent },
   { path: 'typeEdit/:id', component: ProductTypeEntryComponent },
@@ -44,14 +46,16 @@ const routes: Routes = [
   { path: 'mobileBankingList', component: MobileBankingTypeListComponent },
   { path: 'paymentEntry', component: PaymentEntryComponent },
   { path: 'paymentPay/:id', component: PaymentEntryComponent },
-  {path: 'invoice/:id', component: InvoiceComponent},
-  {path: 'user', component: UserComponent,
-children: [
-  {path: 'login', component: LoginComponent},
-  {path: 'registration', component: RegistraionComponent}
-]
-},
-{path: 'profile', component: UserProfileComponent},
+  { path: 'invoice/:id', component: InvoiceComponent },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'user', component: UserComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'registration', component: RegistraionComponent }
+    ]
+  },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'user/login', pathMatch: 'full' },
 ];
 
