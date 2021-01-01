@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ShopApplication.Models.EntityModels.Customers;
+using ShopApplication.Models.EntityModels.PaymentModels;
 using ShopApplication.Models.EntityModels.ProductModel;
 using ShopApplication.Models.EntityModels.Sales;
 
@@ -24,6 +26,7 @@ namespace ShopApplication.Context.ProjectDbContext
             modelBuilder.Entity<Product>().HasKey(c => c.Id);
             modelBuilder.Entity<Product>().Property(c => c.Name).IsRequired();
             modelBuilder.Entity<Product>().Property(c => c.Price).IsRequired();
+            modelBuilder.Entity<Product>().Property(c => c.Code).IsRequired();
             modelBuilder.Entity<Product>().HasOne(c => c.ProductType).WithMany(c => c.Products).HasForeignKey(c => c.ProductTypeId);
             modelBuilder.Entity<Product>().ToTable("Product");
             #endregion
@@ -56,6 +59,48 @@ namespace ShopApplication.Context.ProjectDbContext
             modelBuilder.Entity<SaleDetail>().ToTable("SaleDetail");
 
             #endregion
+
+            #region MobileBankingType
+
+            modelBuilder.Entity<MobileBankingType>().HasKey(c => c.Id);
+            modelBuilder.Entity<MobileBankingType>().Property(c => c.Name).IsRequired();
+            modelBuilder.Entity<MobileBankingType>().ToTable("MobileBankingType");
+
+            #endregion
+
+            #region PaymentOption
+
+            modelBuilder.Entity<PaymentOption>().HasKey(c => c.Id);
+            modelBuilder.Entity<PaymentType>().Property(c => c.Name).IsRequired();
+            modelBuilder.Entity<PaymentOption>().ToTable("PaymentOption");
+
+            #endregion
+
+            #region PaymentType
+
+            modelBuilder.Entity<PaymentType>().HasKey(c => c.Id);
+            modelBuilder.Entity<PaymentType>().Property(c => c.Name).IsRequired();
+            modelBuilder.Entity<PaymentType>().ToTable("PaymentType");
+
+            #endregion
+
+            #region Payment
+
+            modelBuilder.Entity<Payment>().HasKey(c => c.Id);
+            modelBuilder.Entity<Payment>().Property(c => c.Amount).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.VatAmount).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.Pay).IsRequired();
+            modelBuilder.Entity<Payment>().Property(c => c.PaymentDate).IsRequired();
+
+            #endregion
+
+            #region Application User
+
+            // modelBuilder.Entity<ApplicationUser>().Property(c => c.PhoneNo).IsRequired();
+            // modelBuilder.Entity<ApplicationUser>().Property(c => c.PhoneNo).HasMaxLength(15);
+
+            #endregion
+
         }
     }
 }

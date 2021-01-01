@@ -59,6 +59,16 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new {error = "Model Sate is Not Valid! "});
         }
+        [HttpGet("getAllFalse")]
+        public IActionResult getAllFalse()
+        {
+            var customer = _productManager.GetAllProduct();
+            if (customer == null)
+            {
+                return BadRequest(new { error = "Empty Customer!" });
+            }
+            return Ok(customer);
+        }
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -76,7 +86,6 @@ namespace ShopApplication.Controllers.API
         public IActionResult GetProductByTypeId(int typeId)
         {
             var product = _productManager.GetProductByTypeId(typeId);
-            
             if (product == null)
             {
                 return BadRequest(new { error = "Can not Get product!" });
@@ -107,7 +116,9 @@ namespace ShopApplication.Controllers.API
 
             retriveProduct.Name = product.Name;
             retriveProduct.Price = product.Price;
+            retriveProduct.Code = product.Code;
             retriveProduct.Description = product.Description;
+            retriveProduct.ProductTypeId = product.ProductTypeId;
            
             bool isUpdate = _productManager.Update(retriveProduct);
             if (isUpdate)
@@ -127,7 +138,8 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "product not Found!" });
             }
 
-            bool isDelete = _productManager.Remove(retriveProduct, true);
+            retriveProduct.IsDelete = true;
+            bool isDelete = _productManager.Update(retriveProduct);
             if (isDelete)
             {
                 return Ok(retriveProduct);

@@ -1,0 +1,77 @@
+<div class="card border-success">
+    <div class="card-header bg-success text-white text-center">
+        <h5 class="card-title">Product Entry</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="productForm" autocomplete="off" (ngSubmit)="onSave()" class="form-horizontal">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="producttype" class="form-label">Product Type</label>
+                        <select formControlName="productTypeId" class="custom-select mb-3" [ngClass]="{ 'is-invalid': (p.productTypeId.touched || submitted )  && p.productTypeId?.errors }">
+                            <option value=""></option>
+                            <option>Select Product Type</option>
+                            <option *ngFor="let producttype of productType" [value]="producttype.id">
+                                {{producttype.name}}</option>
+
+                        </select>
+                        <div *ngIf="(p.productTypeId.touched || submitted )  && p.productTypeId?.errors" class="invalid-feedback">
+                            <div *ngIf="p.productTypeId.errors?.required">Product Type Is Required!!</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': (p.name.touched || submitted ) && p.name?.errors }" placeholder="Enter Name" name="name" />
+                        <div *ngIf="(p.name.touched || submitted ) && p.name?.errors" class="invalid-feedback">
+                            <div *ngIf=" p.name.errors?.required">Name is Required!!</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="code" class="form-label">Code</label>
+                        <input type="text" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': (p.code.touched || submitted )&& p.code?.errors }" placeholder="Enter Code" name="price">
+                        <div *ngIf="(p.code.touched || submitted )&& p.code?.errors" class="invalid-feedback">
+                            <div *ngIf="p.code.errors?.required">Price is Required!!</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" formControlName="price" [ngClass]="{ 'is-invalid': (p.price.touched || submitted )&& p.price?.errors }" placeholder="Enter Price" name="price">
+                        <div *ngIf="(p.price.touched || submitted )&& p.price?.errors" class="invalid-feedback">
+                            <div *ngIf="p.price.errors?.required">Price is Required!!</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" formControlName="description" rows="2" id="Comment" placeholder="Comment"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-toolbar float-right ">
+                <div *ngIf="showSave">
+                    <input type="submit" class="btn btn-success" value="Save">
+                </div>
+                <div *ngIf="showUpdate">
+                    <input type="submit" class="btn btn-success " value="Update"> &nbsp;
+                    <button type="button" class="btn btn-info" [routerLink]="['/productList']" routerLinkActive="router-link-active">Search</button>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

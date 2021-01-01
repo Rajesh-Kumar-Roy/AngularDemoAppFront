@@ -24,7 +24,12 @@ namespace ShopApplication.Repositories.Repositories
 
         public ICollection<Product> GetProductByTypeId(int productTypeId)
         {
-            return Context.Products.Where(c => c.ProductTypeId == productTypeId).Include(c=>c.ProductType).ToList();
+            return Context.Products.Where(c => c.ProductTypeId == productTypeId && c.IsDelete == false).Include(c=>c.ProductType).ToList();
+        }
+
+        public ICollection<Product> GetAllProduct()
+        {
+            return Context.Products.Where(c => c.IsDelete == false).OrderByDescending(c => c.Id).Include(d=>d.ProductType).ToList();
         }
     }
 }

@@ -1,11 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ShopApplication.Models.EntityModels.Customers;
+using ShopApplication.Models.EntityModels.PaymentModels;
 using ShopApplication.Models.EntityModels.ProductModel;
 using ShopApplication.Models.EntityModels.Sales;
+using ShopApplication.Models.UserModels;
 
 namespace ShopApplication.Context.ProjectDbContext
 {
-    public class ShopApplicationDbContext : DbContext
+    public class ShopApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ShopApplicationDbContext()
         {
@@ -21,8 +26,16 @@ namespace ShopApplication.Context.ProjectDbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(
-                "server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
+            // optionsBuilder.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
 
         #endregion
@@ -33,6 +46,11 @@ namespace ShopApplication.Context.ProjectDbContext
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SalesDetails { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MobileBankingType> MobileBankingTypes { get; set; }
+        public DbSet<PaymentOption> PaymentOptions { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         #endregion
 
@@ -42,6 +60,7 @@ namespace ShopApplication.Context.ProjectDbContext
         {
             ContextModelBuilder cont = new ContextModelBuilder();
             cont.AllModelBuilder(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
         }
 

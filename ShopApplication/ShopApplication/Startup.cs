@@ -1,15 +1,22 @@
+using System;
+using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using ShopApplication.Context.ProjectDbContext;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Manager.Managers;
+using ShopApplication.Models.UserModels;
 using ShopApplication.Repositories.IRContracts;
 using ShopApplication.Repositories.Repositories;
+
 using ShopApplication.UtilityManager;
 
 namespace ShopApplication
@@ -27,41 +34,42 @@ namespace ShopApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ShopApplicationDbContext>(option =>
+                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<ShopApplicationDbContext>();
 
-            //services.AddMvc().AddJsonOptions(options =>
-            //{
-            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //});
+            // create Service mapper class
+            ServiceMapper configService = new ServiceMapper();
+            configService.ConfigServiceMapper(services);
 
-            services.AddMvc().AddNewtonsoftJson();
-            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddTransient<IProductManager, ProductManager>();
-            services.AddTransient<IProductTypeManager, ProductTypeManager>();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
-            services.AddTransient<Microsoft.EntityFrameworkCore.DbContext, ShopApplicationDbContext>();
-            services.AddTransient<ISalesDetailsRepository, SalesDetailsRepository>();
-            services.AddTransient<ISaleRepository, SaleRepository>();
-            services.AddTransient<ISaleManager, SaleManager>();
-            services.AddTransient<ISalesDetailsManager, SalesDetailsManager>();
-            services.AddTransient<ICustomerManager, CustomerManager>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddControllers().AddNewtonsoftJson();
-            services.AddTransient<IDropdownManager, DropdownManager>();
-            services.AddAutoMapper();
-            services.AddDbContext<ShopApplicationDbContext>(options =>
+            // inject appsetting 
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            // jwt Authentication
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            services.AddAuthentication( X =>
             {
-                options.UseSqlServer("server=DESKTOP-R53ADIM; Database=ShopApplicationDbContext;Integrated Security=true;");
-            });
-            services.AddCors(options =>
+                X.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                X.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                X.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew =  TimeSpan.Zero
+                };
             });
+        
+
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -81,8 +89,8 @@ namespace ShopApplication
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

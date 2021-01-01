@@ -10,5 +10,6 @@ namespace ShopApplication.Manager.IMContract
     public interface ICustomerManager:IBaseManager<Customer>
     {
         IQueryable<string> GetNameByCustomerCode(string customerCode);
+        ICollection<Customer> GetAllCustomer();
     }
 }

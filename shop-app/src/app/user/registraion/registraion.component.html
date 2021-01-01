@@ -1,0 +1,56 @@
+<form [formGroup]="formModel" autocomplete="off" (ngSubmit)="onSubmit()">
+    <div class="form-group required">
+        <label>User Name</label>
+        <input type="text" class="form-control" formControlName="UserName" [ngClass]="{ 'is-invalid': (reg.UserName?.touched || submitted ) && reg.UserName?.errors }">
+        <div *ngIf="(reg.UserName?.touched || submitted ) && reg.UserName?.errors" class="invalid-feedback">
+            <div *ngIf=" reg.UserName.errors?.required">User Name is Required!!
+            </div>
+        </div>
+    </div>
+    <div class="form-group required">
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName="Email" [ngClass]="{'is-invalid': (reg.Email?.touched || submitted) && reg.Email?.errors }">
+        <div *ngIf="(reg.Email?.touched || submitted ) && reg.Email?.errors" class="invalid-feedback">
+            <div *ngIf=" reg.Email.errors?.required">
+                Email Is Required!
+            </div>
+        </div>
+        <div class="invalid-feedback" *ngIf=" (reg.Email?.touched || submitted ) &&  reg.Email.errors?.email">Enter correct Email!
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Phone No</label>
+        <input type="text" class="form-control" formControlName="PhoneNO" [ngClass]="{ 'is-invalid': (reg.PhoneNO?.touched || submitted ) && reg.PhoneNO?.errors }" maxlength="11">
+        <div *ngIf="( reg.PhoneNO?.touched || submitted ) && reg.PhoneNO?.errors" class="invalid-feedback">
+            Phone No Is Required!!
+        </div>
+    </div>
+    <div formGroupName="Passwords">
+        <div class="form-group required">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="Password" [ngClass]="{'is-invalid': (formModel.get('Passwords.Password')?.touched || submitted) && formModel.get('Passwords.Password')?.errors }" minlength="5">
+            <div *ngIf="(formModel.get('Passwords.Password')?.touched || submitted ) && formModel.get('Passwords.Password')?.errors" class="invalid-feedback">
+                Password Is Required!!
+            </div>
+            <div *ngIf="formModel.get('Passwords.Password')?.errors?.minlength" class="invalid-feedback">
+               Password must be at least 5 characters long.
+            </div>
+        </div>
+        <div class="form-group required">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" formControlName="ConfirmPassword" [ngClass]="{'is-invalid': (formModel.get('Passwords.ConfirmPassword')?.touched || submitted) && formModel.get('Passwords.ConfirmPassword')?.errors }">
+            <div *ngIf="(formModel.get('Passwords.ConfirmPassword')?.touched || submitted ) && formModel.get('Passwords.ConfirmPassword')?.errors" class="invalid-feedback">
+                 Confirm Password does not match!!
+            </div>
+            <div *ngIf=" formModel.get('Passwords.ConfirmPassword')?.touched && formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">
+
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8 offset-md-2">
+            <button type="submit" class="btn btn-lg btn-primary btn-block" >Sign Up</button>
+        </div>
+    </div>
+
+</form>

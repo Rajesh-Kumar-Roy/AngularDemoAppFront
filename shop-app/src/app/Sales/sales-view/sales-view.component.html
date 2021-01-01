@@ -1,0 +1,106 @@
+<div class="container-fulid">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card border-dark">
+                <!-- <div class="card-header bg-success text-white text-center">
+               <h5 class="card-title">Sale Information</h5> 
+            </div> -->
+                <div class="card-body">
+                    <h2 class="text-center"><b>Sale Information</b></h2>
+                    <hr />
+                    <div class="row">
+
+                        <div class="offset-1 col">
+                            <div class="form-group">
+                                <span><strong>Name :</strong> {{sale?.customer.firstName}} {{sale?.customer.lastName}}</span>
+                            </div>
+                            <div class="form-group">
+                                <span><strong>Mobile No :</strong> {{sale?.customer.mobileNo}}</span>
+                            </div>
+                            <div class="form-group">
+                                <span><strong>Email :</strong> {{sale?.customer.email}}</span>
+                            </div>
+                            <div class="form-group">
+                                <span><strong>Addres :</strong> {{sale?.customer.address}}</span>
+                            </div>
+                            <div class="form-group">
+                                <span><strong>Pay Status :</strong> {{paymentEnum[sale?.paymentStatusId]}}</span>
+                            </div>
+
+                        </div>
+                        <div class="offset-2 col">
+                            <div class="form-group">
+                                <span><strong>Sale Number :</strong> {{sale?.saleNo}}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <span><strong>Date :</strong> {{sale?.date | date: 'd MMM, yyyy' }}</span>
+                            </div>
+                            <div class="form-group">
+                                <span><strong> Customer Code :</strong> {{sale?.customer.customerCode}}</span>
+                            </div>
+                            <div class="form-group" *ngIf="grandTotal != null || grandTotal != 0">
+                                <span ><strong>Total Price : {{grandTotal | number:'1.0':'en-US' }} TK (Only)</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <h2 class="text-center"><b>Product Information</b></h2>
+                    <hr />
+                    <div class="row">
+                        <div class="offset-md-1 col-md-10 ">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SL No</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Amount</th>
+                                       
+                                        <th scope="col">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of saleDetail; let i = index" style="border-bottom: 1px solid black">
+                                        <td>{{i+1}}</td>
+
+                                        <td>{{item.product.name}}</td>
+                                        <td>{{item.product.productType.name}}</td>
+                                        <td>{{item.qty}}</td>
+                                        <td>{{item.unitPrice | number:'1.0':'en-US' }} <strong> TK</strong></td>
+                                        
+                                        <td>{{item.totalPrice | number:'1.0':'en-US' }} <strong> TK</strong></td>
+                                    </tr>
+                                  
+                                    
+                                    <tr>
+                                        <td rowspan="1" colspan="5" style="text-align: right;"><strong>Total Amount</strong></td>
+                                        <td><strong>{{getTotalPrice() | number:'1.0':'en-US' }} TK</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="1" colspan="5" style="text-align: right;"><strong>Vat(5%)</strong></td>
+                                        <td><strong>{{vat | number:'1.0':'en-US' }} TK</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="1" colspan="5" style="text-align: right;"><strong>Grand Total</strong></td>
+                                        <td><strong>{{grandTotal | number:'1.0':'en-US' }} TK</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="float-right mr-4">
+                        <button title="Edit" type="button" class="btn btn-warning" (click) = "onPaymentClick(sale?.id)"><i class="fa fa-cc-amazon-pay"></i> Payment</button>&nbsp;
+                        <button title="Edit" type="button" class="btn btn-primary" (click) = "onEditButtonClick(sale?.id)"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</button> &nbsp;
+                        <button type="button" class="btn btn-info" [routerLink]="['/saleDetails']" routerLinkActive="router-link-active">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>

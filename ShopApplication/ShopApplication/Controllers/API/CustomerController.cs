@@ -24,6 +24,7 @@ namespace ShopApplication.Controllers.API
             _iMapper = iMapper;
         }
         [HttpGet]
+        //get all product is isDelete = true
         public IActionResult Get()
         {
 
@@ -32,6 +33,18 @@ namespace ShopApplication.Controllers.API
             if (customer == null)
             {
                 return BadRequest(new { error = "Empty Customer!" });
+            }
+            return Ok(customer);
+        }
+        //get all product is isDelete = false
+       
+        [HttpGet("getAllFalse")]
+        public IActionResult getAllFalse()
+        {
+            var customer = _repository.GetAllCustomer();
+            if (customer == null)
+            {
+                return BadRequest(new {error = "Empty Customer!"});
             }
             return Ok(customer);
         }
@@ -120,7 +133,8 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "Customer not Found!" });
             }
 
-            bool isDelete = _repository.Remove(retriveCustomer, true);
+            retriveCustomer.IsDelete = true;
+            bool isDelete = _repository.Update(retriveCustomer);
             if (isDelete)
             {
                 return Ok(retriveCustomer);

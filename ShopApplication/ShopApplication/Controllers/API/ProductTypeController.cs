@@ -31,6 +31,16 @@ namespace ShopApplication.Controllers.API
 
             return Ok(productType);
         }
+        [HttpGet("getAllFalse")]
+        public IActionResult getAllFalse()
+        {
+            var productType = _productTypeManager.GetAllProductType();
+            if (productType == null)
+            {
+                return BadRequest(new { error = "Empty product type!" });
+            }
+            return Ok(productType);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] ProductType productType)
@@ -61,6 +71,19 @@ namespace ShopApplication.Controllers.API
             return Ok(productType);
         }
 
+        [HttpGet("GetProductTypeByTypeId/{typeId}")]
+        public IActionResult GetProductTypeByTypeId(int typeId)
+        {
+            var productType = _productTypeManager.GetProductTypeByTypeId(typeId);
+
+            if (productType == null)
+            {
+                return BadRequest(new { error = "Can not Get product!" });
+            }
+
+            return Ok(productType);
+        }
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ProductType model) 
         {
@@ -81,6 +104,24 @@ namespace ShopApplication.Controllers.API
 
             return BadRequest(new {error = "Failed to Update!!!"});
 
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var retriveProduct = _productTypeManager.GetById(id);
+            if (retriveProduct == null)
+            {
+                return BadRequest(new { error = "product Type not Found!" });
+            }
+
+            retriveProduct.IsDelete = true;
+            bool isDelete = _productTypeManager.Update(retriveProduct);
+            if (isDelete)
+            {
+                return Ok(retriveProduct);
+            }
+
+            return BadRequest(new { error = "Failed To Delete!" });
         }
 
     }

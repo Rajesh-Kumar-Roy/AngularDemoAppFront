@@ -1,0 +1,41 @@
+<div class="card border-primary">
+    <div class="card-header bg-primary text-center">
+        <h5 class="card-title"> Payment Option</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="paymentOptionForm" autocomplete="off" (ngSubmit)="onSave()">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="name" class="form-label"> Name</label>
+
+                        <input type="text" class="form-control" name="name" id="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && ptyo.name?.errors }" placeholder="Enter Name" />
+                        <div *ngIf="submitted && ptyo.name?.errors" class="invalid-feedback">
+                            <div *ngIf=" ptyo.name?.errors?.required">Name is Required!!
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col">
+                        <label for="description" class="form-label"> Description</label>
+
+                        <textarea type="text" class="form-control" rows="1" name="description" id="description" formControlName="description" placeholder="Enter Description"> </textarea>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="btn-toolbar float-right ">
+                <button type="submit" class="btn btn-primary mr-2" *ngIf="showSaveButton">Save</button>
+                <button type="submit" class="btn btn-primary mr-2" *ngIf="showUpdateButton">Update</button>
+                <!-- <button type="button" class="btn btn-info" [routerLink]="['/customerList']" routerLinkActive="router-link-active">Search</button> -->
+
+            </div>
+        </form>
+    </div>
+</div>

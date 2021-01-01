@@ -32,6 +32,27 @@ namespace ShopApplication.Controllers.API
             return Ok(salesDetails);
         }
 
+        [HttpGet("getDetailsBySaleId/{id:int}")]
+        public IActionResult GetDetailsBySaleId(int id)
+        {
+            var saleDetails = _iSalesDetailsManager.GetSaleDetailBySaleId(id);
+            if (saleDetails == null)
+            {
+                return BadRequest(new {error = "Details Item Not Found!!"});
+            }
+
+            return Ok(saleDetails);
+        }
+        [HttpGet("getAllFalse")]
+        public IActionResult getAllFalse()
+        {
+            var saleDetails = _iSalesDetailsManager.GetAllSaleDetail();
+            if (saleDetails == null)
+            {
+                return BadRequest(new { error = "Empty Sale Item!" });
+            }
+            return Ok(saleDetails);
+        }
         [HttpPost]
         public IActionResult Post([FromBody] SaleDetail salesDetails)
         {
@@ -53,19 +74,6 @@ namespace ShopApplication.Controllers.API
         public IActionResult Get(int id)
         {
             var saleDetails = _iSalesDetailsManager.GetById(id);
-            if (saleDetails == null)
-            {
-                return BadRequest(new { error = "Can not Get Sale!" });
-            }
-
-            return Ok(saleDetails);
-        }
-
-
-        [HttpGet("getPriceByProductId/{id:int}")]
-        public IActionResult GetPriceByProductId(int id)
-        {
-            var saleDetails = _iSalesDetailsManager.GetPriceByProductId(id);
             if (saleDetails == null)
             {
                 return BadRequest(new { error = "Can not Get Sale!" });
