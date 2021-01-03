@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.PaymentDto;
@@ -26,12 +21,12 @@ namespace ShopApplication.Controllers.API
         [HttpGet]
         // api/paymentType
         public IActionResult Get()
-        
+
         {
             var item = _iPaymentTypeManager.GetAll();
             if (item == null)
             {
-                return BadRequest(new {error = "Payment Type Not Found!!"});
+                return BadRequest(new { error = "Payment Type Not Found!!" });
             }
 
             return Ok(item);
@@ -43,7 +38,7 @@ namespace ShopApplication.Controllers.API
             var items = _iPaymentTypeManager.GetALLFalse();
             if (items == null)
             {
-                return BadRequest(new {error = "Data Not Found!!"});
+                return BadRequest(new { error = "Data Not Found!!" });
             }
 
             return Ok(items);
@@ -63,7 +58,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "Failed to Add Payment Type!!" });
             }
 
-            return BadRequest(new {error = "Not Valid Payment Type!!"});
+            return BadRequest(new { error = "Not Valid Payment Type!!" });
 
         }
 
@@ -73,7 +68,7 @@ namespace ShopApplication.Controllers.API
             var paymentTypeItem = _iPaymentTypeManager.GetById(id);
             if (paymentTypeItem == null)
             {
-                return BadRequest(new {error = "Can not found Payment type!!"});
+                return BadRequest(new { error = "Can not found Payment type!!" });
             }
 
             return Ok(paymentTypeItem);
@@ -86,7 +81,7 @@ namespace ShopApplication.Controllers.API
             var retrivePaymentType = _iPaymentTypeManager.GetById(id);
             if (retrivePaymentType == null)
             {
-                return BadRequest(new {error = "Can Not found Payment Type!!"});
+                return BadRequest(new { error = "Can Not found Payment Type!!" });
             }
 
             var paymentType = _iMapper.Map<PaymentType>(model);
@@ -99,7 +94,7 @@ namespace ShopApplication.Controllers.API
                 return Ok(retrivePaymentType);
             }
 
-            return BadRequest(new {error = "Failed to Update Data!!"});
+            return BadRequest(new { error = "Failed to Update Data!!" });
         }
     }
 }

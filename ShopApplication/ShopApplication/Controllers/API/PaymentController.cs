@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.PaymentDto;
@@ -17,7 +12,7 @@ namespace ShopApplication.Controllers.API
     {
         private IPaymentManager _iPaymentManager;
         private IMapper _iMapper;
-        public PaymentController(IPaymentManager iPaymentManager,IMapper iMapper)
+        public PaymentController(IPaymentManager iPaymentManager, IMapper iMapper)
         {
             _iPaymentManager = iPaymentManager;
             _iMapper = iMapper;
@@ -29,7 +24,7 @@ namespace ShopApplication.Controllers.API
             var result = _iPaymentManager.GetAll();
             if (result == null)
             {
-                return BadRequest(new {error = "Data Can not Found!!"});
+                return BadRequest(new { error = "Data Can not Found!!" });
             }
 
             return Ok(result);
@@ -41,7 +36,7 @@ namespace ShopApplication.Controllers.API
             var result = _iPaymentManager.GetById(id);
             if (result == null)
             {
-                return BadRequest(new {error = "Can not found Data!!"});
+                return BadRequest(new { error = "Can not found Data!!" });
             }
 
             return Ok(result);
@@ -53,14 +48,14 @@ namespace ShopApplication.Controllers.API
             var result = _iPaymentManager.GetLastRow();
             if (result == null)
             {
-                return BadRequest(new {error = "Can not found Last Data!!"});
+                return BadRequest(new { error = "Can not found Last Data!!" });
             }
 
             return Ok(result);
         }
 
         [HttpPost("AddOrUpdate/{id:int}")]
-        public IActionResult AddOrUpdate(int id,[FromBody] PaymentDto model)
+        public IActionResult AddOrUpdate(int id, [FromBody] PaymentDto model)
         {
             if (ModelState.IsValid)
             {

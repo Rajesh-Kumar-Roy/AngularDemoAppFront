@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ namespace ShopApplication.Context.ProjectDbContext
 {
     public class ShopApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        
         public ShopApplicationDbContext()
         {
 
@@ -58,6 +60,7 @@ namespace ShopApplication.Context.ProjectDbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             ContextModelBuilder cont = new ContextModelBuilder();
             cont.AllModelBuilder(modelBuilder);
             base.OnModelCreating(modelBuilder);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.EntityModels.Sales;
 
@@ -52,9 +47,9 @@ namespace ShopApplication.Controllers.API
                 //string uniqueNumber = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
 
 
-               
+
                 bool isAdded = _SaleManager.Add(sale);
-              
+
                 if (isAdded)
                 {
                     return Ok(sale);
@@ -84,7 +79,7 @@ namespace ShopApplication.Controllers.API
             var sale = _SaleManager.GetSaleWithDetailsById(id);
             if (sale == null)
             {
-                return BadRequest(new {error = "Sale Item Can not Found!!"});
+                return BadRequest(new { error = "Sale Item Can not Found!!" });
             }
 
             return Ok(sale);
@@ -96,7 +91,7 @@ namespace ShopApplication.Controllers.API
             var retriveSales = _SaleManager.GetById(id);
             if (retriveSales == null)
             {
-                return BadRequest(new {error = "product not Found!"});
+                return BadRequest(new { error = "product not Found!" });
             }
 
             retriveSales.Description = sale.Description;
@@ -140,22 +135,22 @@ namespace ShopApplication.Controllers.API
             {
                 return BadRequest(new { error = "Can not Get product!" });
             }
-           
+
             return Ok(customer);
 
 
         }
 
         [HttpGet("GetSaleCode")]
-       
+
         public IActionResult GetSaleCode()
         {
             var saleCode = UtilityManager.Uitlity.GetSaleCode();
             if (saleCode == null)
             {
-                return BadRequest(new {error = "Can not Get Sale Code!"});
+                return BadRequest(new { error = "Can not Get Sale Code!" });
             }
-           
+
 
             return Ok(saleCode);
         }
@@ -173,7 +168,7 @@ namespace ShopApplication.Controllers.API
             bool isDelete = _SaleManager.Remove(retriveSales, false);
             if (isDelete)
             {
-                return Ok(retriveSales  );
+                return Ok(retriveSales);
             }
 
             return BadRequest(new { error = "Failed To Delete!" });

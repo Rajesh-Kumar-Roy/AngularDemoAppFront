@@ -1,6 +1,5 @@
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\appsettings.json
-D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.StaticWebAssets.xml
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.exe
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.deps.json
@@ -86,3 +85,4 @@ D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\staticwebasse
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.dll
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.pdb
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.genruntimeconfig.cache
+D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\scopedcss\bundle\ShopApplication.styles.css

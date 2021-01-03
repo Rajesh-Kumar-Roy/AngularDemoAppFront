@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.PaymentDto;
@@ -30,7 +25,7 @@ namespace ShopApplication.Controllers.API
             var items = _iPaymentOptionManager.GetAll();
             if (items == null)
             {
-                return BadRequest(new {error = "No Data Found!!"});
+                return BadRequest(new { error = "No Data Found!!" });
             }
 
             return Ok(items);
@@ -44,7 +39,7 @@ namespace ShopApplication.Controllers.API
             var items = _iPaymentOptionManager.GetAllFalseData();
             if (items == null)
             {
-                return BadRequest(new {error = "No Data Found!!"});
+                return BadRequest(new { error = "No Data Found!!" });
             }
 
             return Ok(items);
@@ -57,7 +52,7 @@ namespace ShopApplication.Controllers.API
             var item = _iPaymentOptionManager.GetById(id);
             if (item == null)
             {
-                return BadRequest(new {error = "No Data Found!"});
+                return BadRequest(new { error = "No Data Found!" });
             }
 
             return Ok(item);
@@ -69,7 +64,7 @@ namespace ShopApplication.Controllers.API
             var retriveItem = _iPaymentOptionManager.GetById(id);
             if (retriveItem == null)
             {
-                return BadRequest(new {error = "Can Not Found Data!!"});
+                return BadRequest(new { error = "Can Not Found Data!!" });
             }
 
             var paymentOption = _iMapper.Map<PaymentOption>(model);
@@ -79,7 +74,7 @@ namespace ShopApplication.Controllers.API
             var isUpdate = _iPaymentOptionManager.Update(retriveItem);
             if (!isUpdate)
             {
-                return BadRequest(new {error = "Failed to add Update!!"});
+                return BadRequest(new { error = "Failed to add Update!!" });
             }
             return Ok(retriveItem);
         }
@@ -98,10 +93,10 @@ namespace ShopApplication.Controllers.API
                     return Ok(paymentOption);
                 }
 
-                return BadRequest(new {error = "Failed To Add!!"});
+                return BadRequest(new { error = "Failed To Add!!" });
             }
 
-            return BadRequest(new {error = "Model State Is Not Valid!"});
+            return BadRequest(new { error = "Model State Is Not Valid!" });
 
         }
     }

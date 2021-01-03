@@ -1,23 +1,17 @@
-using System;
-using System.Text;
-using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using ShopApplication.Context.ProjectDbContext;
-using ShopApplication.Manager.IMContract;
-using ShopApplication.Manager.Managers;
 using ShopApplication.Models.UserModels;
-using ShopApplication.Repositories.IRContracts;
-using ShopApplication.Repositories.Repositories;
-
-using ShopApplication.UtilityManager;
+using ShopApplication.Role;
+using System;
+using System.Text;
 
 namespace ShopApplication
 {
@@ -37,6 +31,7 @@ namespace ShopApplication
             services.AddDbContext<ShopApplicationDbContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ShopApplicationDbContext>();
 
             // create Service mapper class
@@ -47,32 +42,32 @@ namespace ShopApplication
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             // jwt Authentication
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
-            services.AddAuthentication( X =>
-            {
-                X.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                X.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                X.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = false;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew =  TimeSpan.Zero
-                };
-            });
-        
+            services.AddAuthentication(X =>
+           {
+               X.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+               X.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               X.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+           }).AddJwtBearer(x =>
+           {
+               x.RequireHttpsMetadata = false;
+               x.SaveToken = false;
+               x.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(key),
+                   ValidateIssuer = false,
+                   ValidateAudience = false,
+                   ClockSkew = TimeSpan.Zero
+               };
+           });
+
 
 
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -98,6 +93,10 @@ namespace ShopApplication
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            RoleCreate crtRole = new RoleCreate();
+            crtRole.CreateRoles(serviceProvider);
+
         }
+
     }
 }

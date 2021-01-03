@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.PaymentDto;
@@ -29,7 +24,7 @@ namespace ShopApplication.Controllers.API
             var item = _iMobileBankingTypeManager.GetById(id);
             if (item == null)
             {
-                return BadRequest(new {error = "Can not Found Data!!"});
+                return BadRequest(new { error = "Can not Found Data!!" });
             }
 
             return Ok(item);
@@ -44,7 +39,7 @@ namespace ShopApplication.Controllers.API
                     var retriveItem = _iMobileBankingTypeManager.GetById(id);
                     if (retriveItem == null)
                     {
-                        return BadRequest(new {error = "Can not found Data!!"});
+                        return BadRequest(new { error = "Can not found Data!!" });
                     }
 
                     retriveItem.Name = model.Name;
@@ -56,7 +51,7 @@ namespace ShopApplication.Controllers.API
                         return Ok(retriveItem);
                     }
 
-                    return BadRequest(new {error = "Update Failed!!"});
+                    return BadRequest(new { error = "Update Failed!!" });
 
                 }
                 else
@@ -72,7 +67,7 @@ namespace ShopApplication.Controllers.API
                 }
             }
 
-            return BadRequest(new {error = "Model is not Valid!!"});
+            return BadRequest(new { error = "Model is not Valid!!" });
 
         }
 
@@ -82,9 +77,9 @@ namespace ShopApplication.Controllers.API
             var items = _iMobileBankingTypeManager.GetAllFalse();
             if (items == null)
             {
-                return BadRequest(new {error = "Can not Find any Data!!"});
+                return BadRequest(new { error = "Can not Find any Data!!" });
             }
-        
+
             return Ok(items);
         }
         //

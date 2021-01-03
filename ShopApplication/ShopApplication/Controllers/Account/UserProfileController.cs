@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Models.UserModels;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopApplication.Controllers.Account
 {
@@ -23,7 +20,7 @@ namespace ShopApplication.Controllers.Account
         {
             _userManager = userManager;
         }
-       
+
         [HttpGet]
         [Route("GetUserProfile")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

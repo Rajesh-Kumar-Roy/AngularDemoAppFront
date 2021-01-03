@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.CustomerDto;
@@ -18,7 +13,7 @@ namespace ShopApplication.Controllers.API
     {
         private ICustomerManager _repository;
         private IMapper _iMapper;
-        public CustomerController(ICustomerManager repository,IMapper iMapper)
+        public CustomerController(ICustomerManager repository, IMapper iMapper)
         {
             _repository = repository;
             _iMapper = iMapper;
@@ -37,14 +32,14 @@ namespace ShopApplication.Controllers.API
             return Ok(customer);
         }
         //get all product is isDelete = false
-       
+
         [HttpGet("getAllFalse")]
         public IActionResult getAllFalse()
         {
             var customer = _repository.GetAllCustomer();
             if (customer == null)
             {
-                return BadRequest(new {error = "Empty Customer!"});
+                return BadRequest(new { error = "Empty Customer!" });
             }
             return Ok(customer);
         }
@@ -114,7 +109,7 @@ namespace ShopApplication.Controllers.API
             retriveCustomer.Address = customer.Address;
             retriveCustomer.Email = customer.Email;
             retriveCustomer.MobileNo = customer.MobileNo;
-           // retriveCustomer.CustomerCode = retriveCustomer.CustomerCode;
+            // retriveCustomer.CustomerCode = retriveCustomer.CustomerCode;
             bool isUpdate = _repository.Update(retriveCustomer);
             if (isUpdate)
             {

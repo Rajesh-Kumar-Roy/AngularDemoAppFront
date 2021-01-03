@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.EntityModels.ProductModel;
 
@@ -26,7 +21,7 @@ namespace ShopApplication.Controllers.API
 
             if (productType == null)
             {
-                return BadRequest(new {error = "Not Found!"});
+                return BadRequest(new { error = "Not Found!" });
             }
 
             return Ok(productType);
@@ -53,10 +48,10 @@ namespace ShopApplication.Controllers.API
                     return Ok(productType);
                 }
 
-                return BadRequest(new {error = "Failed To Add!"});
+                return BadRequest(new { error = "Failed To Add!" });
             }
 
-            return BadRequest(new {error = "Model  is not valid!!"});
+            return BadRequest(new { error = "Model  is not valid!!" });
         }
 
         [HttpGet("{id}")]
@@ -65,7 +60,7 @@ namespace ShopApplication.Controllers.API
             var productType = _productTypeManager.GetById(id);
             if (productType == null)
             {
-                return BadRequest(new {error = "Can not Get Product Type!!!"});
+                return BadRequest(new { error = "Can not Get Product Type!!!" });
             }
 
             return Ok(productType);
@@ -85,12 +80,12 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ProductType model) 
+        public IActionResult Put(int id, [FromBody] ProductType model)
         {
             var retriveProductType = _productTypeManager.GetById(id);
             if (retriveProductType == null)
             {
-                return BadRequest(new {error = "Can not get"});
+                return BadRequest(new { error = "Can not get" });
             }
 
             retriveProductType.Name = model.Name;
@@ -102,7 +97,7 @@ namespace ShopApplication.Controllers.API
                 return Ok(retriveProductType);
             }
 
-            return BadRequest(new {error = "Failed to Update!!!"});
+            return BadRequest(new { error = "Failed to Update!!!" });
 
         }
         [HttpDelete("{id}")]

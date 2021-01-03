@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.DtoModels.ProductDtos;
@@ -21,23 +16,23 @@ namespace ShopApplication.Controllers.API
         private IProductManager _productManager;
         private IMapper _mapper;
         private IDropdownManager _utilitiManager;
-      
 
-        public ProductController(IProductManager productManager,IMapper mapper,IDropdownManager utilitiManager)
+
+        public ProductController(IProductManager productManager, IMapper mapper, IDropdownManager utilitiManager)
         {
             _productManager = productManager;
-            _utilitiManager= utilitiManager;
+            _utilitiManager = utilitiManager;
             _mapper = mapper;
         }
         [HttpGet]
         public IActionResult Get()
         {
-          
-           
+
+
             var products = _productManager.GetAll();
             if (products == null)
             {
-                return BadRequest(new {error = "Empty Product!"});
+                return BadRequest(new { error = "Empty Product!" });
             }
             return Ok(products);
         }
@@ -54,10 +49,10 @@ namespace ShopApplication.Controllers.API
                     return Ok(product);
                 }
 
-                return BadRequest(new {error = "Failed to Add!"});
+                return BadRequest(new { error = "Failed to Add!" });
             }
 
-            return BadRequest(new {error = "Model Sate is Not Valid! "});
+            return BadRequest(new { error = "Model Sate is Not Valid! " });
         }
         [HttpGet("getAllFalse")]
         public IActionResult getAllFalse()
@@ -75,13 +70,13 @@ namespace ShopApplication.Controllers.API
             var product = _productManager.GetById(id);
             if (product == null)
             {
-                return BadRequest(new {error = "Can not Get product!"});
+                return BadRequest(new { error = "Can not Get product!" });
             }
 
             return Ok(product);
         }
 
-      
+
         [HttpGet("GetProductByTypeId/{typeId}")]
         public IActionResult GetProductByTypeId(int typeId)
         {
@@ -103,7 +98,7 @@ namespace ShopApplication.Controllers.API
             //});
             return Ok(product);
 
-            
+
         }
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Product product)
@@ -111,7 +106,7 @@ namespace ShopApplication.Controllers.API
             var retriveProduct = _productManager.GetById(id);
             if (retriveProduct == null)
             {
-                return BadRequest(new {error = "product not Found!"});
+                return BadRequest(new { error = "product not Found!" });
             }
 
             retriveProduct.Name = product.Name;
@@ -119,14 +114,14 @@ namespace ShopApplication.Controllers.API
             retriveProduct.Code = product.Code;
             retriveProduct.Description = product.Description;
             retriveProduct.ProductTypeId = product.ProductTypeId;
-           
+
             bool isUpdate = _productManager.Update(retriveProduct);
             if (isUpdate)
             {
                 return Ok(retriveProduct);
             }
 
-            return BadRequest(new {error = "Failed!"});
+            return BadRequest(new { error = "Failed!" });
         }
 
         [HttpDelete("{id}")]
@@ -145,10 +140,10 @@ namespace ShopApplication.Controllers.API
                 return Ok(retriveProduct);
             }
 
-            return BadRequest(new {error = "Failed To Delete!"});
+            return BadRequest(new { error = "Failed To Delete!" });
         }
 
-       
-       
+
+
     }
 }

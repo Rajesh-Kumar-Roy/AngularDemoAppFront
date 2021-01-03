@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
 using ShopApplication.Models.UserModels;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ShopApplication.Controllers.Account
 {
@@ -41,14 +35,14 @@ namespace ShopApplication.Controllers.Account
         {
             var applicationUser = new ApplicationUser()
             {
-                UserName =  model.UserName,
+                UserName = model.UserName,
                 Email = model.Email,
-                PhoneNo =  model.PhoneNo
+                PhoneNo = model.PhoneNo
             };
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                
+
                 return Ok(result);
             }
             catch (Exception e)
@@ -62,6 +56,7 @@ namespace ShopApplication.Controllers.Account
         public async Task<IActionResult> Login(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
+
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var tokenDiscriptor = new SecurityTokenDescriptor
@@ -73,18 +68,18 @@ namespace ShopApplication.Controllers.Account
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
-                var tokeHandler =  new JwtSecurityTokenHandler();
+                var tokeHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokeHandler.CreateToken(tokenDiscriptor);
                 var token = tokeHandler.WriteToken(securityToken);
-                return Ok(new {token});
+                return Ok(new { token });
             }
             else
             {
-                return BadRequest(new {error = "User Name Or Password Incorrect!!"});
+                return BadRequest(new { error = "User Name Or Password Incorrect!!" });
             }
-            
+
         }
-       
+
 
     }
 }

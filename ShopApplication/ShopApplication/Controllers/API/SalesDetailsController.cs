@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
 using ShopApplication.Models.EntityModels.Sales;
 
@@ -38,7 +33,7 @@ namespace ShopApplication.Controllers.API
             var saleDetails = _iSalesDetailsManager.GetSaleDetailBySaleId(id);
             if (saleDetails == null)
             {
-                return BadRequest(new {error = "Details Item Not Found!!"});
+                return BadRequest(new { error = "Details Item Not Found!!" });
             }
 
             return Ok(saleDetails);
@@ -91,7 +86,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = "product not Found!" });
             }
 
-           
+
             retriveSalesDetails.UnitPrice = saledDetails.UnitPrice;
             retriveSalesDetails.Description = saledDetails.Description;
             retriveSalesDetails.Qty = saledDetails.Qty;
@@ -117,7 +112,7 @@ namespace ShopApplication.Controllers.API
                 return BadRequest(new { error = " not Found!" });
             }
 
-            bool isDelete = _iSalesDetailsManager.Remove(retriveSalesDetails,false);
+            bool isDelete = _iSalesDetailsManager.Remove(retriveSalesDetails, false);
             if (isDelete)
             {
                 return Ok(retriveSalesDetails);
