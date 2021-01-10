@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopApplication.Context.ProjectDbContext;
@@ -48,7 +43,7 @@ namespace ShopApplication
 
             #region Add db sting and Identity
 
-           
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;

@@ -1,235 +1,238 @@
-<div class="row">
-    <div class="col-md-12 ">
-        <div class="card">
-            <div class="card-header">
-                <h1 style="font-family: Brush Script MT, Brush Script Std, cursive; size: 20px;" class="card-title text-center"><b>Payment Method</b></h1>
-            </div>
-            <div class="card-body">
-                <form autocomplete="off" [formGroup]="paymetMethodForm" (ngSubmit)="onSave()">
-                    <div class="form-row">
-                        <div class="col">
-
-
-                            <ng-container class="form-group">
-                                <label for="amount">Amount</label>
-                                <input type="number" class="form-control" [ngModel]="grandTotal" name="amount" formControlName="amount" placeholder="Enter Amount" readonly />
-                            </ng-container>
-                            <ng-container class="form-group">
-                                <label for="vatAmount">Vat Amount</label>
-                                <input type="number" class="form-control" [ngModel]="vat" id="vatAmount" formControlName="vatAmount" placeholder="Enter Vat Amount" readonly />
-                            </ng-container>
-                            <ng-container class="form-group">
-                                <label for="payAmount">Pay Amount</label>
-                                <input type="number" class="form-control" name="payAmount" formControlName="pay" [ngClass]="{ 'is-invalid': submitted && pty.pay?.errors }" (keyup)="checkDue($event)" placeholder="Enter Pay Amount" />
-                                <div *ngIf="submitted && pty.pay?.errors" class="invalid-feedback">
-                                    <div *ngIf=" pty.pay?.errors?.required">Pay is Required!!
-                                    </div>
-                                </div>
-                            </ng-container>
-                            <ng-container class="form-group">
-                                <label for="date" class="form-label">Payment Date </label>
-
-                                <input type="text" bsDatepicker class="form-control" name="date" id="date" formControlName="paymentDate" [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
-
-                            </ng-container>
-                            <div *ngIf="showDue">
+<div class="px-3 py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 style="font-family: Brush Script MT, Brush Script Std, cursive; size: 20px;" class="card-title text-center"><b>Payment Method</b></h1>
+                </div>
+                <div class="card-body">
+                    <form autocomplete="off" [formGroup]="paymetMethodForm" (ngSubmit)="onSave()">
+                        <div class="form-row">
+                            <div class="col">
+    
+    
                                 <ng-container class="form-group">
-                                    <label for="due">Due Amount</label>
-                                    <input type="number" class="form-control" formControlName="due" [ngModel]="dueTo" placeholder="Enter Due Amount" readonly />
+                                    <label for="amount">Amount</label>
+                                    <input type="number" class="form-control" [ngModel]="grandTotal" name="amount" formControlName="amount" placeholder="Enter Amount" readonly />
                                 </ng-container>
                                 <ng-container class="form-group">
-                                    <label for="vatAmount">Due Payment Date</label>
-                                    <input type="text" class="form-control" formControlName="duePaymentDate" placeholder="Enter Due Payment Date" bsDatepicker [bsConfig]="{ isAnimated: true }" />
+                                    <label for="vatAmount">Vat Amount</label>
+                                    <input type="number" class="form-control" [ngModel]="vat" id="vatAmount" formControlName="vatAmount" placeholder="Enter Vat Amount" readonly />
                                 </ng-container>
-                            </div>
-                            <ng-container class="form-group">
-                                <label for="inlineRadioOptions">Operation By</label>
-                                <div class="ml-2">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="operationId" id="inlineRadio1"  value="1"  formControlName="operationId" checked>
-                                        <label class="form-check-label" for="inlineRadio1">Guide</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="operationId" id="inlineRadio2" value="2" formControlName="operationId">
-                                        <label class="form-check-label" for="inlineRadio2">Employee</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="operationId" id="inlineRadio3" value="3" formControlName="operationId">
-                                        <label class="form-check-label" for="inlineRadio3">Manager</label>
-                                    </div>
-                                </div>
-                               
-
-                            </ng-container>
-
-                            <ng-container class="form-group">
-                                <label for="producttype" class="form-label">Payment Type</label>
-                                <select class="custom-select mb-3" id ="paymentType" class="form-control" formControlName="paymentTypeId" [ngClass]="{ 'is-invalid': (pty.paymentTypeId.touched || submitted )  && pty.paymentTypeId?.errors }" (change)="changingEvent($event.target.value)">
-                                    
-                                    <option *ngFor="let item of paymentType" [value]="item.id">
-                                        {{item.name}}</option>
-
-                                </select>
-                                <div *ngIf="(pty.paymentTypeId.touched || submitted )  && pty.paymentTypeId?.errors" class="invalid-feedback">
-                                    <div *ngIf="pty.paymentTypeId.errors?.required">Payment Type Is Required!!</div>
-                                </div>
-                            </ng-container>
-
-                        </div>
-                        <div class="col">
-
-
-                            <div class="alert alert-info" *ngIf="showAlert">Please choose your method of payment and hit continue. You will then be sent down to pay using your selected payment option.</div>
-                            <ng-container class="form-group">
-                                <label  class="form-label">Payment Option</label>
-                                <select class="custom-select mb-3" class="form-control" formControlName="paymentOptionId" [ngClass]="{ 'is-invalid': (pty.paymentOptionId.touched || submitted )  && pty.paymentOptionId?.errors }" (change)="changingEvent($event.target.value)" >
-                                    
-                                    <option *ngFor="let item of paymentOption" [value]="item.id">
-                                        {{item.name}}</option>
-
-                                </select>
-                                <div *ngIf="(pty.paymentOptionId.touched || submitted )  && pty.paymentOptionId?.errors" class="invalid-feedback">
-                                    <div *ngIf="pty.paymentOptionId.errors?.required">Payment Option Is Required!!</div>
-                                </div>
-                            </ng-container>
-                            <br />
-                            <div *ngIf="showCardDetail">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title text-center">Card Details</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <ng-container class="form-group">
-                                            <label for="cardHolderName">Holder Name</label>
-                                            <input type="text" class="form-control"  formControlName="cardHolderName"  [ngClass]="{ 'is-invalid': (pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors }" placeholder="Enter Card Holder Name" required />
-                                            <div *ngIf="(pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.cardHolderName.errors?.required">Holder Name Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-                                        <ng-container class="form-group">
-                                            <label for="vatAmount">Card No</label>
-                                            <input type="text" class="form-control" formControlName="cardNo"  [ngClass]="{ 'is-invalid': (pty.cardNo.touched || submitted )  && pty.cardNo?.errors }" maxlength="16" placeholder="Enter Card No" />
-                                            <div *ngIf="(pty.cardNo.touched || submitted )  && pty.cardNo?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.cardNo.errors?.required">Card No Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <ng-container class="form-group">
-                                                    <label for="vatAmount">End Month</label>
-                                                    <select class="form-control"  formControlName="cardEndMonth"  [ngClass]="{ 'is-invalid': (pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors }">
-                                                        <option *ngFor="let key of keys; index as i" [value]="i+1" [label]="monthEnum[key]"></option>
-                                                    </select>
-                                                    <div *ngIf="(pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors" class="invalid-feedback">
-                                                        <div *ngIf="pty.cardEndMonth.errors?.required">End Month Is Required!!</div>
-                                                    </div>
-                                                    <!-- <input type="text" class="form-control" formControlName="cardEndMonth" placeholder="Enter End Month" /> -->
-                                                </ng-container>
-                                            </div>
-                                            <div class="col">
-                                                <ng-container class="form-group">
-                                                    <label>End Year</label>
-                                                    <input class="form-control" type="number"  formControlName="cardEndYear"  [ngClass]="{ 'is-invalid': (pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors }"  placeholder="Enter End Year" />
-                                                    <div *ngIf="(pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors" class="invalid-feedback">
-                                                        <div *ngIf="pty.cardEndYear.errors?.required">Card End Year Is Required!!</div>
-                                                    </div>
-                                                    
-                                                </ng-container>
-                                            </div>
-                                            <div class="col">
-                                                <ng-container class="form-group">
-                                                    <label for="vatAmount">CVV No</label>
-                                                    <input type="text" class="form-control" formControlName="cVVNo"  [ngClass]="{ 'is-invalid': (pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors }" placeholder="Enter CVV No" maxlength="4" />
-                                                    <div *ngIf="(pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors" class="invalid-feedback">
-                                                        <div *ngIf="pty.cVVNo.errors?.required">CVV NO Is Required!!</div>
-                                                    </div>
-                                                </ng-container>
-                                            </div>
+                                <ng-container class="form-group">
+                                    <label for="payAmount">Pay Amount</label>
+                                    <input type="number" class="form-control" name="payAmount" formControlName="pay" [ngClass]="{ 'is-invalid': submitted && pty.pay?.errors }" (keyup)="checkDue($event)" placeholder="Enter Pay Amount" />
+                                    <div *ngIf="submitted && pty.pay?.errors" class="invalid-feedback">
+                                        <div *ngIf=" pty.pay?.errors?.required">Pay is Required!!
                                         </div>
-
+                                    </div>
+                                </ng-container>
+                                <ng-container class="form-group">
+                                    <label for="date" class="form-label">Payment Date </label>
+    
+                                    <input type="text" bsDatepicker class="form-control" name="date" id="date" formControlName="paymentDate" [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
+    
+                                </ng-container>
+                                <div *ngIf="showDue">
+                                    <ng-container class="form-group">
+                                        <label for="due">Due Amount</label>
+                                        <input type="number" class="form-control" formControlName="due" [ngModel]="dueTo" placeholder="Enter Due Amount" readonly />
+                                    </ng-container>
+                                    <ng-container class="form-group">
+                                        <label for="vatAmount">Due Payment Date</label>
+                                        <input type="text" class="form-control" formControlName="duePaymentDate" placeholder="Enter Due Payment Date" bsDatepicker [bsConfig]="{ isAnimated: true }" />
+                                    </ng-container>
+                                </div>
+                                <ng-container class="form-group">
+                                    <label for="inlineRadioOptions">Operation By</label>
+                                    <div class="ml-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="operationId" id="inlineRadio1"  value="1"  formControlName="operationId" checked>
+                                            <label class="form-check-label" for="inlineRadio1">Guide</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="operationId" id="inlineRadio2" value="2" formControlName="operationId">
+                                            <label class="form-check-label" for="inlineRadio2">Employee</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="operationId" id="inlineRadio3" value="3" formControlName="operationId">
+                                            <label class="form-check-label" for="inlineRadio3">Manager</label>
+                                        </div>
+                                    </div>
+                                   
+    
+                                </ng-container>
+    
+                                <ng-container class="form-group">
+                                    <label for="producttype" class="form-label">Payment Type</label>
+                                    <select class="custom-select mb-3" id ="paymentType" class="form-control" formControlName="paymentTypeId" [ngClass]="{ 'is-invalid': (pty.paymentTypeId.touched || submitted )  && pty.paymentTypeId?.errors }" (change)="changingEvent($event.target.value)">
+                                        
+                                        <option *ngFor="let item of paymentType" [value]="item.id">
+                                            {{item.name}}</option>
+    
+                                    </select>
+                                    <div *ngIf="(pty.paymentTypeId.touched || submitted )  && pty.paymentTypeId?.errors" class="invalid-feedback">
+                                        <div *ngIf="pty.paymentTypeId.errors?.required">Payment Type Is Required!!</div>
+                                    </div>
+                                </ng-container>
+    
+                            </div>
+                            <div class="col">
+    
+    
+                                <div class="alert alert-info" *ngIf="showAlert">Please choose your method of payment and hit continue. You will then be sent down to pay using your selected payment option.</div>
+                                <ng-container class="form-group">
+                                    <label  class="form-label">Payment Option</label>
+                                    <select class="custom-select mb-3" class="form-control" formControlName="paymentOptionId" [ngClass]="{ 'is-invalid': (pty.paymentOptionId.touched || submitted )  && pty.paymentOptionId?.errors }" (change)="changingEvent($event.target.value)" >
+                                        
+                                        <option *ngFor="let item of paymentOption" [value]="item.id">
+                                            {{item.name}}</option>
+    
+                                    </select>
+                                    <div *ngIf="(pty.paymentOptionId.touched || submitted )  && pty.paymentOptionId?.errors" class="invalid-feedback">
+                                        <div *ngIf="pty.paymentOptionId.errors?.required">Payment Option Is Required!!</div>
+                                    </div>
+                                </ng-container>
+                                <br />
+                                <div *ngIf="showCardDetail">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="card-title text-center">Card Details</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ng-container class="form-group">
+                                                <label for="cardHolderName">Holder Name</label>
+                                                <input type="text" class="form-control"  formControlName="cardHolderName"  [ngClass]="{ 'is-invalid': (pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors }" placeholder="Enter Card Holder Name" required />
+                                                <div *ngIf="(pty.cardHolderName.touched || submitted )  && pty.cardHolderName?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.cardHolderName.errors?.required">Holder Name Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container class="form-group">
+                                                <label for="vatAmount">Card No</label>
+                                                <input type="text" class="form-control" formControlName="cardNo"  [ngClass]="{ 'is-invalid': (pty.cardNo.touched || submitted )  && pty.cardNo?.errors }" maxlength="16" placeholder="Enter Card No" />
+                                                <div *ngIf="(pty.cardNo.touched || submitted )  && pty.cardNo?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.cardNo.errors?.required">Card No Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+    
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <ng-container class="form-group">
+                                                        <label for="vatAmount">End Month</label>
+                                                        <select class="form-control"  formControlName="cardEndMonth"  [ngClass]="{ 'is-invalid': (pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors }">
+                                                            <option *ngFor="let key of keys; index as i" [value]="i+1" [label]="monthEnum[key]"></option>
+                                                        </select>
+                                                        <div *ngIf="(pty.cardEndMonth.touched || submitted )  && pty.cardEndMonth?.errors" class="invalid-feedback">
+                                                            <div *ngIf="pty.cardEndMonth.errors?.required">End Month Is Required!!</div>
+                                                        </div>
+                                                        <!-- <input type="text" class="form-control" formControlName="cardEndMonth" placeholder="Enter End Month" /> -->
+                                                    </ng-container>
+                                                </div>
+                                                <div class="col">
+                                                    <ng-container class="form-group">
+                                                        <label>End Year</label>
+                                                        <input class="form-control" type="number"  formControlName="cardEndYear"  [ngClass]="{ 'is-invalid': (pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors }"  placeholder="Enter End Year" />
+                                                        <div *ngIf="(pty.cardEndYear.touched || submitted )  && pty.cardEndYear?.errors" class="invalid-feedback">
+                                                            <div *ngIf="pty.cardEndYear.errors?.required">Card End Year Is Required!!</div>
+                                                        </div>
+                                                        
+                                                    </ng-container>
+                                                </div>
+                                                <div class="col">
+                                                    <ng-container class="form-group">
+                                                        <label for="vatAmount">CVV No</label>
+                                                        <input type="text" class="form-control" formControlName="cVVNo"  [ngClass]="{ 'is-invalid': (pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors }" placeholder="Enter CVV No" maxlength="4" />
+                                                        <div *ngIf="(pty.cVVNo.touched || submitted )  && pty.cVVNo?.errors" class="invalid-feedback">
+                                                            <div *ngIf="pty.cVVNo.errors?.required">CVV NO Is Required!!</div>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+    
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div *ngIf="showMobileBankingDetail">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title text-center">Mobile Banking Detail</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <ng-container class="form-group">
-                                            <label for="vatAmount">Mobile Banking Type</label>
-                                            <select class="custom-select mb-3" formControlName="mobBankTypeId">
-                                                <option value=""></option>
-                                                <option>--Select--</option>
-                                                <option *ngFor="let item of mobileBankingTypes" [value] ="item.id">
-                                                    {{item.name}}</option>
-
-                                            </select>
-                                        </ng-container>
-                                        <ng-container class="form-group">
-                                            <label for="Mobile Number">Mobile No</label>
-                                            <input type="text" class="form-control" maxlength="11" formControlName="mobileBankingNo"  [ngClass]="{ 'is-invalid': (pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors }" placeholder="Enter Mobile Nubmer" />
-                                            <div *ngIf="pty.mobileBankingNo?.errors?.pattern" class="text-danger">Please, Enter 11 digit Mobile Number.</div>
-                                            <div *ngIf="(pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.mobileBankingNo.errors?.required">Mobile Banking No Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-
-                                        <ng-container class="form-group">
-                                            <label for="vatAmount">Reference No</label>
-                                            <input type="text" class="form-control" formControlName="mobBankRefNo" [ngClass]="{ 'is-invalid': (pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors }" placeholder="Enter Reference No" />
-                                            <div *ngIf="(pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.mobBankRefNo.errors?.required">Mobile Ref No Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="showCheckDetail">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title text-center">Check Detail</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <ng-container class="form-group">
-                                            <label for="bankName">Bank Name</label>
-                                            <input type="text" class="form-control" id="bankName" [ngClass]="{ 'is-invalid': (pty.bankName.touched || submitted )  && pty.bankName?.errors }" formControlName="bankName" placeholder="Enter Bank Name" />
-                                            <div *ngIf="(pty.bankName.touched || submitted )  && pty.bankName?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.bankName.errors?.required">Bank Name Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-                                        <ng-container class="form-group">
-                                            <label for="checkNo">Check No</label>
-                                            <input type="text" id="checkNo" class="form-control" formControlName="checkNo" [ngClass]="{ 'is-invalid': (pty.checkNo.touched || submitted )  && pty.checkNo?.errors }" maxlength="12" placeholder="Enter Check Nubmer" />
-                                            <div *ngIf="(pty.checkNo.touched || submitted )  && pty.checkNo?.errors" class="invalid-feedback">
-                                                <div *ngIf="pty.checkNo.errors?.required">Check No Is Required!!</div>
-                                            </div>
-                                        </ng-container>
-
-                                        <ng-container class="form-group">
-                                            <label for="checkIssueDate">Check Issue Date No</label>
-                                            <input type="text" bsDatepicker class="form-control" name="date" id="date" formControlName="checkIssueDate" [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
-                                        </ng-container>
-
+    
+                                <div *ngIf="showMobileBankingDetail">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="card-title text-center">Mobile Banking Detail</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ng-container class="form-group">
+                                                <label for="vatAmount">Mobile Banking Type</label>
+                                                <select class="custom-select mb-3" formControlName="mobBankTypeId">
+                                                    <option value=""></option>
+                                                    <option>--Select--</option>
+                                                    <option *ngFor="let item of mobileBankingTypes" [value] ="item.id">
+                                                        {{item.name}}</option>
+    
+                                                </select>
+                                            </ng-container>
+                                            <ng-container class="form-group">
+                                                <label for="Mobile Number">Mobile No</label>
+                                                <input type="text" class="form-control" maxlength="11" formControlName="mobileBankingNo"  [ngClass]="{ 'is-invalid': (pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors }" placeholder="Enter Mobile Nubmer" />
+                                                <div *ngIf="pty.mobileBankingNo?.errors?.pattern" class="text-danger">Please, Enter 11 digit Mobile Number.</div>
+                                                <div *ngIf="(pty.mobileBankingNo.touched || submitted )  && pty.mobileBankingNo?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.mobileBankingNo.errors?.required">Mobile Banking No Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+    
+                                            <ng-container class="form-group">
+                                                <label for="vatAmount">Reference No</label>
+                                                <input type="text" class="form-control" formControlName="mobBankRefNo" [ngClass]="{ 'is-invalid': (pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors }" placeholder="Enter Reference No" />
+                                                <div *ngIf="(pty.mobBankRefNo.touched || submitted )  && pty.mobBankRefNo?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.mobBankRefNo.errors?.required">Mobile Ref No Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+    
+                                        </div>
                                     </div>
                                 </div>
+                                <div *ngIf="showCheckDetail">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="card-title text-center">Check Detail</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ng-container class="form-group">
+                                                <label for="bankName">Bank Name</label>
+                                                <input type="text" class="form-control" id="bankName" [ngClass]="{ 'is-invalid': (pty.bankName.touched || submitted )  && pty.bankName?.errors }" formControlName="bankName" placeholder="Enter Bank Name" />
+                                                <div *ngIf="(pty.bankName.touched || submitted )  && pty.bankName?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.bankName.errors?.required">Bank Name Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container class="form-group">
+                                                <label for="checkNo">Check No</label>
+                                                <input type="text" id="checkNo" class="form-control" formControlName="checkNo" [ngClass]="{ 'is-invalid': (pty.checkNo.touched || submitted )  && pty.checkNo?.errors }" maxlength="12" placeholder="Enter Check Nubmer" />
+                                                <div *ngIf="(pty.checkNo.touched || submitted )  && pty.checkNo?.errors" class="invalid-feedback">
+                                                    <div *ngIf="pty.checkNo.errors?.required">Check No Is Required!!</div>
+                                                </div>
+                                            </ng-container>
+    
+                                            <ng-container class="form-group">
+                                                <label for="checkIssueDate">Check Issue Date No</label>
+                                                <input type="text" bsDatepicker class="form-control" name="date" id="date" formControlName="checkIssueDate" [bsConfig]="{ isAnimated: true }" placeholder="MM/DD/YYYY" />
+                                            </ng-container>
+    
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <button class='form-control btn btn-primary submit-button' *ngIf="payButtonHide" type='submit'> Continue</button>
+                                <div class="alert alert-danger text-center" *ngIf="paymentAlert">....Payment Already Collect....</div>
+                                <button class='form-control btn btn-warning submit-button'  [routerLink]="['/saleDetails']" routerLinkActive="router-link-active"  *ngIf="paymentAlert" type='button'> Back</button>
+                                
+    
+    
                             </div>
-                            <br />
-                            <button class='form-control btn btn-primary submit-button' *ngIf="payButtonHide" type='submit'> Continue</button>
-                            <div class="alert alert-danger text-center" *ngIf="paymentAlert">....Payment Already Collect....</div>
-                            <button class='form-control btn btn-warning submit-button'  [routerLink]="['/saleDetails']" routerLinkActive="router-link-active"  *ngIf="paymentAlert" type='button'> Back</button>
-                            
-
-
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
+    
     </div>
-
 </div>
+
 <br />

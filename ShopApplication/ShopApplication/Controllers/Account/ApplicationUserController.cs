@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using ShopApplication.Models.UserModels;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace ShopApplication.Controllers.Account
         // /api/applicationUser/registration
         public async Task<object> Registration(RegistrationModel model)
         {
+            model.Role = "User";
             var applicationUser = new ApplicationUser()
             {
                 UserName = model.UserName,
@@ -42,7 +44,7 @@ namespace ShopApplication.Controllers.Account
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
-
+                await _userManager.AddToRoleAsync(applicationUser, model.Role);
                 return Ok(result);
             }
             catch (Exception e)
@@ -59,11 +61,14 @@ namespace ShopApplication.Controllers.Account
 
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                var role = await _userManager.GetRolesAsync(user);
+                IdentityOptions _identityOptions = new IdentityOptions();
                 var tokenDiscriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim("UserID",user.Id.ToString()),
+                        new Claim(_identityOptions.ClaimsIdentity.RoleClaimType, role.FirstOrDefault()), 
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)

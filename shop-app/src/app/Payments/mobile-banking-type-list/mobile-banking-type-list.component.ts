@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class MobileBankingTypeListComponent implements OnInit {
 
   mobileBankingType: MobileBankingType[];
+  deleteId = 0;
   constructor(private paymentService: PaymentsService, private router: Router) {
     this.mobileBankingType = new Array();
    }
@@ -22,6 +23,10 @@ export class MobileBankingTypeListComponent implements OnInit {
   }
   onClickEditButton(id: number): void{
     this.router.navigate(['/mobileBankingEdit', id]);
+  }
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
   // add New Mobile banking
   newMobileBankingAdd(moblieBanking: MobileBankingType): void{

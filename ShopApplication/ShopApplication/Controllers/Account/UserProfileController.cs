@@ -35,5 +35,16 @@ namespace ShopApplication.Controllers.Account
                 user.Email
             };
         }
+
+        [HttpGet]
+        // api/UserProfile/forAdmin
+        [Route("forAdmin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles= "Administrator")]
+        public string ForAdmin()
+        {
+            return "I am Admin. HA! HA! HA!";
+        }
+
     }
 }

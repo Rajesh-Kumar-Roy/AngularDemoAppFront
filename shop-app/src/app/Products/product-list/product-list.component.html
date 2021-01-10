@@ -1,52 +1,82 @@
-<div class="container-fulid">
-    <app-product-entry (onAdd)="addNewProduct($event)"></app-product-entry>
-</div>
-<br/>
-<div class="container-fulid">
-    <div class="row justify-content-center">
+<div class="my-5 mx-3">
+    <div class="container-fulid">
+        <app-product-entry (onAdd)="addNewProduct($event)"></app-product-entry>
+    </div>
+    <br />
+    <div class="container-fulid">
+        <div class="row justify-content-center">
 
-        <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header bg-secondary text-white text-center ">
-              <h5 class="card-title">Product Details</h5>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered" style="text-align: center;">
-                    <thead>
-                        <tr class="table-secondary">
-                            <th>SL</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Model</th>
-                            <th>Description</th>
-                            <th>Product Type Name</th>
-                            <th>Action</th>
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header bg-secondary text-white text-center ">
+                        <h5 class="card-title">Product Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Model</th>
+                                    <th>Description</th>
+                                    <th>Product Type Name</th>
+                                    <th>Action</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let products of product | paginate: {id: 'listing_pagination',
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let products of product | paginate: {id: 'listing_pagination',
                          itemsPerPage: 10, currentPage: page, totalItems: totalRecords }; let i = index;">
-                            <td>{{i+1}}</td>
-                            <td>{{products.name}}</td>
-                            <td>{{products.price}}</td>
-                            <td>{{products.code}}</td>
-                            <td>{{products.description}}</td>
-                            <td>{{getproductTypeNameBytyId(products.productTypeId)}}</td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{products.name}}</td>
+                                    <td>{{products.price}}</td>
+                                    <td>{{products.code}}</td>
+                                    <td>{{products.description}}</td>
+                                    <td>{{getproductTypeNameBytyId(products.productTypeId)}}</td>
 
-                            <td><button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"(click)="onEditButtonClick(products.id)"></i></button> &nbsp;
-                            <button type="button" class="btn btn-default btn-sm" (click)="deleteButtonClick(products.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                        </tr>
-                    </tbody>
-                </table>
-              <div>
-                <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page= $event"></pagination-controls>
-              </div>
+                                    <td><button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditButtonClick(products.id)"></i></button> &nbsp;
+                                        <!-- <button type="button" class="btn btn-default btn-sm" (click)="deleteButtonClick(products.id)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#shopModal" (click)="deleteIdClick(products.id)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                          </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page= $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
 </div>
 
+<!-- Model show -->
+<!-- Button trigger modal -->
 
-
+  
+  <!-- Modal -->
+  <div class="modal fade" id="shopModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-default btn-sm" (click)="deleteButtonClick(deleteId)">Delete</button>  -->
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="deleteButtonClick(deleteId)">Delete</button> 
+   
+        </div>
+      </div>
+    </div>
+  </div>

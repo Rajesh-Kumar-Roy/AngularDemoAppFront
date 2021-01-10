@@ -1,18 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopApplication.Manager.IMContract;
+using ShopApplication.Models.DtoModels.ProductDtos;
 using ShopApplication.Models.EntityModels.ProductModel;
 
 namespace ShopApplication.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class ProductTypeController : ControllerBase
     {
         private IProductTypeManager _productTypeManager;
+        private IMapper _iMapper;
 
-        public ProductTypeController(IProductTypeManager productTypeManager)
+        public ProductTypeController(IProductTypeManager productTypeManager, IMapper iMapper)
         {
             _productTypeManager = productTypeManager;
+            _iMapper = iMapper;
         }
         [HttpGet]
         public IActionResult Get()
@@ -27,6 +34,8 @@ namespace ShopApplication.Controllers.API
             return Ok(productType);
         }
         [HttpGet("getAllFalse")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Administrator")]
         public IActionResult getAllFalse()
         {
             var productType = _productTypeManager.GetAllProductType();
@@ -38,10 +47,13 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ProductType productType)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Post([FromBody] ProductTypeDto dto)
         {
             if (ModelState.IsValid)
             {
+                var productType = _iMapper.Map<ProductType>(dto);
                 bool isAdded = _productTypeManager.Add(productType);
                 if (isAdded)
                 {
@@ -80,6 +92,8 @@ namespace ShopApplication.Controllers.API
         }
 
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Put(int id, [FromBody] ProductType model)
         {
             var retriveProductType = _productTypeManager.GetById(id);
@@ -101,6 +115,8 @@ namespace ShopApplication.Controllers.API
 
         }
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int id)
         {
             var retriveProduct = _productTypeManager.GetById(id);

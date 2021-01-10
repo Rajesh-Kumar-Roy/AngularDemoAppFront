@@ -1,3 +1,6 @@
+import { DeleteModelComponent } from './home/delete-model/delete-model.component';
+import { AdminPanelComponent } from './user/admin-panel/admin-panel.component';
+import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { HomeComponent } from './home/home/home.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserComponent } from './user/user/user.component';
@@ -26,15 +29,15 @@ import { AuthGuard}  from 'src/app/auth/auth.guard';
 
 const routes: Routes = [
   { path: 'createProduct', component: ProductEntryComponent },
-  { path: 'createProductType', component: ProductTypeEntryComponent },
+  { path: 'createProductType', component: ProductTypeEntryComponent ,canActivate: [AuthGuard], data: {permittedRoles: ['Administrator']}},
   { path: 'Sales', component: SalesEntryComponent },
   { path: 'saleDetails', component: SalesListComponent },
   { path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: CustomerEntryComponent },
   { path: 'productedit/:id', component: ProductEntryComponent },
-  { path: 'typeEdit/:id', component: ProductTypeEntryComponent },
+  { path: 'typeEdit/:id', component: ProductTypeEntryComponent, canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
   { path: 'productList', component: ProductListComponent },
-  { path: 'productTypeList', component: ProductTypeListComponent },
+  { path: 'productTypeList', component: ProductTypeListComponent ,canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
   { path: 'saleDetail/:id', component: SalesEntryComponent },
   { path: 'saleView/:id', component: SalesViewComponent },
   { path: 'createPaymentType', component: PaymentTypeListComponent },
@@ -56,7 +59,9 @@ const routes: Routes = [
     ]
   },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  {path: 'forbidden', component: ForbiddenComponent},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

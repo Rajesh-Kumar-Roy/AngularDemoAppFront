@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class SalesListComponent implements OnInit {
   sale: Sales[];
   saledetail: SalesDetails[];
+  deleteId = 0;
   constructor( private saleService: SalesService, private saleDetailsService: SalesDetailsService, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,6 +31,11 @@ export class SalesListComponent implements OnInit {
         this.saledetail = res;
       }
     });
+  }
+  // Save delete Id
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
   onEditButtonClick(saleId: number): void{
     this.router.navigate(['/saleDetail', saleId]);

@@ -93,8 +93,7 @@ namespace ShopApplication
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            RoleCreate crtRole = new RoleCreate();
-            crtRole.CreateRoles(serviceProvider);
+            new RoleCreate().CreateRoles(serviceProvider);
 
         }
 

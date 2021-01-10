@@ -1,0 +1,7 @@
+.view {
+    background: url("../../../assets/Img/shoppingpic.jpg")no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}

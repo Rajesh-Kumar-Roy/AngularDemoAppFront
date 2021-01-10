@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductTypeListComponent implements OnInit {
   productType: ProductType[];
   @Input() productTypes: ProductType;
+  deleteId = 0;
   constructor(private productTypeService: ProductTypeService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -28,6 +29,10 @@ export class ProductTypeListComponent implements OnInit {
   }
   onEditButtonClick(typeId: number): void{
     this.router.navigate(['/typeEdit', typeId]);
+  }
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
   onDeleteproductTypeClick(typeId: number): void {
     this.productTypeService.deleteProductType(typeId).subscribe(() => {

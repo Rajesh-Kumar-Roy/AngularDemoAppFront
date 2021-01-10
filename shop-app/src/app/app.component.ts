@@ -8,18 +8,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shop-app';
-  buttonHide = false;
   constructor(private router: Router){
-    if(localStorage.getItem('token') != null){
-      this.router.navigateByUrl("#");
-      this.buttonHide = true;
-      
-    }
   }
+  loggedIn(): boolean {
+     if(!localStorage.getItem('token')){
+       return false;
+     } 
+     return true;
+}
   onLogOut(): void{
     
     localStorage.removeItem('token');
-    this.buttonHide = false;
-    this.router.navigateByUrl('/user/login');
+    this.router.navigateByUrl('/home');
   }
+  forLogIn(){
+    this.router.navigate(['/user/login']);
+  }
+  logIn(): boolean {
+    if(localStorage.getItem('token')== null){
+      return true;
+    } 
+    return false;
+}
 }

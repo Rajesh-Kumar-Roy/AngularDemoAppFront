@@ -13,6 +13,7 @@ export class PaymentTypeListComponent implements OnInit {
 
   paymentTypes: PaymentType[] = null;
   notFoundMess = false;
+  deleteId = 0;
   constructor(private paymentTypeService: PaymentsService, private router: Router) {
      this.paymentTypes = new Array();
    }
@@ -30,6 +31,10 @@ export class PaymentTypeListComponent implements OnInit {
   newPaymentTypeAdd(paymentType: PaymentType): void{
     this.notFoundMess = false;
     this.paymentTypes?.unshift(paymentType);
+  }
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
   onEditButtonClick(paymentTypeId: number): void{
     this.router.navigate(['/paymentTypeEdit', paymentTypeId]);

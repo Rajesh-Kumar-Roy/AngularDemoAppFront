@@ -1,49 +1,75 @@
-<div class="justify-content-center">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- <app-payment-type-entry (onAdd) ="newPaymentTypeAdd($event)"></app-payment-type-entry> -->
-            <app-mobile-banking-type-entry (onAdd) = "newMobileBankingAdd($event)"></app-mobile-banking-type-entry>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card ">
-                <div class="card-header bg-secondary text-white text-center">
-                    <h5 class="card-title">Payment Option</h5>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <tr>
-                                <th>Sl</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                               <th>Action</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let pItem of mobileBankingType; let i = index">
-                                <td class="text-center">{{i+1}}</td>
-
-                                <td>{{pItem.name}}</td>
-                                <td>{{pItem.description}}</td>
-
-                                <td>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil-square" (click) = "onClickEditButton(pItem.id)" aria-hidden="true"></i></button> &nbsp;
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </td>
-                               
-                            </tr>
-                            
-                            
-                        </tbody>
-                    </table>
+<div class="mx-3">
+    <div class="justify-content-center">
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <app-payment-type-entry (onAdd) ="newPaymentTypeAdd($event)"></app-payment-type-entry> -->
+                    <app-mobile-banking-type-entry (onAdd)="newMobileBankingAdd($event)"></app-mobile-banking-type-entry>
                 </div>
             </div>
         </div>
-    </div>
 
+        <br />
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h5 class="card-title">Mobile Banking Type</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Sl</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let pItem of mobileBankingType; let i = index">
+                                    <td class="text-center">{{i+1}}</td>
+
+                                    <td>{{pItem.name}}</td>
+                                    <td>{{pItem.description}}</td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil-square" (click)="onClickEditButton(pItem.id)" aria-hidden="true"></i></button> &nbsp;
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#shopModal" (click)="deleteIdClick(pItem.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+<div class="modal fade" id="shopModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-default btn-sm" (click)="deleteButtonClick(deleteId)">Delete</button>  -->
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Delete</button> 
+   
+        </div>
+      </div>
+    </div>
+  </div>

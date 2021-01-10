@@ -12,6 +12,7 @@ export class PaymentOptionListComponent implements OnInit {
 
   paymentOptions: PaymentOption[] = null;
   notFoundMess = false;
+  deleteId = 0;
   constructor(private paymentService: PaymentsService,private router: Router) {
     this.paymentOptions = new Array();
   }
@@ -31,6 +32,10 @@ export class PaymentOptionListComponent implements OnInit {
   }
   newPaymentOptionAdd(paymentOption: PaymentOption): void{
     this.paymentOptions.unshift(paymentOption);
+  }
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
   onClickEditButton(id: PaymentOption): void{
     this.router.navigate(['/paymentOptionEdit', id]);

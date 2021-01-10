@@ -6,7 +6,6 @@ import {ToastrService} from 'ngx-toastr';
 import {ProductTypeService} from '../../Services/product-type.service';
 import {ProductType} from '../../Models/Product-models/productType';
 
-
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -19,13 +18,13 @@ export class ProductListComponent implements OnInit {
   ii: number;
   totalRecords: number;
   page = 1;
-
+  deleteId =0;
   constructor(
     private productService: ProductServiceService,
     private router: Router,
     private toastr: ToastrService,
     private productTypeService: ProductTypeService) {
-
+      
   }
 
   ngOnInit(): void {
@@ -57,6 +56,10 @@ export class ProductListComponent implements OnInit {
 
       }
     }
+  }
+  deleteIdClick(id: any): void{
+    this.deleteId = id;
+    
   }
 
   // edit product

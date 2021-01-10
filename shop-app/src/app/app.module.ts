@@ -3,7 +3,7 @@ import { ProductTypeListComponent } from './Products/product-type-list/product-t
 import { CustomerListComponent } from './Customers/customer-list/customer-list.component';
 import { ProductListComponent } from './Products/product-list/product-list.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, NgForm } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +35,12 @@ import { UserProfileComponent } from '../app/user/user-profile/user-profile.comp
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeComponent } from './home/home/home.component';
 import { AuthInterceptor } from 'src/app/auth/auth.Interceptor';
+import { ForbiddenComponent } from './user/forbidden/forbidden.component';
+import { AdminPanelComponent } from './user/admin-panel/admin-panel.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { DropdownModule } from 'angular-bootstrap-md';
+import { DeleteModelComponent } from './home/delete-model/delete-model.component';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +67,9 @@ import { AuthInterceptor } from 'src/app/auth/auth.Interceptor';
     UserComponent,
     UserProfileComponent,
     HomeComponent,
+    ForbiddenComponent,
+    AdminPanelComponent,
+    DeleteModelComponent,
 
 
   ],
@@ -71,6 +80,7 @@ import { AuthInterceptor } from 'src/app/auth/auth.Interceptor';
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     FormsModule,
     NgSelectModule,
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
@@ -83,6 +93,7 @@ import { AuthInterceptor } from 'src/app/auth/auth.Interceptor';
     }),
     CommonModule,
     NgxPaginationModule,
+    DropdownModule
   ],
   providers: [
     HttpClientModule, UserService,
