@@ -1,0 +1,70 @@
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false" style="padding-bottom: 10px;">
+  <mdb-navbar-brand>
+    <a class="logo navbar-brand" href="#"><strong>Shop Solution</strong></a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active waves-light" mdbWavesEffect>
+        <a class="nav-link"routerLink="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <ng-container *ngIf="loggedIn()">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="createProductType">Product type </a>
+            <a class="dropdown-item" routerLink="productList">Product</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sale</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="Sales">Sales</a>
+            <a class="dropdown-item" routerLink="saleDetails">Sales Details</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Payment</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="paymentEntry">Payment</a>
+            <a class="dropdown-item" routerLink="createPaymentType">Payment Type</a>
+            <a class="dropdown-item" routerLink="paymentOptionList">Payment Option</a>
+            <a class="dropdown-item" routerLink="mobileBankingList">Mobile Banking</a>
+          </div>
+        </li>
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" routerLinkActive="active" routerLink="customerList">Customer</a>
+        </li>
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link"routerLinkActive="active" routerLink="admin">Admin</a>
+        </li>
+      </ng-container>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button> &nbsp;
+    </form>
+    <ul class="navbar-nav nav-flex-icons" *ngIf="loggedIn()">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default"
+             aria-labelledby="navbarDropdownMenuLink-333">
+          <a class="dropdown-item text-center" routerLink="profile">My Profile</a>
+          <div class="text-center">
+            <button  class="btn btn-default" (click)="onLogOut()"><i class="fa fa-sign-out" aria-hidden="true"> Sign Out</i></button>
+          </div>
+
+        </div>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button *ngIf="logIn()" class="btn btn-outline-dark" (click)="forLogIn()"><i class="fa fa-sign-in" aria-hidden="true"> Sign In</i></button>
+    </div>
+
+  </links>
+
+
+
+</mdb-navbar>

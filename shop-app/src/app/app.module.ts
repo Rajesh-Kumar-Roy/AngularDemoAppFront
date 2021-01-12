@@ -40,6 +40,8 @@ import { AdminPanelComponent } from './user/admin-panel/admin-panel.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { DropdownModule } from 'angular-bootstrap-md';
 import { DeleteModelComponent } from './home/delete-model/delete-model.component';
+import { ShopAppNavComponent } from './Shop-app-Nav-footer/shop-app-nav/shop-app-nav.component';
+import { ShopAppFooterComponent } from './Shop-app-Nav-footer/shop-app-footer/shop-app-footer.component';
 
 
 @NgModule({
@@ -70,6 +72,8 @@ import { DeleteModelComponent } from './home/delete-model/delete-model.component
     ForbiddenComponent,
     AdminPanelComponent,
     DeleteModelComponent,
+    ShopAppNavComponent,
+    ShopAppFooterComponent,
 
 
   ],

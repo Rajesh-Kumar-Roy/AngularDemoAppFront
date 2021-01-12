@@ -1,15 +1,79 @@
 
+<div class="py-5">
+  <div class="container">
+    <div class="row py-3">
+      <div class="col-3 prifileNav" >
+        <div class="nav flex-column nav-pills  py-4 overflow-y: scroll" id="v-pills-tab " role="tablist" aria-orientation="vertical">
+         <div class="text-center">
+          <img class="rounded-circle z-depth-2 profileimg" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
+               data-holder-rendered="true">
+         </div>
+          <hr>
+          <p class="text-center"> Rajesh Kumar Roy</p>
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a>
+          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-editprofile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile</a>
+          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a>
+          <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a>
+        </div>
 
-<div class="card m-5" style="width: 18rem;" *ngIf="userDetails">
-    <div class="card-header">
-        <div class="card-title">User Information</div>
+      </div>
+      <div class="col-9">
+        <div class="row">
+          <div class="offset-4 col-4">
+            <h3 class="text-center">Profile</h3>
+          </div>
+        </div>
+        <hr>
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="px-4">
+              <h5 ><u>Your Profile</u></h5>
+              <div class="row">
+                <div class="col-5">
+                  <div class="form-group">
+                    <span><strong>Name :</strong> </span>
+                  </div>
+                  <div class="form-group">
+                    <span><strong>Mobile No :</strong> {{userDetails.phoneNo}} </span>
+                  </div>
+                  <div class="form-group">
+                    <span><strong>Email :</strong> {{userDetails.email}}</span>
+                  </div>
+                  <div class="form-group">
+                    <span><strong>Addres :</strong> </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <span><strong>UserName :</strong> {{userDetails.userName}}</span>
+                  </div>
+                  <div class="form-group">
+                    <span><strong>Mobile No :</strong> sadflsakf</span>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="text-center">
+                    <div class="card" style="width: 150px; height: 150px">
+                      <img class="card-img-top " src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Card image cap">
+                    </div>
+                  </div>
+
+<!--                  <img class="z-depth-2" alt="100x100" src=""-->
+<!--                       data-holder-rendered="true">-->
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="v-pills-editprofile" role="tabpanel" aria-labelledby="v-pills-profile-tab">sdlfjsdlfsdldslfsdl</div>
+          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+        </div>
+      </div>
+
     </div>
-    <div class="card-body">
-         <ul class="list-group">
-        <li class="list-group-item"><strong>User Name: </strong>{{userDetails.userName}}</li>
-        <li class="list-group-item"><strong>Phone No: </strong>{{userDetails.phoneNo}}</li>
-        <li class="list-group-item"><strong>Email: </strong>{{userDetails.email}}</li>
-    </ul>
-    </div>
-   
+  </div>
 </div>
+
+
+
