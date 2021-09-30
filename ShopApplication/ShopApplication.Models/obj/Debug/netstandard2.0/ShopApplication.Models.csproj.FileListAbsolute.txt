@@ -6,4 +6,5 @@ D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopA
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csproj.CoreCompileInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.dll
 D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csprojAssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.csproj.AssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.Models\obj\Debug\netstandard2.0\ShopApplication.Models.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,0 +1,39 @@
+<div class="my-5 mx-3">
+<div class="card border-success">
+    <div class="card-header bg-success text-white text-center">
+        <h5 class="card-title">Role Create</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="roleForm" autocomplete="off" (ngSubmit)="onAdd()" class="form-horizontal">
+
+            <div class="md-form md-outline">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="name" class="form-label">Role Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="roleName" [ngClass]="{ 'is-invalid': (p.roleName.touched || submitted )&& p.roleName?.errors }" name="name" mdbInput>
+                        <div *ngIf="(p.roleName.touched || submitted )&& p.roleName?.errors" class="invalid-feedback">
+                            <div *ngIf="p.roleName.errors?.required">Name is Required!!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="btn-toolbar float-right ">
+                <!-- <div *ngIf="showSave">
+                    <input type="submit" class="btn btn-success" value="Save">
+                </div> -->
+                <!-- <div *ngIf="showUpdate">
+                    <input type="submit" class="btn btn-success " value="Update"> &nbsp;
+                    <button type="button" class="btn btn-info" [routerLink]="['/productList']" routerLinkActive="router-link-active">Search</button>
+                </div> -->
+                <input type="submit" class="btn btn-success " value="Save">
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>
+</div>

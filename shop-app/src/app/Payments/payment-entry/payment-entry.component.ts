@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentOption } from 'src/app/Models/payment-models/paymentOption';
 import { FormsModule } from '@angular/forms';
 import { CalendarCellViewModel } from 'ngx-bootstrap/datepicker/models';
+import {PaymentOptionEnum} from '../../Enums/PaymentOptionEnum';
 
 
 
@@ -47,6 +48,8 @@ export class PaymentEntryComponent implements OnInit {
   saleId: number;
   payButtonHide = true;
   paymentAlert = false;
+  paymentOptionEnum = PaymentOptionEnum;
+  paymentOptionEnumKeys = [];
 
   // tslint:disable-next-line: max-line-length
   constructor(
@@ -60,6 +63,7 @@ export class PaymentEntryComponent implements OnInit {
   ) {
     this.$model = new Payment();
     this.keys = Object.keys(this.monthEnum).filter(f => !isNaN(Number(f)));
+    this.paymentOptionEnumKeys = Object.keys(this.paymentOptionEnum).filter( f => !isNaN(Number(f)));
   }
 
   ngOnInit(): void {

@@ -1,3 +1,4 @@
+import { AuthModule } from './user/Auth/auth.module';
 import { UserService } from './Services/User/user.service';
 import { ProductTypeListComponent } from './Products/product-type-list/product-type-list.component';
 import { CustomerListComponent } from './Customers/customer-list/customer-list.component';
@@ -42,6 +43,10 @@ import { DropdownModule } from 'angular-bootstrap-md';
 import { DeleteModelComponent } from './home/delete-model/delete-model.component';
 import { ShopAppNavComponent } from './Shop-app-Nav-footer/shop-app-nav/shop-app-nav.component';
 import { ShopAppFooterComponent } from './Shop-app-Nav-footer/shop-app-footer/shop-app-footer.component';
+import { ShopAppRoleComponent } from './user/Auth/Role/shop-app-role/shop-app-role.component';
+import { ForgetPasswordComponent } from './user/Auth/ForgetPassword/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './user/Auth/ResetPassword/reset-password/reset-password.component';
+import { AuthService } from './user/Auth/auth.service';
 
 
 @NgModule({
@@ -97,7 +102,8 @@ import { ShopAppFooterComponent } from './Shop-app-Nav-footer/shop-app-footer/sh
     }),
     CommonModule,
     NgxPaginationModule,
-    DropdownModule
+    DropdownModule,
+    AuthModule,
   ],
   providers: [
     HttpClientModule, UserService,

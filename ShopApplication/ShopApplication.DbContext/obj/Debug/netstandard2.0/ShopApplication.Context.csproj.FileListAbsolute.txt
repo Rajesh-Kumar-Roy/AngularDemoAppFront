@@ -3,10 +3,11 @@ D:\gitproj\ShopApplication\ShopApplication.DbContext\bin\Debug\netstandard2.0\Sh
 D:\gitproj\ShopApplication\ShopApplication.DbContext\bin\Debug\netstandard2.0\ShopApplication.Context.pdb
 D:\gitproj\ShopApplication\ShopApplication.DbContext\bin\Debug\netstandard2.0\ShopApplication.Models.dll
 D:\gitproj\ShopApplication\ShopApplication.DbContext\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.csprojAssemblyReference.cache
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.AssemblyInfoInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.AssemblyInfo.cs
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.csproj.CoreCompileInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.csproj.CopyComplete
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.dll
 D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.pdb
+D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.csproj.AssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.DbContext\obj\Debug\netstandard2.0\ShopApplication.Context.GeneratedMSBuildEditorConfig.editorconfig

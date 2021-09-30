@@ -58,7 +58,6 @@ D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplicati
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.Manager.pdb
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.Models.pdb
 D:\gitproj\ShopApplication\ShopApplication\bin\Debug\netcoreapp3.1\ShopApplication.Repositories.pdb
-D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.csprojAssemblyReference.cache
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.AssemblyInfoInputs.cache
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.AssemblyInfo.cs
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.csproj.CoreCompileInputs.cache
@@ -86,3 +85,5 @@ D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplicati
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.pdb
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.genruntimeconfig.cache
 D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\scopedcss\bundle\ShopApplication.styles.css
+D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.csproj.AssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication\obj\Debug\netcoreapp3.1\ShopApplication.GeneratedMSBuildEditorConfig.editorconfig

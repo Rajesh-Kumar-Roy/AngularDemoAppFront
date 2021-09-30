@@ -5,10 +5,11 @@ D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0
 D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.dll
 D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Context.pdb
 D:\gitproj\ShopApplication\ShopApplication.Repositories\bin\Debug\netstandard2.0\ShopApplication.Models.pdb
-D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csprojAssemblyReference.cache
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfoInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.AssemblyInfo.cs
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CoreCompileInputs.cache
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.CopyComplete
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.dll
 D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.pdb
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.csproj.AssemblyReference.cache
+D:\gitproj\ShopApplication\ShopApplication.Repositories\obj\Debug\netstandard2.0\ShopApplication.Repositories.GeneratedMSBuildEditorConfig.editorconfig

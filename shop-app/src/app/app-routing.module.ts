@@ -1,4 +1,3 @@
-import { DeleteModelComponent } from './home/delete-model/delete-model.component';
 import { AdminPanelComponent } from './user/admin-panel/admin-panel.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { HomeComponent } from './home/home/home.component';
@@ -25,19 +24,20 @@ import { ProductTypeListComponent } from './Products/product-type-list/product-t
 import { SalesEntryComponent } from './Sales/sale-entry/sales-entry.component';
 import { SalesListComponent } from './Sales/sales-list/sales-list.component';
 import { SalesViewComponent } from './Sales/sales-view/sales-view.component';
-import { AuthGuard}  from 'src/app/auth/auth.guard';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { ShopAppRoleComponent } from './user/Auth/Role/shop-app-role/shop-app-role.component';
 
 const routes: Routes = [
   { path: 'createProduct', component: ProductEntryComponent },
-  { path: 'createProductType', component: ProductTypeEntryComponent ,canActivate: [AuthGuard], data: {permittedRoles: ['Administrator']}},
+  { path: 'createProductType', component: ProductTypeEntryComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Administrator'] } },
   { path: 'Sales', component: SalesEntryComponent },
   { path: 'saleDetails', component: SalesListComponent },
   { path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: CustomerEntryComponent },
   { path: 'productedit/:id', component: ProductEntryComponent },
-  { path: 'typeEdit/:id', component: ProductTypeEntryComponent, canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
+  { path: 'typeEdit/:id', component: ProductTypeEntryComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Administrator', 'Manager'] } },
   { path: 'productList', component: ProductListComponent },
-  { path: 'productTypeList', component: ProductTypeListComponent ,canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
+  { path: 'productTypeList', component: ProductTypeListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Administrator', 'Manager'] } },
   { path: 'saleDetail/:id', component: SalesEntryComponent },
   { path: 'saleView/:id', component: SalesViewComponent },
   { path: 'createPaymentType', component: PaymentTypeListComponent },
@@ -58,10 +58,11 @@ const routes: Routes = [
       { path: 'registration', component: RegistraionComponent }
     ]
   },
-  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-  {path: 'forbidden', component: ForbiddenComponent},
-  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {permittedRoles: ['Administrator','Manager']}},
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'forbidden', component: ForbiddenComponent },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Administrator', 'Manager'] } },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'CreateRole', component: ShopAppRoleComponent },
 ];
 
 @NgModule({
